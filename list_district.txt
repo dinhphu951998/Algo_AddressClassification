@@ -1,696 +1,387 @@
-Quận Ba Đình
-Quận Hoàn Kiếm
-Quận Tây Hồ
-Quận Long Biên
-Quận Cầu Giấy
-Quận Đống Đa
-Quận Hai Bà Trưng
-Quận Hoàng Mai
-Quận Thanh Xuân
-Huyện Sóc Sơn
-Huyện Đông Anh
-Huyện Gia Lâm
-Quận Nam Từ Liêm
-Huyện Thanh Trì
-Quận Bắc Từ Liêm
-Huyện Mê Linh
-Quận Hà Đông
-Thị xã Sơn Tây
-Huyện Ba Vì
-Huyện Phúc Thọ
-Huyện Đan Phượng
-Huyện Hoài Đức
-Huyện Quốc Oai
-Huyện Thạch Thất
-Huyện Chương Mỹ
-Huyện Thanh Oai
-Huyện Thường Tín
-Huyện Phú Xuyên
-Huyện Ứng Hòa
-Huyện Mỹ Đức
-Thành phố Hà Giang
-Huyện Đồng Văn
-Huyện Mèo Vạc
-Huyện Yên Minh
-Huyện Quản Bạ
-Huyện Vị Xuyên
-Huyện Bắc Mê
-Huyện Hoàng Su Phì
-Huyện Xín Mần
-Huyện Bắc Quang
-Huyện Quang Bình
-Thành phố Cao Bằng
-Huyện Bảo Lâm
-Huyện Bảo Lạc
-Huyện Hà Quảng
-Huyện Trùng Khánh
-Huyện Hạ Lang
-Huyện Quảng Hòa
-Huyện Hoà An
-Huyện Nguyên Bình
-Huyện Thạch An
-Thành phố Bắc Kạn
-Huyện Pác Nặm
-Huyện Ba Bể
-Huyện Ngân Sơn
-Huyện Bạch Thông
-Huyện Chợ Đồn
-Huyện Chợ Mới
-Huyện Na Rì
-Thành phố Tuyên Quang
-Huyện Lâm Bình
-Huyện Na Hang
-Huyện Chiêm Hóa
-Huyện Hàm Yên
-Huyện Yên Sơn
-Huyện Sơn Dương
-Thành phố Lào Cai
-Huyện Bát Xát
-Huyện Mường Khương
-Huyện Si Ma Cai
-Huyện Bắc Hà
-Huyện Bảo Thắng
-Huyện Bảo Yên
-Thị xã Sa Pa
-Huyện Văn Bàn
-Thành phố Điện Biên Phủ
-Thị xã Mường Lay
-Huyện Mường Nhé
-Huyện Mường Chà
-Huyện Tủa Chùa
-Huyện Tuần Giáo
-Huyện Điện Biên
-Huyện Điện Biên Đông
-Huyện Mường Ảng
-Huyện Nậm Pồ
-Thành phố Lai Châu
-Huyện Tam Đường
-Huyện Mường Tè
-Huyện Sìn Hồ
-Huyện Phong Thổ
-Huyện Than Uyên
-Huyện Tân Uyên
-Huyện Nậm Nhùn
-Thành phố Sơn La
-Huyện Quỳnh Nhai
-Huyện Thuận Châu
-Huyện Mường La
-Huyện Bắc Yên
-Huyện Phù Yên
-Thị xã Mộc Châu
-Huyện Yên Châu
-Huyện Mai Sơn
-Huyện Sông Mã
-Huyện Sốp Cộp
-Huyện Vân Hồ
-Thành phố Yên Bái
-Thị xã Nghĩa Lộ
-Huyện Lục Yên
-Huyện Văn Yên
-Huyện Mù Căng Chải
-Huyện Trấn Yên
-Huyện Trạm Tấu
-Huyện Văn Chấn
-Huyện Yên Bình
-Thành phố Hòa Bình
-Huyện Đà Bắc
-Huyện Lương Sơn
-Huyện Kim Bôi
-Huyện Cao Phong
-Huyện Tân Lạc
-Huyện Mai Châu
-Huyện Lạc Sơn
-Huyện Yên Thủy
-Huyện Lạc Thủy
-Thành phố Thái Nguyên
-Thành phố Sông Công
-Huyện Định Hóa
-Huyện Phú Lương
-Huyện Đồng Hỷ
-Huyện Võ Nhai
-Huyện Đại Từ
-Thành phố Phổ Yên
-Huyện Phú Bình
-Thành phố Lạng Sơn
-Huyện Tràng Định
-Huyện Bình Gia
-Huyện Văn Lãng
-Huyện Cao Lộc
-Huyện Văn Quan
-Huyện Bắc Sơn
-Huyện Hữu Lũng
-Huyện Chi Lăng
-Huyện Lộc Bình
-Huyện Đình Lập
-Thành phố Hạ Long
-Thành phố Móng Cái
-Thành phố Cẩm Phả
-Thành phố Uông Bí
-Huyện Bình Liêu
-Huyện Tiên Yên
-Huyện Đầm Hà
-Huyện Hải Hà
-Huyện Ba Chẽ
-Huyện Vân Đồn
-Thành phố Đông Triều
-Thị xã Quảng Yên
-Huyện Cô Tô
-Thành phố Bắc Giang
-Huyện Yên Thế
-Huyện Tân Yên
-Huyện Lạng Giang
-Huyện Lục Nam
-Huyện Lục Ngạn
-Huyện Sơn Động
-Thị xã Việt Yên
-Huyện Hiệp Hòa
-Thị xã Chũ
-Thành phố Việt Trì
-Thị xã Phú Thọ
-Huyện Đoan Hùng
-Huyện Hạ Hoà
-Huyện Thanh Ba
-Huyện Phù Ninh
-Huyện Yên Lập
-Huyện Cẩm Khê
-Huyện Tam Nông
-Huyện Lâm Thao
-Huyện Thanh Sơn
-Huyện Thanh Thuỷ
-Huyện Tân Sơn
-Thành phố Vĩnh Yên
-Thành phố Phúc Yên
-Huyện Lập Thạch
-Huyện Tam Dương
-Huyện Tam Đảo
-Huyện Bình Xuyên
-Huyện Yên Lạc
-Huyện Vĩnh Tường
-Huyện Sông Lô
-Thành phố Bắc Ninh
-Huyện Yên Phong
-Thị xã Quế Võ
-Huyện Tiên Du
-Thành phố Từ Sơn
-Thị xã Thuận Thành
-Huyện Gia Bình
-Huyện Lương Tài
-Thành phố Hải Dương
-Thành phố Chí Linh
-Huyện Nam Sách
-Thị xã Kinh Môn
-Huyện Kim Thành
-Huyện Thanh Hà
-Huyện Cẩm Giàng
-Huyện Bình Giang
-Huyện Gia Lộc
-Huyện Tứ Kỳ
-Huyện Ninh Giang
-Huyện Thanh Miện
-Quận Hồng Bàng
-Quận Ngô Quyền
-Quận Lê Chân
-Quận Hải An
-Quận Kiến An
-Quận Đồ Sơn
-Quận Dương Kinh
-Thành phố Thuỷ Nguyên
-Quận An Dương
-Huyện An Lão
-Huyện Kiến Thuỵ
-Huyện Tiên Lãng
-Huyện Vĩnh Bảo
-Huyện Cát Hải
-Huyện Bạch Long Vĩ
-Thành phố Hưng Yên
-Huyện Văn Lâm
-Huyện Văn Giang
-Huyện Yên Mỹ
-Thị xã Mỹ Hào
-Huyện Ân Thi
-Huyện Khoái Châu
-Huyện Kim Động
-Huyện Tiên Lữ
-Huyện Phù Cừ
-Thành phố Thái Bình
-Huyện Quỳnh Phụ
-Huyện Hưng Hà
-Huyện Đông Hưng
-Huyện Thái Thụy
-Huyện Tiền Hải
-Huyện Kiến Xương
-Huyện Vũ Thư
-Thành phố Phủ Lý
-Thị xã Duy Tiên
-Thị xã Kim Bảng
-Huyện Thanh Liêm
-Huyện Bình Lục
-Huyện Lý Nhân
-Thành phố Nam Định
-Huyện Vụ Bản
-Huyện Ý Yên
-Huyện Nghĩa Hưng
-Huyện Nam Trực
-Huyện Trực Ninh
-Huyện Xuân Trường
-Huyện Giao Thủy
-Huyện Hải Hậu
-Thành phố Tam Điệp
-Huyện Nho Quan
-Huyện Gia Viễn
-Thành phố Hoa Lư
-Huyện Yên Khánh
-Huyện Kim Sơn
-Huyện Yên Mô
-Thành phố Thanh Hóa
-Thị xã Bỉm Sơn
-Thành phố Sầm Sơn
-Huyện Mường Lát
-Huyện Quan Hóa
-Huyện Bá Thước
-Huyện Quan Sơn
-Huyện Lang Chánh
-Huyện Ngọc Lặc
-Huyện Cẩm Thủy
-Huyện Thạch Thành
-Huyện Hà Trung
-Huyện Vĩnh Lộc
-Huyện Yên Định
-Huyện Thọ Xuân
-Huyện Thường Xuân
-Huyện Triệu Sơn
-Huyện Thiệu Hóa
-Huyện Hoằng Hóa
-Huyện Hậu Lộc
-Huyện Nga Sơn
-Huyện Như Xuân
-Huyện Như Thanh
-Huyện Nông Cống
-Huyện Quảng Xương
-Thị xã Nghi Sơn
-Thành phố Vinh
-Thị xã Thái Hoà
-Huyện Quế Phong
-Huyện Quỳ Châu
-Huyện Kỳ Sơn
-Huyện Tương Dương
-Huyện Nghĩa Đàn
-Huyện Quỳ Hợp
-Huyện Quỳnh Lưu
-Huyện Con Cuông
-Huyện Tân Kỳ
-Huyện Anh Sơn
-Huyện Diễn Châu
-Huyện Yên Thành
-Huyện Đô Lương
-Huyện Thanh Chương
-Huyện Nghi Lộc
-Huyện Nam Đàn
-Huyện Hưng Nguyên
-Thị xã Hoàng Mai
-Thành phố Hà Tĩnh
-Thị xã Hồng Lĩnh
-Huyện Hương Sơn
-Huyện Đức Thọ
-Huyện Vũ Quang
-Huyện Nghi Xuân
-Huyện Can Lộc
-Huyện Hương Khê
-Huyện Thạch Hà
-Huyện Cẩm Xuyên
-Huyện Kỳ Anh
-Thị xã Kỳ Anh
-Thành phố Đồng Hới
-Huyện Minh Hóa
-Huyện Tuyên Hóa
-Huyện Quảng Trạch
-Huyện Bố Trạch
-Huyện Quảng Ninh
-Huyện Lệ Thủy
-Thị xã Ba Đồn
-Thành phố Đông Hà
-Thị xã Quảng Trị
-Huyện Vĩnh Linh
-Huyện Hướng Hóa
-Huyện Gio Linh
-Huyện Đa Krông
-Huyện Cam Lộ
-Huyện Triệu Phong
-Huyện Hải Lăng
-Huyện Cồn Cỏ
-Quận Thuận Hóa
-Quận Phú Xuân
-Thị xã Phong Điền
-Huyện Quảng Điền
-Huyện Phú Vang
-Thị xã Hương Thủy
-Thị xã Hương Trà
-Huyện A Lưới
-Huyện Phú Lộc
-Quận Liên Chiểu
-Quận Thanh Khê
-Quận Hải Châu
-Quận Sơn Trà
-Quận Ngũ Hành Sơn
-Quận Cẩm Lệ
-Huyện Hòa Vang
-Huyện Hoàng Sa
-Thành phố Tam Kỳ
-Thành phố Hội An
-Huyện Tây Giang
-Huyện Đông Giang
-Huyện Đại Lộc
-Thị xã Điện Bàn
-Huyện Duy Xuyên
-Huyện Quế Sơn
-Huyện Nam Giang
-Huyện Phước Sơn
-Huyện Hiệp Đức
-Huyện Thăng Bình
-Huyện Tiên Phước
-Huyện Bắc Trà My
-Huyện Nam Trà My
-Huyện Núi Thành
-Huyện Phú Ninh
-Thành phố Quảng Ngãi
-Huyện Bình Sơn
-Huyện Trà Bồng
-Huyện Sơn Tịnh
-Huyện Tư Nghĩa
-Huyện Sơn Hà
-Huyện Sơn Tây
-Huyện Minh Long
-Huyện Nghĩa Hành
-Huyện Mộ Đức
-Thị xã Đức Phổ
-Huyện Ba Tơ
-Huyện Lý Sơn
-Thành phố Quy Nhơn
-Huyện An Lão
-Thị xã Hoài Nhơn
-Huyện Hoài Ân
-Huyện Phù Mỹ
-Huyện Vĩnh Thạnh
-Huyện Tây Sơn
-Huyện Phù Cát
-Thị xã An Nhơn
-Huyện Tuy Phước
-Huyện Vân Canh
-Thành phố Tuy Hoà
-Thị xã Sông Cầu
-Huyện Đồng Xuân
-Huyện Tuy An
-Huyện Sơn Hòa
-Huyện Sông Hinh
-Huyện Tây Hoà
-Huyện Phú Hoà
-Thị xã Đông Hòa
-Thành phố Nha Trang
-Thành phố Cam Ranh
-Huyện Cam Lâm
-Huyện Vạn Ninh
-Thị xã Ninh Hòa
-Huyện Khánh Vĩnh
-Huyện Diên Khánh
-Huyện Khánh Sơn
-Huyện Trường Sa
-Thành phố Phan Rang-Tháp Chàm
-Huyện Bác Ái
-Huyện Ninh Sơn
-Huyện Ninh Hải
-Huyện Ninh Phước
-Huyện Thuận Bắc
-Huyện Thuận Nam
-Thành phố Phan Thiết
-Thị xã La Gi
-Huyện Tuy Phong
-Huyện Bắc Bình
-Huyện Hàm Thuận Bắc
-Huyện Hàm Thuận Nam
-Huyện Tánh Linh
-Huyện Đức Linh
-Huyện Hàm Tân
-Huyện Phú Quí
-Thành phố Kon Tum
-Huyện Đắk Glei
-Huyện Ngọc Hồi
-Huyện Đắk Tô
-Huyện Kon Plông
-Huyện Kon Rẫy
-Huyện Đắk Hà
-Huyện Sa Thầy
-Huyện Tu Mơ Rông
-Huyện Ia H' Drai
-Thành phố Pleiku
-Thị xã An Khê
-Thị xã Ayun Pa
-Huyện KBang
-Huyện Đăk Đoa
-Huyện Chư Păh
-Huyện Ia Grai
-Huyện Mang Yang
-Huyện Kông Chro
-Huyện Đức Cơ
-Huyện Chư Prông
-Huyện Chư Sê
-Huyện Đăk Pơ
-Huyện Ia Pa
-Huyện Krông Pa
-Huyện Phú Thiện
-Huyện Chư Pưh
-Thành phố Buôn Ma Thuột
-Thị xã Buôn Hồ
-Huyện Ea H'leo
-Huyện Ea Súp
-Huyện Buôn Đôn
-Huyện Cư M'gar
-Huyện Krông Búk
-Huyện Krông Năng
-Huyện Ea Kar
-Huyện M'Đrắk
-Huyện Krông Bông
-Huyện Krông Pắc
-Huyện Krông A Na
-Huyện Lắk
-Huyện Cư Kuin
-Thành phố Gia Nghĩa
-Huyện Đăk Glong
-Huyện Cư Jút
-Huyện Đắk Mil
-Huyện Krông Nô
-Huyện Đắk Song
-Huyện Đắk R'Lấp
-Huyện Tuy Đức
-Thành phố Đà Lạt
-Thành phố Bảo Lộc
-Huyện Đam Rông
-Huyện Lạc Dương
-Huyện Lâm Hà
-Huyện Đơn Dương
-Huyện Đức Trọng
-Huyện Di Linh
-Huyện Bảo Lâm
-Huyện Đạ Tẻh
-Thị xã Phước Long
-Thành phố Đồng Xoài
-Thị xã Bình Long
-Huyện Bù Gia Mập
-Huyện Lộc Ninh
-Huyện Bù Đốp
-Huyện Hớn Quản
-Huyện Đồng Phú
-Huyện Bù Đăng
-Thị xã Chơn Thành
-Huyện Phú Riềng
-Thành phố Tây Ninh
-Huyện Tân Biên
-Huyện Tân Châu
-Huyện Dương Minh Châu
-Huyện Châu Thành
-Thị xã Hòa Thành
-Huyện Gò Dầu
-Huyện Bến Cầu
-Thị xã Trảng Bàng
-Thành phố Thủ Dầu Một
-Huyện Bàu Bàng
-Huyện Dầu Tiếng
-Thành phố Bến Cát
-Huyện Phú Giáo
-Thành phố Tân Uyên
-Thành phố Dĩ An
-Thành phố Thuận An
-Huyện Bắc Tân Uyên
-Thành phố Biên Hòa
-Thành phố Long Khánh
-Huyện Tân Phú
-Huyện Vĩnh Cửu
-Huyện Định Quán
-Huyện Trảng Bom
-Huyện Thống Nhất
-Huyện Cẩm Mỹ
-Huyện Long Thành
-Huyện Xuân Lộc
-Huyện Nhơn Trạch
-Thành phố Vũng Tàu
-Thành phố Bà Rịa
-Huyện Châu Đức
-Huyện Xuyên Mộc
-Huyện Long Đất
-Thành phố Phú Mỹ
-Huyện Côn Đảo
-Quận 1
-Quận 12
-Quận Gò Vấp
-Quận Bình Thạnh
-Quận Tân Bình
-Quận Tân Phú
-Quận Phú Nhuận
-Thành phố Thủ Đức
-Quận 3
-Quận 10
-Quận 11
-Quận 4
-Quận 5
-Quận 6
-Quận 8
-Quận Bình Tân
-Quận 7
-Huyện Củ Chi
-Huyện Hóc Môn
-Huyện Bình Chánh
-Huyện Nhà Bè
-Huyện Cần Giờ
-Thành phố Tân An
-Thị xã Kiến Tường
-Huyện Tân Hưng
-Huyện Vĩnh Hưng
-Huyện Mộc Hóa
-Huyện Tân Thạnh
-Huyện Thạnh Hóa
-Huyện Đức Huệ
-Huyện Đức Hòa
-Huyện Bến Lức
-Huyện Thủ Thừa
-Huyện Tân Trụ
-Huyện Cần Đước
-Huyện Cần Giuộc
-Huyện Châu Thành
-Thành phố Mỹ Tho
-Thành phố Gò Công
-Thị xã Cai Lậy
-Huyện Tân Phước
-Huyện Cái Bè
-Huyện Cai Lậy
-Huyện Châu Thành
-Huyện Chợ Gạo
-Huyện Gò Công Tây
-Huyện Gò Công Đông
-Huyện Tân Phú Đông
-Thành phố Bến Tre
-Huyện Châu Thành
-Huyện Chợ Lách
-Huyện Mỏ Cày Nam
-Huyện Giồng Trôm
-Huyện Bình Đại
-Huyện Ba Tri
-Huyện Thạnh Phú
-Huyện Mỏ Cày Bắc
-Thành phố Trà Vinh
-Huyện Càng Long
-Huyện Cầu Kè
-Huyện Tiểu Cần
-Huyện Châu Thành
-Huyện Cầu Ngang
-Huyện Trà Cú
-Huyện Duyên Hải
-Thị xã Duyên Hải
-Thành phố Vĩnh Long
-Huyện Long Hồ
-Huyện Mang Thít
-Huyện Vũng Liêm
-Huyện Tam Bình
-Thị xã Bình Minh
-Huyện Trà Ôn
-Huyện Bình Tân
-Thành phố Cao Lãnh
-Thành phố Sa Đéc
-Thành phố Hồng Ngự
-Huyện Tân Hồng
-Huyện Hồng Ngự
-Huyện Tam Nông
-Huyện Tháp Mười
-Huyện Cao Lãnh
-Huyện Thanh Bình
-Huyện Lấp Vò
-Huyện Lai Vung
-Huyện Châu Thành
-Thành phố Long Xuyên
-Thành phố Châu Đốc
-Huyện An Phú
-Thị xã Tân Châu
-Huyện Phú Tân
-Huyện Châu Phú
-Thị xã Tịnh Biên
-Huyện Tri Tôn
-Huyện Châu Thành
-Huyện Chợ Mới
-Huyện Thoại Sơn
-Thành phố Rạch Giá
-Thành phố Hà Tiên
-Huyện Kiên Lương
-Huyện Hòn Đất
-Huyện Tân Hiệp
-Huyện Châu Thành
-Huyện Giồng Riềng
-Huyện Gò Quao
-Huyện An Biên
-Huyện An Minh
-Huyện Vĩnh Thuận
-Thành phố Phú Quốc
-Huyện Kiên Hải
-Huyện U Minh Thượng
-Huyện Giang Thành
-Quận Ninh Kiều
-Quận Ô Môn
-Quận Bình Thuỷ
-Quận Cái Răng
-Quận Thốt Nốt
-Huyện Vĩnh Thạnh
-Huyện Cờ Đỏ
-Huyện Phong Điền
-Huyện Thới Lai
-Thành phố Vị Thanh
-Thành phố Ngã Bảy
-Huyện Châu Thành A
-Huyện Châu Thành
-Huyện Phụng Hiệp
-Huyện Vị Thuỷ
-Huyện Long Mỹ
-Thị xã Long Mỹ
-Thành phố Sóc Trăng
-Huyện Châu Thành
-Huyện Kế Sách
-Huyện Mỹ Tú
-Huyện Cù Lao Dung
-Huyện Long Phú
-Huyện Mỹ Xuyên
-Thị xã Ngã Năm
-Huyện Thạnh Trị
-Thị xã Vĩnh Châu
-Huyện Trần Đề
-Thành phố Bạc Liêu
-Huyện Hồng Dân
-Huyện Phước Long
-Huyện Vĩnh Lợi
-Thị xã Giá Rai
-Huyện Đông Hải
-Huyện Hoà Bình
-Thành phố Cà Mau
-Huyện U Minh
-Huyện Thới Bình
-Huyện Trần Văn Thời
-Huyện Cái Nước
-Huyện Đầm Dơi
-Huyện Năm Căn
-Huyện Phú Tân
-Huyện Ngọc Hiển
+Yên Sơn
+Mỹ Tho
+Chiêm Hóa
+1
+Hóc Môn
+Cẩm Phả
+Yên Mỹ
+Vĩnh Thạnh
+Hải Lăng
+Dương Minh Châu
+Biên Hòa
+Sơn La
+Hà Đông
+Bắc Ninh
+Phú Tân
+Lý Nhân
+Tiền Hải
+Gò Dầu
+Tân Phú
+Sông Hinh
+Chư Prông
+Tiên Du
+Con Cuông
+Ea Kar
+Biên Hòa
+Vĩnh Lộc
+Thanh Oai
+Hưng Nguyên
+Quỳnh Phụ
+Sìn Hồ
+Bắc Từ Liêm
+Cửa Lò
+Thanh Hóa
+Châu Thành
+Uông Bí
+Càng Long
+Thuận An
+Cao Lộc
+Hải Châu
+Phù Mỹ
+Triệu Sơn
+Thanh Oai
+Châu Thành
+Đức Hòa
+Hoàng Mai
+Tam Bình
+Lâm Hà
+Phan Thiết
+Hoằng Hóa
+Bình Long
+Thái Thụy
+Cai Lậy
+Quỳnh Lưu
+Thanh Hóa
+Vĩnh Yên
+Krông Pắc
+Thanh Ba
+Hoằng Hóa
+Nam Trực
+Phú Nhuận
+Vũng Tàu
+Cai Lậy
+Cờ Đỏ
+Vũ Thư
+Thường Tín
+Như Xuân
+Ninh Bình
+Chương Mỹ
+Sóc Sơn
+Long Biên
+Hoàng Mai
+Đất Đỏ
+Bình Thạnh
+8
+Trảng Bom
+1
+Tam Dương
+Chương Mỹ
+Bố Trạch
+Thạch Thất
+Tây Hồ
+Phong Thổ
+Hà Đông
+Nho Quan
+Hai Bà Trưng
+Long Khánh
+Tĩnh Gia
+Phúc Thọ
+Hoằng Hóa
+Châu Đốc
+Tĩnh Gia
+Ninh Phước
+Cai Lậy
+Biên Hòa
+Lệ Thủy
+Thanh Hóa
+Tân Châu
+Chí Linh
+Sơn Tây
+Phước Long
+Tân Hưng
+Đông Anh
+12
+Thạch Thành
+Lạng Giang
+Biên Hòa
+Phù Ninh
+Thủ Đức
+Hiệp Hòa
+Sơn Tây
+Tân Phú
+Tam Bình
+Thanh Oai
+Châu Đức
+Tuyên Quang
+Ninh Phước
+Lục Nam
+1
+Mang Thít
+Đức Linh
+Gia Viễn
+Tuyên Quang
+Yên Sơn
+10
+Tam Nông
+Thanh Xuân
+2
+Trà Ôn
+Cẩm Lệ
+Vĩnh Yên
+Châu Thành
+Vũng Tàu
+Yên Sơn
+Tam Bình
+Quy Nhơn
+10
+Trảng Bàng
+Phù Cừ
+Vị Xuyên
+Krông Pắc
+6
+Cao Lãnh
+Tây Sơn
+Gia Viễn
+Hải Lăng
+Cẩm Thủy
+Việt Yên
+Bình Sơn
+Trà Bồng
+Châu Thành
+Thường Tín
+Yên Bình
+Gò Dầu
+Đồng Văn
+Yên Lập
+Nam Đàn
+Nam Trực
+Năm Căn
+Khánh Sơn
+An Minh
+Cam Ranh
+Lương Tài
+Quỳnh Phụ
+Năm Căn
+Hữu Lũng
+Buôn Ma Thuột
+Sông Lô
+Châu Thành
+Định Quán
+Phổ Yên
+Thường Tín
+Hiệp Hòa
+Đông Giang
+Hoằng Hóa
+An Lão
+Văn Chấn
+Lang Chánh
+Bình Sơn
+Đồng Phú
+Ngũ Hành Sơn
+Mường Khương
+Vị Xuyên
+Kiến Xương
+Biên Hòa
+Bắc Trà My
+Gò Quao
+Bắc Mê
+Bá Thước
+Đống Đa
+Yên Thành
+Vĩnh Bảo
+Mỹ Lộc
+Như Thanh
+Phú Tân
+Cẩm Thủy
+Lệ Thủy
+Càng Long
+Việt Trì
+Di Linh
+Đại Lộc
+Bảo Lâm
+Phong Thổ
+Lai Châu
+Phú Giáo
+Yên Bái
+Tiên Du
+Hải Lăng
+Hà Tiên
+Sông Hinh
+Diễn Châu
+Bảo Lâm
+Châu Thành
+Chí Linh
+Xuân Lộc
+Kinh Môn
+Bát Xát
+Nam Từ Liêm
+Đông Hà
+Phủ Lý
+Thuận Châu
+Sông Công
+6
+Thuận Thành
+KBang
+Lai Vung
+Đô Lương
+Chi Lăng
+Tân Biên
+Thanh Miện
+Thanh Hà
+Nậm Pồ
+Kiến An
+Cẩm Thủy
+Phú Bình
+Hoài Nhơn
+Đa Krông
+Buôn Ma Thuột
+Vĩnh Cửu
+Nghi Sơn
+Nam Đàn
+Vị Thanh
+Cai Lậy
+Krông Bông
+Lý Nhân
+Thanh Sơn
+Đông Hòa
+Đắk Tô
+Vị Xuyên
+11
+Đăk Đoa
+Thủ Đức
+Đông Hưng
+Chư Sê
+Đại Lộc
+Sông Lô
+Thuận Thành
+Lệ Thủy
+An Biên
+Sầm Sơn
+Đông Hòa
+Núi Thành
+Quảng Yên
+Nghi Sơn
+Thăng Bình
+Ứng Hòa
+Đan Phượng
+Triệu Sơn
+Bình Sơn
+Tân Yên
+Bình Giang
+Bến Lức
+Chợ Mới
+Bảo Lộc
+Mỹ Đức
+Lạc Sơn
+Hồng Ngự
+Sốp Cộp
+Chợ Gạo
+Núi Thành
+Mỹ Đức
+Đô Lương
+Cư Jút
+Vĩnh Yên
+Phú Hoà
+Bình Lục
+Krông Năng
+Hoài Ân
+Di Linh
+Thăng Bình
+Bắc Sơn
+Vũ Thư
+Thanh Sơn
+Gia Viễn
+Trảng Bom
+Châu Thành
+Cửa Lò
+Cầu Giấy
+U Minh Thượng
+Buôn Đôn
+Kông Chro
+Lạng Giang
+Sơn Hòa
+Hoàng Su Phì
+Kim Thành
+Nam Giang
+Lục Nam
+Bù Gia Mập
+Quỳ Châu
+Văn Giang
+Ba Tơ
+Bình Chánh
+Thanh Liêm
+Chí Linh
+Mê Linh
+Yên Lạc
+Tịnh Biên
+Phù Cát
+Ea Kar
+Nho Quan
+Giồng Trôm
+Hiệp Hòa
+Anh Sơn
+Krông Nô
+Điện Bàn
+Duy Xuyên
+Mộ Đức
+Kon Tum
+Châu Thành
+Bảo Lộc
+Lâm Thao
+Tiền Hải
+Long Mỹ
+An Biên
+Trấn Yên
+Duy Xuyên
+Cần Giuộc
+Thạch Hà
+1
+Si Ma Cai
+Tuy An
+Hưng Hà
+Mường La
+Tuy Hoà
+Đông Hưng
+Phan Rang-Tháp Chàm
+Tân Phước
+Ninh Giang
+Tiền Hải
+Ea Súp
+Vũ Quang
+Quỳnh Phụ
+Bắc Mê
+Long Khánh
+Phú Thiện
+An Lão
+Krông Pa
+Ea H'leo
+Phú Lương
+Ba Vì
+Phù Yên
+Quỳnh Phụ
+Nam Đông
+Yên Bình
+Đắk Song
+Thường Tín
+Phù Cừ
+Hương Khê
+Hoài Ân
+Kiến An
+Tam Đường
+Đông Hải
+KBang
+Bắc Trà My
+Ba Vì
+Diễn Châu
+Châu Thành
+An Minh
+Lục Yên
+Hương Thủy
+Ea Kar
+Quế Sơn
+Nga Sơn
+Thủ Dầu Một
+Lệ Thủy
+Dĩ An
+Na Hang
+Phú Tân

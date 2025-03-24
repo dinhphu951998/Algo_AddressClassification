@@ -122,11 +122,11 @@ def search_with_merging(search_tokens, trie_sequence):
 
 def main():
     # Build all tries and retrieve the locality mapper.
-    province_trie, district_trie, ward_trie = build_all_tries()
+    _, _, _, trie_reversed_province, trie_reversed_district, trie_reversed_ward = build_all_tries()
     trie_sequence = [
-        ("province", province_trie),
-        ("district", district_trie),
-        ("ward", ward_trie)
+        ("province", trie_reversed_province),
+        ("district", trie_reversed_district),
+        ("ward", trie_reversed_ward)
     ]
     locality_mapper = get_locality_mapper()
 

@@ -18,6 +18,15 @@ class Trie:
 
     def insert(self, word, reference_id):
         current = self.root
+        for char in word:
+            if char not in current.children:
+                current.children[char] = TrieNode()
+            current = current.children[char]
+        current.isTerminal = True
+        current.references.add(reference_id)
+
+    def insert_reversed(self, word, reference_id):
+        current = self.root
         for char in reversed(word):
             if char not in current.children:
                 current.children[char] = TrieNode()
@@ -210,10 +219,39 @@ def build_trie(file_path, trie, type):
                     for variant in text_variants:
                         trie.insert(variant, id)
 
+def build_reversed_trie(file_path, trie, type):
+    global current_id
+    seen = set()
+    with open(file_path, 'r', encoding='utf-8') as f:
+        for line in f:
+            raw = line.strip()
+            if raw and raw not in seen:
+                seen.add(raw)
+                id = current_id;
+                current_id += 1
+
+                locality_map[id] = {
+                    "type": type,
+                    "name": raw
+                }
+
+                if raw.isdigit():
+                    numeric_vars = generate_numeric_variants(raw, type)
+                    for variant in numeric_vars:
+                        trie.insert_reversed(variant, id)
+                else:
+                    text_variants = generate_text_variants(raw)
+                    for variant in text_variants:
+                        trie.insert_reversed(variant, id)
+
 def build_all_tries():
     trie_province = Trie()
     trie_district = Trie()
     trie_ward = Trie()
+
+    trie_reversed_province = Trie()
+    trie_reversed_district = Trie()
+    trie_reversed_ward = Trie()
 
     current_dir = os.path.dirname(os.path.abspath(__file__))
     district_file = os.path.join(current_dir, "..", "list_district.txt")
@@ -226,11 +264,15 @@ def build_all_tries():
     build_trie(district_file, trie_district, "district")
     build_trie(ward_file, trie_ward, "ward")
 
+    build_reversed_trie(province_file, trie_reversed_province, "province")
+    build_reversed_trie(district_file, trie_reversed_district, "district")
+    build_reversed_trie(ward_file, trie_reversed_ward, "ward")
+
     end = time.time()
     elapsed = end - start
     print(f"Building tries took {elapsed:.6f} seconds.")
 
-    return trie_province, trie_district, trie_ward
+    return trie_province, trie_district, trie_ward, trie_reversed_province, trie_reversed_district, trie_reversed_ward
 
 def get_locality_mapper():
     return locality_map

@@ -1,7 +1,6 @@
-import re
 import time
-import unicodedata
-
+import os
+from Utils.Utils import *
 locality_map = {}
 current_id = 0
 
@@ -26,6 +25,15 @@ class Trie:
         current.isTerminal = True
         current.references.add(reference_id)
 
+    def insert_reversed(self, word, reference_id):
+        current = self.root
+        for char in reversed(word):
+            if char not in current.children:
+                current.children[char] = TrieNode()
+            current = current.children[char]
+        current.isTerminal = True
+        current.references.add(reference_id)
+
     def search(self, word):
         current = self.root
         for char in word:
@@ -36,20 +44,31 @@ class Trie:
             return current.references
         return None
 
+    def collect_candidates(self, reversed_search_key):
+        node = self.root
+        for char in reversed_search_key:
+            if char not in node.children:
+                return []  # No candidate matches this reversed prefix.
+            node = node.children[char]
 
-def remove_vietnamese_accents(text):
-    text = unicodedata.normalize('NFD', text)
-    text = ''.join(ch for ch in text if unicodedata.category(ch) != 'Mn')
-    return text
+        candidates = []
+
+        def dfs(current_node, path):
+            # 'path' holds the accumulated reversed characters from the starting point.
+            if current_node.isTerminal:
+                # Do not reverse the path; keep the candidate in its reversed form.
+                candidate = path
+                candidates.append((candidate, current_node.references.copy()))
+            for letter, child in current_node.children.items():
+                dfs(child, path + letter)
+
+        # Start DFS from the node corresponding to the reversed search key.
+        dfs(node, reversed_search_key)
+        return candidates
 
 
 def generate_text_variants(raw_str):
-    s = remove_vietnamese_accents(raw_str).lower()
-
-    s = re.sub(r'[^a-z0-9\s]', ' ', s)
-
-    s = re.sub(r'\s+', ' ', s).strip()
-
+    s = normalize_text(raw_str)
     tokens = s.split()
     n = len(tokens)
 
@@ -92,7 +111,6 @@ def generate_text_variants(raw_str):
         variants = [s]
 
     variants = list(set(variants))
-
     print(variants)
     return variants
 
@@ -178,10 +196,12 @@ def generate_numeric_variants(num_str, place_type):
 
 def build_trie(file_path, trie, type):
     global current_id
+    seen = set()
     with open(file_path, 'r', encoding='utf-8') as f:
         for line in f:
             raw = line.strip()
-            if raw:
+            if raw and raw not in seen:
+                seen.add(raw)
                 id = current_id;
                 current_id += 1
 
@@ -192,23 +212,68 @@ def build_trie(file_path, trie, type):
 
                 if raw.isdigit():
                     numeric_vars = generate_numeric_variants(raw, type)
-                    print(numeric_vars)
                     for variant in numeric_vars:
                         trie.insert(variant, id)
                 else:
                     text_variants = generate_text_variants(raw)
                     for variant in text_variants:
                         trie.insert(variant, id)
-trie_province = Trie()
-trie_district = Trie()
-trie_ward = Trie()
 
-start = time.time()  # current time in seconds
-build_trie("../list_province.txt", trie_province, "province")
-build_trie("../list_district.txt", trie_district, "district")
-build_trie("../list_ward.txt", trie_ward, "ward")
-end = time.time()
+def build_reversed_trie(file_path, trie, type):
+    global current_id
+    seen = set()
+    with open(file_path, 'r', encoding='utf-8') as f:
+        for line in f:
+            raw = line.strip()
+            if raw and raw not in seen:
+                seen.add(raw)
+                id = current_id;
+                current_id += 1
 
-elapsed = end - start
-print(f"Search took {elapsed:.6f} seconds.")
+                locality_map[id] = {
+                    "type": type,
+                    "name": raw
+                }
+
+                if raw.isdigit():
+                    numeric_vars = generate_numeric_variants(raw, type)
+                    for variant in numeric_vars:
+                        trie.insert_reversed(variant, id)
+                else:
+                    text_variants = generate_text_variants(raw)
+                    for variant in text_variants:
+                        trie.insert_reversed(variant, id)
+
+def build_all_tries():
+    trie_province = Trie()
+    trie_district = Trie()
+    trie_ward = Trie()
+
+    trie_reversed_province = Trie()
+    trie_reversed_district = Trie()
+    trie_reversed_ward = Trie()
+
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    district_file = os.path.join(current_dir, "..", "list_district.txt")
+    province_file = os.path.join(current_dir, "..", "list_province.txt")
+    ward_file = os.path.join(current_dir, "..", "list_ward.txt")
+
+    start = time.time()
+
+    build_trie(province_file, trie_province, "province")
+    build_trie(district_file, trie_district, "district")
+    build_trie(ward_file, trie_ward, "ward")
+
+    build_reversed_trie(province_file, trie_reversed_province, "province")
+    build_reversed_trie(district_file, trie_reversed_district, "district")
+    build_reversed_trie(ward_file, trie_reversed_ward, "ward")
+
+    end = time.time()
+    elapsed = end - start
+    print(f"Building tries took {elapsed:.6f} seconds.")
+
+    return trie_province, trie_district, trie_ward, trie_reversed_province, trie_reversed_district, trie_reversed_ward
+
+def get_locality_mapper():
+    return locality_map
 

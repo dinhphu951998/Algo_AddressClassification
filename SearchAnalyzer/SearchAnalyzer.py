@@ -53,7 +53,7 @@ class Trie:
                 if node.is_end and len(words[j + 1]) == 0:
                     words[j + 1] = words[i] + [str[i:j + 1]]
 
-        return [item for possible_words in words for item in possible_words]
+        return words
 
 ward_trie = Trie()
 ward_trie.add_word("3")
@@ -125,7 +125,7 @@ test("A:12A.21BlockA C/c BCA,P.AnKhánh,TP.Thủ Đức, TP. HCM")
 # district:
 # ['3', 'my', 'my tho']
 # ward:
-# ['an', 'p3', 'an'] => Create trie should contain concate to contain p3
+# ['an', 'p3', 'an'] => Create trie should have the combination p3
 
 # original: 357/28,Ng-T- Thuật,P1,Q3,TP.HồChíMinh.
 # preprocessed: 35728ngt thuatp1q3tphochiminh

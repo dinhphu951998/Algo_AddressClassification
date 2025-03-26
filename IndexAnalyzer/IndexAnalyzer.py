@@ -2,6 +2,7 @@ import time
 import os
 from Utils.Utils import *
 locality_map = {}
+normalized_locality_map = {}
 current_id = 0
 
 
@@ -44,6 +45,11 @@ class Trie:
             return current.references
         return None
 
+    def search_for_normalized_result(self, word):
+        references = self.search(word)
+        return [(normalized_locality_map[id]["name"], word, locality_map[id]["name"]) for id in references if references]
+
+
     def collect_candidates(self, reversed_search_key):
         node = self.root
         for char in reversed_search_key:
@@ -66,9 +72,23 @@ class Trie:
         dfs(node, reversed_search_key)
         return candidates
 
+    def split_words(self, str):
+        n = len(str)
+        words = [[]] * (n + 1)
+        for i in range(n):
+            node = self.root
+            for j in range(i, n):
+                c = str[j]
+                if c not in node.children:
+                    break
+                node = node.children[c]
+                if node.isTerminal and len(words[j + 1]) == 0:
+                    words[j + 1] = words[i] + [str[i:j + 1]]
 
-def generate_text_variants(raw_str):
-    s = normalize_text(raw_str)
+        return words
+
+
+def generate_text_variants(s):
     tokens = s.split()
     n = len(tokens)
 
@@ -76,10 +96,13 @@ def generate_text_variants(raw_str):
         t1, t2 = tokens
         variants = [
             f"{t1} {t2}",
-            f"{t1[0]}{t2[0]}",
+            # f"{t1[0]}{t2[0]}",
             f"{t1[0]}{t2}",
+            f"{t1[0]} {t2}",
             f"{t1}{t2[0]}",
+            f"{t1} {t2[0]}",
             f"{t1}{t2}",
+            f"{t1} {t2}",
         ]
 
     elif n == 3:
@@ -111,7 +134,7 @@ def generate_text_variants(raw_str):
         variants = [s]
 
     variants = list(set(variants))
-    print(variants)
+    # print(variants)
     return variants
 
 
@@ -210,12 +233,19 @@ def build_trie(file_path, trie, type):
                     "name": raw
                 }
 
-                if raw.isdigit():
-                    numeric_vars = generate_numeric_variants(raw, type)
+                normalized = normalize_text(raw)
+                normalized_locality_map[id] = {
+                    "type": type,
+                    "name": normalized
+                }
+
+                if normalized.isdigit():
+                    numeric_vars = generate_numeric_variants(normalized, type)
                     for variant in numeric_vars:
                         trie.insert(variant, id)
                 else:
-                    text_variants = generate_text_variants(raw)
+
+                    text_variants = generate_text_variants(normalized)
                     for variant in text_variants:
                         trie.insert(variant, id)
 

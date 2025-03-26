@@ -16,8 +16,7 @@ class VietnameseHelper:
         "Y": "ÝỲỴỶỸ"
     }
     reversed_vietnamese_dict = {}
-    special_characters = ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", "-", ".", "/", ":", ";", "<",
-                          # ",",
+    special_characters = ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<",
                           "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"]
 
     def __init__(self):
@@ -25,7 +24,13 @@ class VietnameseHelper:
             for char in variations:
                 self.reversed_vietnamese_dict[char] = base_char
 
-    def remove_vietnamese_signs(self, s: str):
+    def normalize_text(self, str):
+        str = str.lower()
+        str = self.remove_vietnamese_signs(str)
+        str = self.remove_special_characters(str)
+        return str
+
+    def remove_vietnamese_signs(self, s):
         result = []
         for char in s:
             if char in self.reversed_vietnamese_dict:
@@ -34,8 +39,7 @@ class VietnameseHelper:
                 result.append(char)
         return "".join(result)
 
-    def remove_special_characters(self, s: str):
-        s = s.replace('.', ' ')
+    def remove_special_characters(self, s):
         result = []
         for char in s:
             if char not in self.special_characters:

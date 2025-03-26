@@ -1,0 +1,9 @@
+Original:  284dbis ng van giao p3 my tho tgiang
+Possible provinces:  [[], [], [], [], [], ['db'], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], ['th'], [], [], [], ['tg'], [], [], [], ['tgiang']]
+Possible districts:  [[], [], ['8'], ['8', '4'], [], ['8', '4', 'db'], [], [], [], [], ['ng'], [], [], [], ['an'], [], [], [], [], [], [], [], ['3'], [], [], ['my'], [], [], ['th'], ['my tho'], [], [], ['tg'], [], [], ['gian'], ['tgiang']]
+Possible wards:  [[], [], [], [], [], ['db'], [], [], [], [], ['ng'], [], [], [], ['an'], [], [], [], [], [], [], [], [], [], [], ['my'], [], [], ['th'], [], [], [], ['tg'], [], ['tgia'], ['an'], ['tgiang']]
+
+
+tìm ngược từ end đến start
+mỗi khi thấy giá trị thì tính distance đến các possible outcomes
+    chọn outcomes có distance ngắn nhất, và lưu vào province/district/ward results

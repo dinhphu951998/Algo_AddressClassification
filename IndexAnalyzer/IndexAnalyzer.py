@@ -1,5 +1,7 @@
 import time
 import os
+from dbm import error
+
 from Utils.Utils import *
 locality_map = {}
 normalized_locality_map = {}
@@ -142,14 +144,14 @@ numbers_1_to_30 = {
     1: "mot", 2: "hai", 3: "ba", 4: "bon",
     5: "nam", 6: "sau", 7: "bay", 8: "tam",
     9: "chin", 10: "muoi",
-    11: "muoi mot", 12: "muoi hai", 13: "muoi ba", 14: "muoi bon",
-    15: "muoi lam", 16: "muoi sau", 17: "muoi bay", 18: "muoi tam",
-    19: "muoi chin",
-    20: "hai muoi",
-    21: "hai muoi mot", 22: "hai muoi hai", 23: "hai muoi ba",
-    24: "hai muoi bon", 25: "hai muoi lam", 26: "hai muoi sau",
-    27: "hai muoi bay", 28: "hai muoi tam", 29: "hai muoi chin",
-    30: "ba muoi"
+    # 11: "muoi mot", 12: "muoi hai", 13: "muoi ba", 14: "muoi bon",
+    # 15: "muoi lam", 16: "muoi sau", 17: "muoi bay", 18: "muoi tam",
+    # 19: "muoi chin",
+    # 20: "hai muoi",
+    # 21: "hai muoi mot", 22: "hai muoi hai", 23: "hai muoi ba",
+    # 24: "hai muoi bon", 25: "hai muoi lam", 26: "hai muoi sau",
+    # 27: "hai muoi bay", 28: "hai muoi tam", 29: "hai muoi chin",
+    # 30: "ba muoi"
 }
 
 
@@ -169,52 +171,30 @@ def generate_numeric_variants(num_str, place_type):
     except ValueError:
         return [num_str]
 
+    variants = []
     if 1 <= n <= 30:
-        digit_word = numbers_1_to_30[n]
-        digit_word_no_space = digit_word.replace(" ", "")
+        digit_word = numbers_1_to_30.get(n, "")
+        if digit_word:
+            variants.append(f"{prefixShort}{digit_word}")
+            variants.append(f"{prefixShort} {digit_word}")
 
-        zero_num = ""
+            variants.append(f"{prefixLong}{digit_word}")
+            variants.append(f"{prefixLong} {digit_word}")
+
         if n < 10:
             zero_num = f"0{num_str}"
-
-        variants = []
-
-        variants.append(f"{prefixShort}{num_str}")
-        variants.append(f"{prefixLong}{num_str}")
-        variants.append(f"{prefixShort}{digit_word}")
-        variants.append(f"{prefixLong}{digit_word}")
-
-        if zero_num:
             variants.append(f"{prefixShort}{zero_num}")
-            variants.append(f"{prefixLong}{zero_num}")
-
-        variants.append(num_str)
-
-        if zero_num:
-            variants.append(zero_num)
-
-        variants.append(digit_word)
-
-        variants.append(f"{prefixLong} {num_str}")
-
-        if zero_num:
             variants.append(f"{prefixShort} {zero_num}")
+            variants.append(f"{prefixLong}{zero_num}")
+            variants.append(f"{prefixLong} {zero_num}")
 
-        variants.append(f"{prefixShort} {num_str}")
+    variants.append(f"{prefixShort}{num_str}")
+    variants.append(f"{prefixShort} {num_str}")
 
-        variants.append(f"{prefixShort}{digit_word_no_space}")
-        variants.append(f"{prefixLong}{digit_word_no_space}")
+    variants.append(f"{prefixLong}{num_str}")
+    variants.append(f"{prefixLong} {num_str}")
 
-        variants.append(f"{prefixShort} {digit_word_no_space}")
-        variants.append(f"{prefixLong} {digit_word_no_space}")
-
-        variants.append(f"{prefixShort} {digit_word}")
-        variants.append(f"{prefixLong} {digit_word}")
-
-        variants = list(set(variants))
-        return variants
-    else:
-        return [num_str]
+    return list(set(variants))
 
 
 def build_trie(file_path, trie, type):
@@ -247,6 +227,12 @@ def build_trie(file_path, trie, type):
 
                     text_variants = generate_text_variants(normalized)
                     for variant in text_variants:
+                        if  variant == "i":
+                            print(variant)
+                            print(raw)
+                            print(file_path)
+                            raise ValueError("This is a custom error message")
+
                         trie.insert(variant, id)
 
 def build_reversed_trie(file_path, trie, type):

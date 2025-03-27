@@ -1,3 +1,5 @@
+from re import search
+
 import editdistance
 
 class Searcher:
@@ -10,41 +12,38 @@ class Searcher:
         self.ward_trie = ward_trie
 
     def process(self):
-        n = len(self.possible_provinces)
-        final_province = ""
-        final_district = ""
-        final_ward = ""
-        i = n - 1
-        while i >= 0:
-            provinces_at_i = self.possible_provinces[i]
-            districts_at_i = self.possible_districts[i]
-            wards_at_i = self.possible_wards[i]
-
-            pro_calculator = self.search(provinces_at_i, self.province_trie)
-            dis_calculator = self.search(districts_at_i, self.district_trie)
-            wa_calculator = self.search(wards_at_i, self.ward_trie)
-
-            length = 0
-            if final_province is "" and pro_calculator["distance"] == min(pro_calculator["distance"], dis_calculator["distance"], wa_calculator["distance"]):
-                final_province = pro_calculator["best_candidate"]
-                length = len(pro_calculator["key"])
-            elif final_district is "" and dis_calculator["distance"] == min(pro_calculator["distance"], dis_calculator["distance"], wa_calculator["distance"]):
-                final_district = dis_calculator["best_candidate"]
-                length = len(dis_calculator["key"])
-            elif final_ward is "" and wa_calculator["distance"] == min(pro_calculator["distance"], dis_calculator["distance"], wa_calculator["distance"]):
-                final_ward = wa_calculator["best_candidate"]
-                length = len(wa_calculator["key"])
-
-            if final_province != "" and final_district != "" and final_ward != "":
-                break
-
-            i = i - max(length, 2) + 1
+        final_province = self.search_part(self.possible_provinces, self.province_trie, "province")
+        print(final_province)
+        final_district = self.search_part(self.possible_districts, self.district_trie, "district")
+        print(final_district)
+        final_ward = self.search_part(self.possible_wards, self.ward_trie, "ward")
+        print(final_ward)
 
         return {
-            "province": final_province,
-            "district": final_district,
-            "ward": final_ward
+            "province": final_province["best_candidate"],
+            "district": final_district["best_candidate"],
+            "ward": final_ward["best_candidate"]
         }
+
+    part_possibilities = {
+        "province": 1,
+        "district": 2/3,
+        "ward": 1/3
+    }
+
+    def search_part(self, possible_words, trie, type):
+        result = []
+        n = len(possible_words)
+
+        for i, words_at_i in enumerate(possible_words):
+            if len(words_at_i) == 0:
+                continue
+            calculator = self.search(words_at_i, trie)
+            calculator["distance"] = calculator["distance"] * abs(i - self.part_possibilities[type] * n + 1) / n
+            result.append(calculator)
+
+        result.sort(key=lambda x: x["distance"])
+        return result[0]
 
 
     def search(self, words, trie):

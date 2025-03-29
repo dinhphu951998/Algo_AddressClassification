@@ -153,12 +153,11 @@ columns = [
 df = pd.DataFrame(df)
 df.columns = columns
 
-print(f'{TEAM_NAME = }')
-print(f'{EXCEL_FILE = }')
 print(df2)
 
-
-writer = pd.ExcelWriter(EXCEL_FILE, engine='xlsxwriter')
-df2.to_excel(writer, index=False, sheet_name='summary')
-df.to_excel(writer, index=False, sheet_name='details')
-writer.close()
+# print(f'{TEAM_NAME = }')
+# print(f'{EXCEL_FILE = }')
+# writer = pd.ExcelWriter(EXCEL_FILE, engine='xlsxwriter')
+# df2.to_excel(writer, index=False, sheet_name='summary')
+# df.to_excel(writer, index=False, sheet_name='details')
+# writer.close()

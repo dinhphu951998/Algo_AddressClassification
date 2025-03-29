@@ -1,3 +1,5 @@
+import unicodedata
+
 class VietnameseHelper:
     vietnamese_dict = {
         "a": "áàạảãâấầậẩẫăắằặẳẵ",
@@ -17,7 +19,7 @@ class VietnameseHelper:
     }
     reversed_vietnamese_dict = {}
     special_characters = ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", "-", ".", "/", ":", ";", "<",
-                          # ",",
+                          ",", " ",
                           "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"]
 
     def __init__(self):
@@ -26,16 +28,19 @@ class VietnameseHelper:
                 self.reversed_vietnamese_dict[char] = base_char
 
     def remove_vietnamese_signs(self, s: str):
-        result = []
-        for char in s:
-            if char in self.reversed_vietnamese_dict:
-                result.append(self.reversed_vietnamese_dict[char])
-            else:
-                result.append(char)
-        return "".join(result)
+        s = unicodedata.normalize('NFKD', s)
+        s = "".join(c for c in s if not unicodedata.combining(c))  # Remove accents
+        return s
+        # result = []
+        # for char in s:
+        #     if char in self.reversed_vietnamese_dict:
+        #         result.append(self.reversed_vietnamese_dict[char])
+        #     else:
+        #         result.append(char)
+        # return "".join(result)
 
     def remove_special_characters(self, s: str):
-        s = s.replace('.', ' ')
+        # s = s.replace('.', ' ')
         result = []
         for char in s:
             if char not in self.special_characters:

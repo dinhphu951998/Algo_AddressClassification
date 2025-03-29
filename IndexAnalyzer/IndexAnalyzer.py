@@ -15,9 +15,14 @@ class TrieNode:
         self.references = set()
 
 
+
 class Trie:
     def __init__(self):
         self.root = TrieNode()
+        self.allWords = set()
+
+    def get_all_words(self):
+        return self.allWords
 
     def insert(self, word, reference_id):
         current = self.root
@@ -27,6 +32,8 @@ class Trie:
             current = current.children[char]
         current.isTerminal = True
         current.references.add(reference_id)
+        self.allWords.add((locality_map[reference_id]["name"], locality_map[reference_id]["type"]))
+
 
     def insert_reversed(self, word, reference_id):
         current = self.root
@@ -97,40 +104,41 @@ def generate_text_variants(s):
     if n == 2:
         t1, t2 = tokens
         variants = [
-            f"{t1} {t2}",
+            # f"{t1} {t2}",
             # f"{t1[0]}{t2[0]}",
-            f"{t1[0]}{t2}",
-            f"{t1[0]} {t2}",
-            f"{t1}{t2[0]}",
-            f"{t1} {t2[0]}",
-            f"{t1}{t2}",
-            f"{t1} {t2}",
+            # f"{t1[0]}{t2}",
+            # f"{t1[0]} {t2}",
+            # f"{t1}{t2[0]}",
+            # f"{t1} {t2[0]}",
+            # f"{t1}{t2}",
+            # f"{t1} {t2}",
+            s
         ]
 
     elif n == 3:
         t1, t2, t3 = tokens
         variants = [
-            f"{t1} {t2} {t3}",
+            # f"{t1} {t2} {t3}",
             f"{t1}{t2}{t3}",
             f"{t1[0]}{t2[0]}{t3[0]}",
-            f"{t1} {t2}{t3}",
-            f"{t1}{t2} {t3}",
-            f"{t1[0]}{t2}{t3}",
-            f"{t1}{t2[0]}{t3}",
-            f"{t1}{t2}{t3[0]}",
+            # f"{t1} {t2}{t3}",
+            # f"{t1}{t2} {t3}",
+            # f"{t1[0]}{t2}{t3}",
+            # f"{t1}{t2[0]}{t3}",
+            # f"{t1}{t2}{t3[0]}",
         ]
 
     elif n == 4:
         t1, t2, t3, t4 = tokens
         variants = [
-            f"{t1} {t2} {t3} {t4}",
+            # f"{t1} {t2} {t3} {t4}",
             f"{t1}{t2}{t3}{t4}",
             f"{t1[0]}{t2[0]}{t3[0]}{t4[0]}",
-            f"{t1} {t2}{t3}{t4}",
-            f"{t1}{t2} {t3}{t4}",
-            f"{t1}{t2}{t3} {t4}",
-            f"{t1[0]}{t2}{t3}{t4}",
-            f"{t1}{t2[0]}{t3}{t4}",
+            # f"{t1} {t2}{t3}{t4}",
+            # f"{t1}{t2} {t3}{t4}",
+            # f"{t1}{t2}{t3} {t4}",
+            # f"{t1[0]}{t2}{t3}{t4}",
+            # f"{t1}{t2[0]}{t3}{t4}",
         ]
     else:
         variants = [s]
@@ -213,7 +221,7 @@ def build_trie(file_path, trie, type):
                     "name": raw
                 }
 
-                normalized = normalize_text(raw)
+                normalized = normalize_text(raw, True)
                 normalized_locality_map[id] = {
                     "type": type,
                     "name": normalized

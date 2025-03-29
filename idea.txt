@@ -7,3 +7,50 @@ Possible wards:  [[], [], [], [], [], ['db'], [], [], [], [], ['ng'], [], [], []
 tìm ngược từ end đến start
 mỗi khi thấy giá trị thì tính distance đến các possible outcomes
     chọn outcomes có distance ngắn nhất, và lưu vào province/district/ward results
+
+
+------------
+text: .....ho6chiminh
+#  segment theo "quan|huyen|q|thi tran|thanh pho|tp|....|phuong|xa|"
+segments = ["...", "...", "ho6chiminh"]  # assume là segment đúng
+
+loop text:
+    trie_province -> province = ""
+if province is empty
+    province dựa trên edit distance
+replace province tìm dược (text + segments)
+
+loop text:
+    trie_district -> district = ""
+if district is empty
+    district dựa trên edit distance
+replace district tìm dược
+
+loop text:
+    trie_ward -> ward = ""
+if trie_ward is empty
+    trie_ward dựa trên edit distance
+replace trie_ward tìm dược
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

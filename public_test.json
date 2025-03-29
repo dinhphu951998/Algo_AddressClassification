@@ -1,0 +1,18 @@
+[
+   {
+    "text": "X Bình Thuận H.Tây Son Tỉnh Bình Định",
+    "result": {
+      "district": "Tây Sơn",
+      "ward": "Bình Thuận",
+      "province": "Bình Định"
+    }
+  },
+  {
+    "text": "357/28,Ng-T- Thuật,P1,Q3, HồChíMinh.",
+    "result": {
+      "province": "Hồ Chí Minh",
+      "district": "",
+      "ward": ""
+    }
+  }
+]

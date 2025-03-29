@@ -13,6 +13,24 @@ def normalize_text(text):
 
 def tokenize_search_term_by_character(text):
     text = normalize_text(text)
+    print(text)
+    unit_words = [
+        "huyen",  # huyện
+        "quan",  # quận
+        "thanh pho",  # thành phố
+        "tp",  # tp (abbreviation for thành phố)
+        "tinh",  # tỉnh
+        "xa",  # xã
+        "phuong",  # phường
+        "thi xa",  # thị xã
+        "thi tran"
+    ]
+
+    for unit in unit_words:
+        text = re.sub(r'\b' + re.escape(unit) + r'\b', '', text)
+
+    # Optionally, remove extra spaces resulting from the removals.
+    text = re.sub(r'\s+', ' ', text).strip()
     text = re.sub(r'\s+', '', text)
     tokens = list(text)
     return tokens

@@ -75,43 +75,42 @@ def generate_text_variants(raw_str):
     if n == 2:
         t1, t2 = tokens
         variants = [
-            f"{t1} {t2}",
-            f"{t1[0]}{t2[0]}",
+            # f"{t1} {t2}",
+            # f"{t1[0]}{t2[0]}",
             f"{t1[0]}{t2}",
-            f"{t1}{t2[0]}",
+            # f"{t1}{t2[0]}",
             f"{t1}{t2}",
         ]
 
     elif n == 3:
         t1, t2, t3 = tokens
         variants = [
-            f"{t1} {t2} {t3}",
+            # f"{t1} {t2} {t3}",
             f"{t1}{t2}{t3}",
-            f"{t1[0]}{t2[0]}{t3[0]}",
-            f"{t1} {t2}{t3}",
-            f"{t1}{t2} {t3}",
-            f"{t1[0]}{t2}{t3}",
-            f"{t1}{t2[0]}{t3}",
-            f"{t1}{t2}{t3[0]}",
+            # f"{t1[0]}{t2[0]}{t3[0]}",
+            # f"{t1} {t2}{t3}",
+            # f"{t1}{t2} {t3}",
+            # f"{t1[0]}{t2}{t3}",
+            # f"{t1}{t2[0]}{t3}",
+            # f"{t1}{t2}{t3[0]}",
         ]
 
     elif n == 4:
         t1, t2, t3, t4 = tokens
         variants = [
-            f"{t1} {t2} {t3} {t4}",
+            # f"{t1} {t2} {t3} {t4}",
             f"{t1}{t2}{t3}{t4}",
-            f"{t1[0]}{t2[0]}{t3[0]}{t4[0]}",
-            f"{t1} {t2}{t3}{t4}",
-            f"{t1}{t2} {t3}{t4}",
-            f"{t1}{t2}{t3} {t4}",
-            f"{t1[0]}{t2}{t3}{t4}",
-            f"{t1}{t2[0]}{t3}{t4}",
+            # f"{t1[0]}{t2[0]}{t3[0]}{t4[0]}",
+            # f"{t1} {t2}{t3}{t4}",
+            # f"{t1}{t2} {t3}{t4}",
+            # f"{t1}{t2}{t3} {t4}",
+            # f"{t1[0]}{t2}{t3}{t4}",
+            # f"{t1}{t2[0]}{t3}{t4}",
         ]
     else:
         variants = [s]
 
     variants = list(set(variants))
-    print(variants)
     return variants
 
 

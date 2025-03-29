@@ -5,7 +5,7 @@ from datetime import datetime
 
 from Solution import Solution
 
-
+debug = False
 # CORRECT TESTS
 groups_province = {}
 groups_district = {'hòa bình': ['Hoà Bình', 'Hòa Bình'], 'kbang': ['Kbang', 'KBang'], 'quy nhơn': ['Qui Nhơn', 'Quy Nhơn']}
@@ -81,7 +81,7 @@ for test_idx, data_point in enumerate(data):
             ok,
             timer[-1] / 1_000_000_000,
         ])
-        if not ok or not province_correct or not district_correct or not ward_correct:
+        if debug and (not ok or not province_correct or not district_correct or not ward_correct):
             raise ValueError()
     except Exception as e:
         print()
@@ -159,9 +159,9 @@ df.columns = columns
 
 print(df2)
 
-# print(f'{TEAM_NAME = }')
-# print(f'{EXCEL_FILE = }')
-# writer = pd.ExcelWriter(EXCEL_FILE, engine='xlsxwriter')
-# df2.to_excel(writer, index=False, sheet_name='summary')
-# df.to_excel(writer, index=False, sheet_name='details')
-# writer.close()
+print(f'{TEAM_NAME = }')
+print(f'{EXCEL_FILE = }')
+writer = pd.ExcelWriter(EXCEL_FILE, engine='xlsxwriter')
+df2.to_excel(writer, index=False, sheet_name='summary')
+df.to_excel(writer, index=False, sheet_name='details')
+writer.close()

@@ -1,3 +1,4 @@
+from queue import Queue
 from typing import Optional, Tuple, Dict, List
 
 from Utils.Utils import *
@@ -8,13 +9,17 @@ SPECIAL_CASES = ["xã", "x.", "huyện", "tỉnh", "t.",
                  "tp", "thành phố", "thànhphố"]
 
 # Prefixes for wards and districts to expand possible matches
-WARD_CASES = ["p", "phường", "phương", "phuong"]
-DISTRICT_CASES = ["q", "quân", "quan"]
+WARD_CASES = ["p", "phường"]
+DISTRICT_CASES = ["q", "quận"]
 
 # Dictionary to store generated variations for tracing back
 variation_map: Dict[str, List[str]] = {}
 original_names: Dict[str, str] = {}
 
+province_short_form = {
+    "hồchíminh":"hcm",
+    "bàrịavũngtàu":"brvt",
+}
 
 class TrieNode:
     def __init__(self):
@@ -26,18 +31,46 @@ class TrieNode:
 class Trie:
     def __init__(self):
         self.root = TrieNode()
+        self.allWords = set()
 
     def insert(self, original: str):
         """Insert a normalized word into the trie with a reference to the original."""
         normalized_word = original
         # normalized_word = normalize_text(original)
         node = self.root
-        for char in normalized_word:
+        q = Queue()
+        for i, char in enumerate(normalized_word):
+
             if char not in node.children:
                 node.children[char] = TrieNode()
+
+            # c_variant = get_character_variant(char)
+            # if c_variant:
+            #     q.put((node, c_variant, i))
+
             node = node.children[char]
+
         node.is_end_of_word = True
         node.original_string = normalized_word
+
+        self.allWords.add(normalized_word)
+
+        # insert variants
+        # while q.qsize() > 0:
+        #     node, c_variant, i = q.get()
+        #
+        #     if c_variant not in node.children:
+        #         node.children[c_variant] = TrieNode()
+        #     node = node.children[c_variant]
+        #
+        #     for char in normalized_word[i + 1:]:
+        #         if char not in node.children:
+        #             node.children[char] = TrieNode()
+        #         node = node.children[char]
+        #
+        #     node.is_end_of_word = True
+        #     node.original_string = normalized_word
+
 
     def search(self, text: str, start: int) -> Optional[Tuple[str, int, int]]:
         """Finds the first valid word from the given start index."""
@@ -51,6 +84,26 @@ class Trie:
                 return (node.original_string, start, i + 1)
         return None
 
+    def search_max_length(self, text: str, start: int) -> Optional[Tuple[str, int, int]]:
+        """Finds the longest valid word from the given start index."""
+        node = self.root
+        longest_match = ""
+        longest_length = 0
+        for i in range(start, len(text)):
+            char = text[i]
+            if char not in node.children:
+                break
+            node = node.children[char]
+            if node.is_end_of_word:
+                current_length = i - start + 1
+                if current_length > longest_length:
+                    longest_length = current_length
+                    longest_match = (node.original_string, start, i + 1)
+        return longest_match
+
+    def get_all_words(self):
+        return self.allWords
+
 def generate_prefixed_variations(normalized_name: str, category: str) -> List[str]:
     """Generate prefixed variations ONLY for wards and districts, and store variations per category."""
     variations = []
@@ -61,6 +114,7 @@ def generate_prefixed_variations(normalized_name: str, category: str) -> List[st
     if category not in original_names:
         original_names[category] = {}
 
+
     if normalized_name.isdigit():  # Only generate prefixes for wards and districts
         if category == "ward":
             variations = [prefix + normalized_name for prefix in WARD_CASES]
@@ -68,6 +122,9 @@ def generate_prefixed_variations(normalized_name: str, category: str) -> List[st
             variations = [prefix + normalized_name for prefix in DISTRICT_CASES]
     else:
         variations.append(normalized_name)
+
+    if normalized_name in province_short_form:
+        variations.append(province_short_form[normalized_name])
 
     # Store variations per category
     variation_map[category][normalized_name] = variations
@@ -85,10 +142,8 @@ def load_databases(filenames: Dict[str, str]) -> Dict[str, Trie]:
                     location_name = line.strip()
                     if location_name:
 
-                        normalized_name_but_keep_alphabet = normalize_text_but_keep_vietnamese_alphabet(location_name)
-                        normalized_name = normalize_text(location_name)
-
-                        prefixed_variations = list(set(generate_prefixed_variations(normalized_name, category) + generate_prefixed_variations(normalized_name_but_keep_alphabet, category)))
+                        normalized_name_but_keep_alphabet = normalize_text_but_keep_vietnamese(location_name)
+                        prefixed_variations = generate_prefixed_variations(normalized_name_but_keep_alphabet, category)
 
                         for variant in prefixed_variations:
                             # Store the original form under the correct category

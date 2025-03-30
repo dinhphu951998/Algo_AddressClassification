@@ -85,11 +85,11 @@ for test_idx, data_point in enumerate(data):
             print()
             print("Original: " + address)
             if province_correct == 0:
-                print(f"Province -> Result: '{result['province']}', Answer: {answer['province']}")
+                print(f"Province -> Result: '{result['province']}', Answer: '{answer['province']}'")
             if district_correct == 0:
-                print(f"District -> Result: '{result['district']}', Answer: {answer['district']}")
+                print(f"District -> Result: '{result['district']}', Answer: '{answer['district']}'")
             if ward_correct == 0:
-                print(f"Ward -> Result: '{result['ward']}', Answer: {answer['ward']}")
+                print(f"Ward -> Result: '{result['ward']}', Answer: '{answer['ward']}'")
     except Exception as e:
         print(f"{answer = }")
         print(f"{result = }")

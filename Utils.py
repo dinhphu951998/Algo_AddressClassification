@@ -19,7 +19,8 @@ ALL_PREFIXES = ["TP.", "T.P", "F.", "Thành phố", "ThànhPhố", "TP ", " TP",
                "Tỉnh", "Tỉn","T.", " T ",  #",T ",
                "Quận", "Q.", " Q ", ",Q ",
                "Huyện", "hyện", "H.", " H ",  #",H ",
-               "khu phố", "KP", "KhuPhố", "Khu pho", "KhuPho",  # KP. contains P.
+                #"KP", # KP. contains P.
+               "khu phố",  "KhuPhố", "Khu pho", "KhuPho",
                "Phường", "P.", "F", " P ",  #",P ",
                "X.", "Thị xã", "ThịXã", "Xã",  #" X ", "X ", ",X ",
                 "Thị trấn", "ThịTrấn", "T.T",
@@ -50,6 +51,8 @@ def common_normalize(text: str) -> str:
     # text = text.replace(".", "")
     for case in SAFE_CASES:
         text = re.sub(re.escape(case), ',', text, flags=re.IGNORECASE)
+    text = re.sub(r"\s{2,}", ",", text)  # Remove spaces
+    text = text.replace(" ", "")
     return text
 
 def normalize_text_and_remove_accent(text: str) -> str:
@@ -58,7 +61,7 @@ def normalize_text_and_remove_accent(text: str) -> str:
     text = unicodedata.normalize("NFKD", text)
     text = text.replace("đ", "d")
     text = "".join(c for c in text if not unicodedata.combining(c))  # Remove accents
-    text = re.sub(r"\s+", "", text)  # Remove spaces
+    # text = re.sub(r"\s+", "", text)  # Remove spaces
     return text
 
 def normalize_text_but_keep_vietnamese_alphabet(text: str) -> str:
@@ -88,9 +91,6 @@ def normalize_text_but_keep_accent(text: str) -> str:
 
     for wrong, correct in wrong_accents.items():
         text = text.replace(wrong, correct)
-
-    # text = text.replace("oà", "òa")
-    text = re.sub(r"\s+", "", text)  # Remove spaces
 
     return text
 

@@ -56,7 +56,7 @@ def normalize_text_and_remove_accent(text: str) -> str:
     """Normalize text by removing accents, spaces, and special cases."""
     text = common_normalize(text)
     text = unicodedata.normalize("NFKD", text)
-    text.replace("đ", "d")
+    text = text.replace("đ", "d")
     text = "".join(c for c in text if not unicodedata.combining(c))  # Remove accents
     text = re.sub(r"\s+", "", text)  # Remove spaces
     return text

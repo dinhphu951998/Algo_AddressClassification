@@ -2,17 +2,10 @@ from typing import Dict, Tuple, Optional
 
 from IndexAnalyzer import Trie
 from Autocorrect import autocorrect
-from Utils import normalize_text_but_keep_vietnamese_alphabet, segment_text, normalize_text_but_keep_accent, \
-    normalize_text_and_remove_accent
 
 
-def search_locations(tries: Dict[str, Trie], input_text: str) -> Tuple[Dict[str, Optional[str]], str]:
-    """Searches the text using Tries and removes matched words."""
-    results = {"ward": "", "district": "", "province": ""}
+def search_locations_in_trie(tries: Dict[str, Trie], input_text: str, results) -> Tuple[Dict[str, Optional[str]], str]:
     matched_positions = set()
-
-    segments = segment_text(input_text)
-    input_text = normalize_text_but_keep_accent(",".join(segments))
 
     remaining_chars = list(input_text)
 
@@ -22,23 +15,17 @@ def search_locations(tries: Dict[str, Trie], input_text: str) -> Tuple[Dict[str,
         res, input_text = search_in_trie(tries[category], input_text, matched_positions, remaining_chars, reverse)
         results[category] = res
 
-    # search in non accents tries
-    input_text = normalize_text_and_remove_accent(input_text)
+    return results, input_text
+
+def search_locations_in_segments(tries: Dict[str, Trie], segments: [], results) -> Tuple[Dict[str, Optional[str]], str]:
     for category, reverse in [("province", True), ("ward", False), ("district", False)]:
         if results[category] != "":
-            continue
-        res, input_text = search_in_trie(tries[category], input_text, matched_positions, remaining_chars, reverse)
-        results[category] = res
-
-    segments = segment_text(input_text, False)
-    for category, reverse in [("province", True), ("ward", False), ("district", False)]:
-        if results[category]:
             continue
 
         res = search_in_segment(segments, tries[category], category, reverse)
         results[category] = res
 
-    return results, "normalized_remaining_text"
+    return results, segments
 
 def search_in_trie(trie, input_text, matched_positions, remaining_chars, reverse):
     match = search_part(trie, input_text, matched_positions, remaining_chars, reverse)

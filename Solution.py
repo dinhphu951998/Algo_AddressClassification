@@ -1,7 +1,7 @@
 from IndexAnalyzer import load_databases, variation_map, original_names
-from Searcher import search_locations
+from Searcher import search_locations_in_trie, search_locations_in_segments
 from Utils import normalize_text_but_keep_vietnamese_alphabet, normalize_text_but_keep_accent, \
-    normalize_text_and_remove_accent
+    normalize_text_and_remove_accent, segment_text
 
 
 class Solution:
@@ -27,10 +27,25 @@ class Solution:
         pass
 
     def process(self, s: str):
-        # write your process string here
+        # Preprocess
         s_copy = s[:]
 
-        result, remaining_text = search_locations(self.tries, s)
+        segments = segment_text(s)
+        input_text = normalize_text_but_keep_accent(",".join(segments))
+
+        # Start searching
+        results = {"ward": "", "district": "", "province": ""}
+
+        # Search with accents
+        result, remaining_text = search_locations_in_trie(self.tries, input_text, results)
+
+        # If the province/district/ward not found, search without accents
+        remaining_text = normalize_text_and_remove_accent(remaining_text)
+        result, remaining_text = search_locations_in_trie(self.tries, remaining_text, results)
+
+        # If the province/district/ward not found, search by segments
+        segments = segment_text(remaining_text)
+        result, remaining_text = search_locations_in_segments(self.tries, segments, results)
 
         result =  {
             "province": original_names["province"].get(result["province"], result["province"]),
@@ -50,8 +65,8 @@ class Solution:
 runner = Solution()
 runner.debug = True
 
-# runner.process("CH F1614-HH2-Khu ĐTM Dương Nội Yên NghĩahàdônghyàNội")
-runner.process("Huyện Hiêp Hòa Bắc Giang")
+runner.process("Khu B Chu Hoà, Việt HhiPhú Thọ")
+# runner.process("Huyện Hiêp Hòa Bắc Giang")
 
 # Not able to solve yet
 # runner.process("284DBis Ng Văn Giáo, P3, Mỹ Tho, T.Giang.")

@@ -49,9 +49,7 @@ class Solution:
 runner = Solution()
 runner.debug = True
 
-runner.process("X. Trà DVưong Bắc Trà My TQuảg Nam")
-runner.process("  Đông Giang T Quảyg Nm")
-runner.process("FHim Lam   Điện Biê")
+runner.process("Khu B Chu Hoà, Việt HhiPhú Thọ")
 
 # Not able to solve yet
 # runner.process("284DBis Ng Văn Giáo, P3, Mỹ Tho, T.Giang.")

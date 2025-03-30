@@ -10,31 +10,35 @@ def search_locations(tries: Dict[str, Trie], input_text: str) -> Tuple[Dict[str,
     results = {"ward": "", "district": "", "province": ""}
     matched_positions = set()
 
-    input_text = normalize_text_but_keep_vietnamese(input_text)
     segments = segment_text(input_text)
+    input_text = normalize_text_but_keep_vietnamese(",".join(segments))
 
     remaining_chars = list(input_text)
 
-    for category in ["province", "ward", "district"]:
+    for category, reversed in [("province", True), ("ward", False), ("district", False)]:
         trie = tries.get(category, None)
-
         if not trie:
             continue
 
-        if category == "province":
-            province = search_part(trie, input_text, matched_positions, remaining_chars, True)
-            results["province"] = province if province else search_in_segment(segments, trie, "province", True)
+        match = search_part(trie, input_text, matched_positions, remaining_chars, reversed)
+        res = match[0]
+        if match and res:
+            input_text = input_text[:match[1]] + "," + input_text[match[2]:]
+        results[category] = res
 
-        if category == "ward":
-            ward = search_part(trie, input_text, matched_positions, remaining_chars)
-            results["ward"] = ward if ward else search_in_segment(segments, trie, "ward")
+    segments = segment_text(input_text, False)
+    for category, reversed in [("province", True), ("ward", False), ("district", False)]:
+        trie = tries.get(category, None)
+        if not trie:
+            continue
 
-        if category == "district":
-            district = search_part(trie, input_text, matched_positions, remaining_chars)
-            results["district"] = district if district else search_in_segment(segments, trie, "district")
+        if results[category]:
+            continue
 
-    normalized_remaining_text = "".join(remaining_chars).strip()
-    return results, normalized_remaining_text
+        res = search_in_segment(segments, trie, category, reversed)
+        results[category] = res
+
+    return results, "normalized_remaining_text"
 
 def search_in_segment(segments, trie, category, reversed=False):
     if reversed:
@@ -59,12 +63,9 @@ def search_part(trie, input_text, matched_positions, remaining_chars, reversed=F
         if i in matched_positions:
             continue
         match = trie.search_max_length(input_text, i)
-        if match and match[1] not in matched_positions and match[2] - 1 not in matched_positions:
-            matched_positions.update(range(match[1], match[2]))
-            for j in range(match[1], match[2]):
-                remaining_chars[j] = ""
-            return match[0] # normalized result
-    return ""
+        if match:
+            return match
+    return "", None, None
 
 # def search_part_reversed(trie, input_text, matched_positions, remaining_chars):
 #     for i in range(len(input_text) - 1, -1, -1): # Reverse start at len - 1, end at -1 exclusive, step -1

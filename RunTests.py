@@ -5,7 +5,7 @@ from datetime import datetime
 
 from Solution import Solution
 
-debug = False
+debug = True
 # CORRECT TESTS
 groups_province = {}
 groups_district = {'hòa bình': ['Hoà Bình', 'Hòa Bình'], 'kbang': ['Kbang', 'KBang'], 'quy nhơn': ['Qui Nhơn', 'Quy Nhơn']}
@@ -159,9 +159,10 @@ df.columns = columns
 
 print(df2)
 
-print(f'{TEAM_NAME = }')
-print(f'{EXCEL_FILE = }')
-writer = pd.ExcelWriter(EXCEL_FILE, engine='xlsxwriter')
-df2.to_excel(writer, index=False, sheet_name='summary')
-df.to_excel(writer, index=False, sheet_name='details')
-writer.close()
+if not debug:
+    print(f'{TEAM_NAME = }')
+    print(f'{EXCEL_FILE = }')
+    writer = pd.ExcelWriter(EXCEL_FILE, engine='xlsxwriter')
+    df2.to_excel(writer, index=False, sheet_name='summary')
+    df.to_excel(writer, index=False, sheet_name='details')
+    writer.close()

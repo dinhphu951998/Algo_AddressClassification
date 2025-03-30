@@ -60,7 +60,7 @@ def normalize_text_and_remove_non_unicode(text: str) -> str:
     text = re.sub(r"\s+", "", text)  # Remove spaces
     return text
 
-def normalize_text_but_keep_vietnamese_alphabet(text: str) -> str:
+def normalize_text_but_keep_vietnamese(text: str) -> str:
     text = common_normalize(text)
     for base_char, variations in vietnamese_dict.items():
         for char in variations:

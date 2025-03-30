@@ -1,8 +1,8 @@
 from typing import Dict, Tuple, Optional
 
-from IndexAnalyzer.IndexAnalyzer import Trie
-from SearchEngine.Autocorrect import autocorrect
-from Utils.Utils import normalize_text_but_keep_vietnamese, segment_text
+from IndexAnalyzer import Trie
+from Autocorrect import autocorrect
+from Utils import normalize_text_but_keep_vietnamese, segment_text
 
 
 def search_locations(tries: Dict[str, Trie], input_text: str) -> Tuple[Dict[str, Optional[str]], str]:

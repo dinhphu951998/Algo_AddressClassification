@@ -88,7 +88,7 @@ def normalize_text_but_keep_accent(text: str) -> str:
     for wrong, correct in wrong_accents.items():
         text = text.replace(wrong, correct)
 
-    text = text.replace("oà", "òa")
+    # text = text.replace("oà", "òa")
     text = re.sub(r"\s+", "", text)  # Remove spaces
 
     return text

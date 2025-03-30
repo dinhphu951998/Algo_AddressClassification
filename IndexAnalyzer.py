@@ -1,7 +1,7 @@
 from queue import Queue
 from typing import Optional, Tuple, Dict, List
 
-from Utils.Utils import *
+from Utils import *
 locality_map = {}
 current_id = 0
 

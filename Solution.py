@@ -1,6 +1,6 @@
-from IndexAnalyzer.IndexAnalyzer import load_databases, variation_map, original_names
-from SearchEngine.Searcher import search_locations
-from Utils.Utils import normalize_text_but_keep_vietnamese
+from IndexAnalyzer import load_databases, variation_map, original_names
+from Searcher import search_locations
+from Utils import normalize_text_but_keep_vietnamese
 
 
 class Solution:
@@ -49,7 +49,7 @@ class Solution:
 runner = Solution()
 runner.debug = True
 
-runner.process("Khu B Chu Hoà, Việt HhiPhú Thọ")
+runner.process(", HXuân Lộc,  Đồng Nai")
 
 # Not able to solve yet
 # runner.process("284DBis Ng Văn Giáo, P3, Mỹ Tho, T.Giang.")

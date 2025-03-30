@@ -12,7 +12,7 @@ from collections import Counter
 import math
 
 from IndexAnalyzer import Trie
-from Utils import normalize_text_but_keep_vietnamese
+from Utils import normalize_text_but_keep_vietnamese_alphabet, normalize_text_but_keep_accent
 
 # Define category ranking
 CATEGORY_PRIORITY = {"province": 1, "district": 2, "ward": 3}  # Lower number = higher priority
@@ -58,11 +58,11 @@ def cosine_similarity(s1, s2):
 # Autocorrection with Category Priority, Damerau-Levenshtein Distance & Cosine Similarity Check
 def autocorrect(word, trie: Trie, category):
     all_words = trie.get_all_words()
-    word_normalized = normalize_text_but_keep_vietnamese(word)
+    word_normalized = normalize_text_but_keep_accent(word)
     best_match, best_distance, best_category = None, float("inf"), None
 
     for candidate in all_words:
-        candidate_normalized = normalize_text_but_keep_vietnamese(candidate)
+        candidate_normalized = normalize_text_but_keep_accent(candidate)
         distance = damerau_levenshtein(word_normalized, candidate_normalized, max_distance=3)
 
         # Prioritize lower edit distance & higher-ranked category (Province > District > Ward)
@@ -71,6 +71,6 @@ def autocorrect(word, trie: Trie, category):
             best_distance, best_match, best_category = distance, candidate, category
 
     # Check Cosine Similarity Threshold
-    if best_match and cosine_similarity(word_normalized, normalize_text_but_keep_vietnamese(best_match)) < COSINE_SIMILARITY_THRESHOLD:
+    if best_match and cosine_similarity(word_normalized, normalize_text_but_keep_accent(best_match)) < COSINE_SIMILARITY_THRESHOLD:
         return ("null", "")
     return (best_category, best_match) if best_match else ("Unknown", word)

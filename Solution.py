@@ -1,6 +1,6 @@
 from IndexAnalyzer import load_databases, variation_map, original_names
 from Searcher import search_locations
-from Utils import normalize_text_but_keep_vietnamese
+from Utils import normalize_text_but_keep_vietnamese_alphabet, normalize_text_but_keep_accent
 
 
 class Solution:
@@ -40,7 +40,7 @@ class Solution:
         if self.debug:
             print()
             print(f"Original: {s_copy}")
-            print(f"Normalized: {normalize_text_but_keep_vietnamese(s_copy)}")
+            print(f"Normalized: {normalize_text_but_keep_accent(s_copy)}")
             print(f"Result: {result}")
             # print("Remaining Text: ", remaining_text)
 
@@ -49,7 +49,7 @@ class Solution:
 runner = Solution()
 runner.debug = True
 
-runner.process(", HXuân Lộc,  Đồng Nai")
+runner.process("154/4/81 Nguyễn - Phúc Chu, P15, TB, TP. Hồ Chí Minh")
 
 # Not able to solve yet
 # runner.process("284DBis Ng Văn Giáo, P3, Mỹ Tho, T.Giang.")

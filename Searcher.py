@@ -2,7 +2,7 @@ from typing import Dict, Tuple, Optional
 
 from IndexAnalyzer import Trie
 from Autocorrect import autocorrect
-from Utils import normalize_text_but_keep_vietnamese, segment_text
+from Utils import normalize_text_but_keep_vietnamese_alphabet, segment_text, normalize_text_but_keep_accent
 
 
 def search_locations(tries: Dict[str, Trie], input_text: str) -> Tuple[Dict[str, Optional[str]], str]:
@@ -11,7 +11,7 @@ def search_locations(tries: Dict[str, Trie], input_text: str) -> Tuple[Dict[str,
     matched_positions = set()
 
     segments = segment_text(input_text)
-    input_text = normalize_text_but_keep_vietnamese(",".join(segments))
+    input_text = normalize_text_but_keep_accent(",".join(segments))
 
     remaining_chars = list(input_text)
 

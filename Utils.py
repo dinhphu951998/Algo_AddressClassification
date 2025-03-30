@@ -60,7 +60,7 @@ def normalize_text_and_remove_non_unicode(text: str) -> str:
     text = re.sub(r"\s+", "", text)  # Remove spaces
     return text
 
-def normalize_text_but_keep_vietnamese(text: str) -> str:
+def normalize_text_but_keep_vietnamese_alphabet(text: str) -> str:
     text = common_normalize(text)
     for base_char, variations in vietnamese_dict.items():
         for char in variations:
@@ -112,7 +112,7 @@ def segment_text(s, safe=True):
     return segments
 
 
-print(normalize_text_but_keep_accent("Phố Đức Sơn, TT Bút Sơn, Hoằng Hoá, Thanh Hoá."))
+print(normalize_text_but_keep_accent("T18,Cẩm Bình, Cẩm Phả, Quảng Ninh"))
 # print(normalize_text_but_keep_vietnamese("Thôn Đồng Lực Hoàng Lâu, Tam Dương, Vĩnh Phúc"))
 # print(normalize_text_but_keep_vietnamese("Tam Đường, Tam Đường, Lai Châu"))
 

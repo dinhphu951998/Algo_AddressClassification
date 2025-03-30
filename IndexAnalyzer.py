@@ -142,8 +142,8 @@ def load_databases(filenames: Dict[str, str]) -> Dict[str, Trie]:
                     location_name = line.strip()
                     if location_name:
 
-                        normalized_name_but_keep_alphabet = normalize_text_but_keep_vietnamese(location_name)
-                        prefixed_variations = generate_prefixed_variations(normalized_name_but_keep_alphabet, category)
+                        normalize_text = normalize_text_but_keep_accent(location_name)
+                        prefixed_variations = generate_prefixed_variations(normalize_text, category)
 
                         for variant in prefixed_variations:
                             # Store the original form under the correct category

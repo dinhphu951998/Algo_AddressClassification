@@ -2,7 +2,8 @@ from typing import Dict, Tuple, Optional
 
 from IndexAnalyzer import Trie
 from Autocorrect import autocorrect
-from Utils import normalize_text_but_keep_vietnamese_alphabet, segment_text, normalize_text_but_keep_accent
+from Utils import normalize_text_but_keep_vietnamese_alphabet, segment_text, normalize_text_but_keep_accent, \
+    normalize_text_and_remove_accent
 
 
 def search_locations(tries: Dict[str, Trie], input_text: str) -> Tuple[Dict[str, Optional[str]], str]:
@@ -15,33 +16,39 @@ def search_locations(tries: Dict[str, Trie], input_text: str) -> Tuple[Dict[str,
 
     remaining_chars = list(input_text)
 
-    for category, reversed in [("province", True), ("ward", False), ("district", False)]:
-        trie = tries.get(category, None)
-        if not trie:
+    for category, reverse in [("province", True), ("ward", False), ("district", False)]:
+        if results[category] != "":
             continue
+        res, input_text = search_in_trie(tries[category], input_text, matched_positions, remaining_chars, reverse)
+        results[category] = res
 
-        match = search_part(trie, input_text, matched_positions, remaining_chars, reversed)
-        res = match[0]
-        if match and res:
-            input_text = input_text[:match[1]] + "," + input_text[match[2]:]
+    # search in non accents tries
+    input_text = normalize_text_and_remove_accent(input_text)
+    for category, reverse in [("province", True), ("ward", False), ("district", False)]:
+        if results[category] != "":
+            continue
+        res, input_text = search_in_trie(tries[category], input_text, matched_positions, remaining_chars, reverse)
         results[category] = res
 
     segments = segment_text(input_text, False)
-    for category, reversed in [("province", True), ("ward", False), ("district", False)]:
-        trie = tries.get(category, None)
-        if not trie:
-            continue
-
+    for category, reverse in [("province", True), ("ward", False), ("district", False)]:
         if results[category]:
             continue
 
-        res = search_in_segment(segments, trie, category, reversed)
+        res = search_in_segment(segments, tries[category], category, reverse)
         results[category] = res
 
     return results, "normalized_remaining_text"
 
-def search_in_segment(segments, trie, category, reversed=False):
-    if reversed:
+def search_in_trie(trie, input_text, matched_positions, remaining_chars, reverse):
+    match = search_part(trie, input_text, matched_positions, remaining_chars, reverse)
+    res = match[0]
+    if match and res:
+        input_text = input_text[:match[1]] + "," + input_text[match[2]:]
+    return res, input_text
+
+def search_in_segment(segments, trie, category, reverse=False):
+    if reverse:
         segments.reverse()
 
     for seg in segments:
@@ -50,7 +57,7 @@ def search_in_segment(segments, trie, category, reversed=False):
             segments.remove(seg)
             return ward
 
-    if reversed:
+    if reverse:
         segments.reverse()
 
     return ""

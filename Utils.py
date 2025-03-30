@@ -52,10 +52,11 @@ def common_normalize(text: str) -> str:
         text = re.sub(re.escape(case), ',', text, flags=re.IGNORECASE)
     return text
 
-def normalize_text_and_remove_non_unicode(text: str) -> str:
+def normalize_text_and_remove_accent(text: str) -> str:
     """Normalize text by removing accents, spaces, and special cases."""
     text = common_normalize(text)
     text = unicodedata.normalize("NFKD", text)
+    text.replace("đ", "d")
     text = "".join(c for c in text if not unicodedata.combining(c))  # Remove accents
     text = re.sub(r"\s+", "", text)  # Remove spaces
     return text
@@ -112,7 +113,7 @@ def segment_text(s, safe=True):
     return segments
 
 
-print(normalize_text_but_keep_accent("T18,Cẩm Bình, Cẩm Phả, Quảng Ninh"))
+# print(normalize_text_but_keep_accent("T18,Cẩm Bình, Cẩm Phả, Quảng Ninh"))
 # print(normalize_text_but_keep_vietnamese("Thôn Đồng Lực Hoàng Lâu, Tam Dương, Vĩnh Phúc"))
 # print(normalize_text_but_keep_vietnamese("Tam Đường, Tam Đường, Lai Châu"))
 

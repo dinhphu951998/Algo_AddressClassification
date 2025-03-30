@@ -81,11 +81,16 @@ for test_idx, data_point in enumerate(data):
             ok,
             timer[-1] / 1_000_000_000,
         ])
-        if debug and (not ok or not province_correct or not district_correct or not ward_correct):
-            raise ValueError()
+        if debug and ok < 3:
+            print()
+            print("Original: " + address)
+            if province_correct == 0:
+                print(f"Province -> Result: '{result['province']}', Answer: {answer['province']}")
+            if district_correct == 0:
+                print(f"District -> Result: '{result['district']}', Answer: {answer['district']}")
+            if ward_correct == 0:
+                print(f"Ward -> Result: '{result['ward']}', Answer: {answer['ward']}")
     except Exception as e:
-        print()
-        print("Original: " + address)
         print(f"{answer = }")
         print(f"{result = }")
         df.append([

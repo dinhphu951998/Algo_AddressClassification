@@ -1,6 +1,7 @@
 from IndexAnalyzer import load_databases, variation_map, original_names
 from Searcher import search_locations
-from Utils import normalize_text_but_keep_vietnamese_alphabet, normalize_text_but_keep_accent
+from Utils import normalize_text_but_keep_vietnamese_alphabet, normalize_text_but_keep_accent, \
+    normalize_text_and_remove_accent
 
 
 class Solution:
@@ -14,13 +15,13 @@ class Solution:
         self.district_path = 'list_district.txt'
         self.ward_path = 'list_ward.txt'
 
-        self.files = {
+        self.tries = {}
+        load_databases({
             "province": self.province_path,
             "district": self.district_path,
             "ward": self.ward_path
-        }
+        }, self.tries)
 
-        self.tries = load_databases(self.files)
         self.variation_map = variation_map
         self.original_names = original_names
         pass
@@ -49,7 +50,8 @@ class Solution:
 runner = Solution()
 runner.debug = True
 
-runner.process("154/4/81 Nguyễn - Phúc Chu, P15, TB, TP. Hồ Chí Minh")
+# runner.process("CH F1614-HH2-Khu ĐTM Dương Nội Yên NghĩahàdônghyàNội")
+runner.process("Huyện Hiêp Hòa Bắc Giang")
 
 # Not able to solve yet
 # runner.process("284DBis Ng Văn Giáo, P3, Mỹ Tho, T.Giang.")

@@ -174,71 +174,146 @@ def best_candidate_by_distance(search_key, candidates):
 #
 #     return results
 
+# def search_with_merging(search_tokens, trie_sequence):
+#     results = {}
+#     tokens_remaining = search_tokens[:]  # Make a copy; these tokens will be reduced level by level.
+#
+#     for trie_name, current_trie in trie_sequence:
+#         if not tokens_remaining:
+#             break  # No tokens left to process
+#         print("Trie Name", trie_name)
+#         merged_token = ""
+#         best_result = None
+#         best_distance = float('inf')
+#         used_count = 0          # Number of tokens merged so far at this level.
+#         best_used_count = 0     # Number of tokens that produced the best result.
+#         # List to store each iteration's best candidate.
+#         # Each element is tuple: (candidate, candidate_ids, distance, used_count)
+#         all_best_candidates = []
+#
+#         # Iterate from the rightmost token of tokens_remaining.
+#         for i in range(len(tokens_remaining) - 1, -1, -1):
+#             token = tokens_remaining[i]
+#             # Prepend the token to build the merged string in natural order.
+#             merged_token = token if merged_token == "" else token + merged_token
+#             used_count += 1
+#
+#             # Reverse the merged token because the trie is built backward.
+#             search_key = merged_token[::-1]
+#             print("Search key (reversed):", search_key)
+#
+#             # Collect candidates from the trie.
+#             candidates = current_trie.collect_candidates(search_key)
+#             print("Candidates:", candidates)
+#
+#             # Evaluate candidates using Levenshtein distance.
+#             current_candidate, candidate_ids, distance = best_candidate_by_distance(search_key, candidates)
+#             print("Iteration candidate:", current_candidate)
+#             print("Candidate Reference IDs:", candidate_ids)
+#             print("Distance:", distance)
+#             print("All best candidates:", all_best_candidates)
+#             # Compare current result with previous best candidates.
+#             for prev_candidate, prev_ids, prev_distance, prev_used in all_best_candidates:
+#                 if prev_candidate is not None:  # Check to avoid None candidate.
+#                     d = levenshtein_distance(search_key, prev_candidate)
+#                     if d < distance:
+#                         current_candidate, candidate_ids, distance = prev_candidate, prev_ids, d
+#
+#             # Save this iteration's best candidate into our history.
+#             all_best_candidates.append((current_candidate, candidate_ids, distance, used_count))
+#             print("Updated iteration candidate:", current_candidate)
+#             print("Updated candidate IDs:", candidate_ids)
+#             print("Updated distance:", distance)
+#
+#             # Always update overall best result for this level if candidate_ids exist.
+#             if candidate_ids:
+#                 if best_result is None or distance < best_distance or (distance == best_distance and used_count > best_used_count):
+#                     best_result = candidate_ids
+#                     best_distance = distance
+#                     best_used_count = used_count
+#
+#         if best_result is not None:
+#             results[trie_name] = best_result
+#
+#         # Remove the tokens that were used for this level (i.e. the rightmost best_used_count tokens)
+#         tokens_remaining = tokens_remaining[:len(tokens_remaining) - best_used_count]
+#
+#     return results
+
 def search_with_merging(search_tokens, trie_sequence):
     results = {}
-    tokens_remaining = search_tokens[:]  # Make a copy; these tokens will be reduced level by level.
+    tokens_remaining = search_tokens[:]  # Sao chép danh sách tokens
 
     for trie_name, current_trie in trie_sequence:
         if not tokens_remaining:
-            break  # No tokens left to process
-
+            break  # Không còn token nào để xử lý
+        print("Trie Name", trie_name)
         merged_token = ""
         best_result = None
         best_distance = float('inf')
-        used_count = 0          # Number of tokens merged so far at this level.
-        best_used_count = 0     # Number of tokens that produced the best result.
-        # List to store each iteration's best candidate.
-        # Each element is tuple: (candidate, candidate_ids, distance, used_count)
-        all_best_candidates = []
+        used_count = 0          # Số token đã merge ở cấp độ này.
+        best_used_count = 0     # Số token tạo ra kết quả tốt nhất.
+        # Mảng lưu trữ tất cả các candidate tại các vòng lặp.
+        candidate_array = []
 
-        # Iterate from the rightmost token of tokens_remaining.
+        # Duyệt từ token cuối cùng (bên phải) của tokens_remaining.
         for i in range(len(tokens_remaining) - 1, -1, -1):
             token = tokens_remaining[i]
-            # Prepend the token to build the merged string in natural order.
+            # Nối token vào merged_token theo thứ tự tự nhiên.
             merged_token = token if merged_token == "" else token + merged_token
             used_count += 1
 
-            # Reverse the merged token because the trie is built backward.
+            # Đảo ngược merged_token vì trie được xây dựng theo thứ tự ngược.
             search_key = merged_token[::-1]
             print("Search key (reversed):", search_key)
 
-            # Collect candidates from the trie.
+            # Lấy candidates từ trie.
             candidates = current_trie.collect_candidates(search_key)
             print("Candidates:", candidates)
 
-            # Evaluate candidates using Levenshtein distance.
+            # Tính candidate hiện tại dựa trên khoảng cách Levenshtein.
             current_candidate, candidate_ids, distance = best_candidate_by_distance(search_key, candidates)
             print("Iteration candidate:", current_candidate)
             print("Candidate Reference IDs:", candidate_ids)
             print("Distance:", distance)
 
-            # Compare current result with previous best candidates.
-            for prev_candidate, prev_ids, prev_distance, prev_used in all_best_candidates:
-                if prev_candidate is not None:  # Check to avoid None candidate.
-                    d = levenshtein_distance(search_key, prev_candidate)
-                    if d < distance:
-                        current_candidate, candidate_ids, distance = prev_candidate, prev_ids, d
+            # Lưu candidate hiện tại vào candidate_array cùng với số token đã dùng.
+            candidate_array.append((current_candidate, candidate_ids, distance, used_count))
+            print("Candidate array:", candidate_array)
 
-            # Save this iteration's best candidate into our history.
-            all_best_candidates.append((current_candidate, candidate_ids, distance, used_count))
-            print("Updated iteration candidate:", current_candidate)
-            print("Updated candidate IDs:", candidate_ids)
-            print("Updated distance:", distance)
+            # So sánh candidate hiện tại với tất cả các candidate đã lưu để tìm ra candidate tốt nhất (best of best)
+            best_candidate_current = None
+            best_candidate_ids_current = None
+            best_distance_current = float('inf')
+            best_used_count_current = 0
+            for cand, cand_ids, cand_dist, cand_used in candidate_array:
+                if cand is not None:
+                    d = levenshtein_distance(search_key, cand)
+                    if d < best_distance_current or (d == best_distance_current and cand_used > best_used_count_current):
+                        best_candidate_current = cand
+                        best_candidate_ids_current = cand_ids
+                        best_distance_current = d
+                        best_used_count_current = cand_used
 
-            # Always update overall best result for this level if candidate_ids exist.
-            if candidate_ids:
-                if best_result is None or distance < best_distance or (distance == best_distance and used_count > best_used_count):
-                    best_result = candidate_ids
-                    best_distance = distance
+            print("Best candidate after comparison:", best_candidate_current)
+            print("Best candidate IDs after comparison:", best_candidate_ids_current)
+            print("Best distance after comparison:", best_distance_current)
+
+            # Cập nhật best_result của cấp độ hiện tại nếu có candidate hợp lệ
+            if best_candidate_ids_current:
+                if best_result is None or best_distance_current < best_distance or (best_distance_current == best_distance and used_count > best_used_count):
+                    best_result = best_candidate_ids_current
+                    best_distance = best_distance_current
                     best_used_count = used_count
 
         if best_result is not None:
             results[trie_name] = best_result
 
-        # Remove the tokens that were used for this level (i.e. the rightmost best_used_count tokens)
+        # Loại bỏ các token đã được sử dụng (bên phải best_used_count token)
         tokens_remaining = tokens_remaining[:len(tokens_remaining) - best_used_count]
 
     return results
+
 
 
 def main():
@@ -251,7 +326,7 @@ def main():
     ]
     locality_mapper = get_locality_mapper()
 
-    input_file = 'public.json'
+    input_file = 'public_test.json'
     output_file = 'results.json'
 
     # Load the JSON file.

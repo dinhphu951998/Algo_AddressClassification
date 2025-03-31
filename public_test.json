@@ -1,18 +1,10 @@
 [
    {
-    "text": "X Bình Thuận H.Tây Son Tỉnh Bình Định",
+    "text": " Điên Hải, Đông Hải, bạc Liêu",
     "result": {
-      "district": "Tây Sơn",
-      "ward": "Bình Thuận",
-      "province": "Bình Định"
-    }
-  },
-  {
-    "text": "357/28,Ng-T- Thuật,P1,Q3, HồChíMinh.",
-    "result": {
-      "province": "Hồ Chí Minh",
-      "district": "",
-      "ward": ""
+      "district": "Đông Hải",
+      "ward": "Điền Hải",
+      "province": "Bạc Liêu"
     }
   }
 ]

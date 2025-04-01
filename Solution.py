@@ -1,6 +1,7 @@
-from IndexAnalyzer.IndexAnalyzer import load_databases, variation_map, original_names
-from SearchEngine.Searcher import search_locations
-from Utils.Utils import normalize_text, normalize_text_but_keep_vietnamese_alphabet
+from IndexAnalyzer import load_databases, variation_map
+from Searcher import search_locations_in_trie, search_locations_in_segments
+from Utils import normalize_text_but_keep_vietnamese_alphabet, normalize_text_but_keep_accent, \
+    normalize_text_and_remove_accent, segment_text
 
 
 class Solution:
@@ -14,51 +15,57 @@ class Solution:
         self.district_path = 'list_district.txt'
         self.ward_path = 'list_ward.txt'
 
-        self.files = {
+        self.tries = {}
+        load_databases({
             "province": self.province_path,
             "district": self.district_path,
             "ward": self.ward_path
-        }
+        }, self.tries)
 
-        self.tries = load_databases(self.files)
         self.variation_map = variation_map
-        self.original_names = original_names
         pass
 
     def process(self, s: str):
-        # write your process string here
+        # Preprocess
         s_copy = s[:]
 
-        normalized_text = normalize_text_but_keep_vietnamese_alphabet(s)
-        result, remaining_text = search_locations(self.tries, normalized_text)
+        segments = segment_text(s)
+        input_text = normalize_text_but_keep_accent(",".join(segments))
+
+        # Start searching
+        results = {"ward": "", "district": "", "province": ""}
+
+        # Search with accents
+        result, remaining_text = search_locations_in_trie(self.tries, input_text, results)
+
+        # If the province/district/ward not found, search without accents
+        # remaining_text = normalize_text_and_remove_accent(remaining_text)
+        # result, remaining_text = search_locations_in_trie(self.tries, remaining_text, results)
+
+        # If the province/district/ward not found, search by segments
+        segments = segment_text(remaining_text, False)
+        result, remaining_text = search_locations_in_segments(self.tries, segments, results)
 
         result =  {
-            "province": original_names["province"].get(result["province"], result["province"]),
-            "district": original_names["district"].get(result["district"], result["district"]),
-            "ward": original_names["ward"].get(result["ward"], result["ward"])
+            "province": self.tries["province"].get_raw_text(result["province"]),
+            "district": self.tries["district"].get_raw_text(result["district"]),
+            "ward": self.tries["ward"].get_raw_text(result["ward"]),
         }
 
         if self.debug:
             print()
             print(f"Original: {s_copy}")
-            print(f"Normalized: {normalized_text}")
+            print(f"Normalized: {normalize_text_but_keep_accent(s_copy)}")
             print(f"Result: {result}")
-            print("Remaining Text: ", remaining_text)
 
         return result
 
-# runner = Solution()
-# runner.debug = True
-# runner.process("489/24A/18 Huỳnh Văn Bánh Phường 13, Phú Nhuận, TP. Hồ Chí Minh")
-# runner.process("Số 259/54/8, Tổ 28, KP1, Long Bình Tân, Biên Hòa, Đồng Nai.")
-# runner.process("285 B/1A Bình Gĩa Phường 8,Vũng Tàu,Bà Rịa - Vũng Tàu")
-# runner.process("290 Tùng Thiện- Vương,P.13, Quận 8, TP. Hồ Chí Minh.")
-# runner.process("8 Trịnh Văn Cấn P.C-Ô-Lãnh, Q.1, TP. Hồ Chí Minh")
-# runner.process("Khu phố Nam Tân, TT Thuận Nam, Hàm Thuận Bắc, Bình Thuận.")
-# runner.process("H.Hoài ân,TBình Dịnh")
-# runner.process("Mường La,  sơn La")
-# runner.process("x. Văn Cẩs HuyệnHung Hà Tthái Bình")
-# runner.process("Duy Phú,  Duy Xuyen,  Quang Nam")
-# runner.process("X. Bản Nguyen,HuyệnLâm Thao,")
-# runner.process("X.Mỹ Thạnh, HuyệnGiong Trôm, TỉnhBến Tre")
-# runner.process("")
+runner = Solution()
+runner.debug = True
+
+runner.process("Diên Thạnh,,T Khabnh Hòa")
+
+
+# Not able to solve yet
+# runner.process(" T.P Phan Rang-Tháp lhàm  Ninh Thuận")
+# runner.process("Điên Hải, Đông Hải, T bạc Liêu")

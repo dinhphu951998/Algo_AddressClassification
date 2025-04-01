@@ -5,7 +5,7 @@ from datetime import datetime
 
 from Solution import Solution
 
-
+debug = True
 # CORRECT TESTS
 groups_province = {}
 groups_district = {'hòa bình': ['Hoà Bình', 'Hòa Bình'], 'kbang': ['Kbang', 'KBang'], 'quy nhơn': ['Qui Nhơn', 'Quy Nhơn']}
@@ -81,11 +81,16 @@ for test_idx, data_point in enumerate(data):
             ok,
             timer[-1] / 1_000_000_000,
         ])
-        if not ok or not province_correct or not district_correct or not ward_correct:
-            raise ValueError()
+        if debug and ok < 3:
+            print()
+            print("Original: " + address)
+            if province_correct == 0:
+                print(f"Province -> Result: '{result['province']}', Answer: '{answer['province']}'")
+            if district_correct == 0:
+                print(f"District -> Result: '{result['district']}', Answer: '{answer['district']}'")
+            if ward_correct == 0:
+                print(f"Ward -> Result: '{result['ward']}', Answer: '{answer['ward']}'")
     except Exception as e:
-        print()
-        print("Original: " + address)
         print(f"{answer = }")
         print(f"{result = }")
         df.append([
@@ -159,9 +164,10 @@ df.columns = columns
 
 print(df2)
 
-# print(f'{TEAM_NAME = }')
-# print(f'{EXCEL_FILE = }')
-# writer = pd.ExcelWriter(EXCEL_FILE, engine='xlsxwriter')
-# df2.to_excel(writer, index=False, sheet_name='summary')
-# df.to_excel(writer, index=False, sheet_name='details')
-# writer.close()
+if not debug:
+    print(f'{TEAM_NAME = }')
+    print(f'{EXCEL_FILE = }')
+    writer = pd.ExcelWriter(EXCEL_FILE, engine='xlsxwriter')
+    df2.to_excel(writer, index=False, sheet_name='summary')
+    df.to_excel(writer, index=False, sheet_name='details')
+    writer.close()

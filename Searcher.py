@@ -76,3 +76,7 @@ def search_part(trie, input_text, matched_positions, remaining_chars, reversed=F
         if match:
             return match
     return "", None, None
+
+def search_by_character(trie, last_results, remaining_text):
+    print(trie)
+

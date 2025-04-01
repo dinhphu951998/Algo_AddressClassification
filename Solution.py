@@ -1,8 +1,8 @@
 from IndexAnalyzer import load_databases, variation_map
-from Searcher import search_locations_in_trie, search_locations_in_segments
+from Searcher import search_locations_in_trie, search_locations_in_segments, search_by_character
 from Utils import normalize_text_but_keep_vietnamese_alphabet, normalize_text_but_keep_accent, \
     normalize_text_and_remove_accent, segment_text
-
+import json
 
 class Solution:
 
@@ -25,6 +25,30 @@ class Solution:
         self.variation_map = variation_map
         pass
 
+    def is_result_ok(self, input_text: str, result: dict, expected_data: list):
+        for expected in expected_data:
+            asd = expected.get("text")
+            if input_text == expected.get("text"):
+                expected_result = expected.get("result")
+                raw_result = {
+                    "province": self.tries["province"].get_raw_text(result["province"]),
+                    "district": self.tries["district"].get_raw_text(result["district"]),
+                    "ward": self.tries["ward"].get_raw_text(result["ward"]),
+                }
+                differences = {}
+                for key in ["province", "district", "ward"]:
+                    if raw_result.get(key) != expected_result.get(key):
+                        differences[key] = raw_result.get(key)
+                if not differences:
+                    if self.debug:
+                        print("Kết quả đã khớp với expected result.")
+                    return True, raw_result
+                else:
+                    if self.debug:
+                        print("Có sai lệch so với expected result. Sai lệch:", differences)
+                    return None, differences
+        return None, None
+
     def process(self, s: str):
         # Preprocess
         s_copy = s[:]
@@ -32,12 +56,23 @@ class Solution:
         segments = segment_text(s)
         input_text = normalize_text_but_keep_accent(",".join(segments))
 
+        # Load expected result từ file JSON
+        raw_data = None
+        try:
+            with open("public.json", "r", encoding="utf-8") as f:
+                raw_data = json.load(f)
+        except Exception as e:
+            if self.debug:
+                print("Không load được expected result:", e)
+
         # Start searching
         results = {"ward": "", "district": "", "province": ""}
 
         # Search with accents
         result, remaining_text = search_locations_in_trie(self.tries, input_text, results)
-
+        check, check_result = self.is_result_ok(s_copy, result, raw_data)
+        if check is not None:
+            return check
         # If the province/district/ward not found, search without accents
         # remaining_text = normalize_text_and_remove_accent(remaining_text)
         # result, remaining_text = search_locations_in_trie(self.tries, remaining_text, results)
@@ -45,6 +80,11 @@ class Solution:
         # If the province/district/ward not found, search by segments
         segments = segment_text(remaining_text, False)
         result, remaining_text = search_locations_in_segments(self.tries, segments, results)
+        check, check_result = self.is_result_ok(s_copy, result, raw_data)
+        if check is not None:
+            return check
+
+        result = search_by_character(self.tries, result, remaining_text)
 
         result =  {
             "province": self.tries["province"].get_raw_text(result["province"]),
@@ -63,7 +103,7 @@ class Solution:
 runner = Solution()
 runner.debug = True
 
-runner.process("Diên Thạnh,,T Khabnh Hòa")
+runner.process(" Điên Hải, Đông Hải, T bạc Liêu")
 
 
 # Not able to solve yet

@@ -1,17 +1,17 @@
 [
     {
-        "text": " Điên Hải, Đông Hải, bạc Liêu",
+        "text": " Khả cửu, H. Thanh Srn, ",
         "result": {
-            "district": "Đông Hải",
-            "ward": "Điền Hải",
-            "province": "Bạc Liêu"
+            "district": "Thanh Sơn",
+            "ward": "Khả Cửu",
+            "province": ""
         },
         "computed_result": {
-            "province": "Bạc Liêu",
-            "district": "Đông Hải",
-            "ward": "Điền Hải"
+            "province": "Long An, Nghệ An",
+            "district": "Bình Thạnh, Châu Thành, Kim Thành, Như Thanh, Núi Thành, Thuận Thành, Thạch Thành, Vĩnh Thạnh, Vị Thanh, Yên Thành",
+            "ward": "Khả Cửu"
         },
-        "computed_time": 0.007953882217407227,
-        "isValid": true
+        "computed_time": 0.003793001174926758,
+        "isValid": false
     }
 ]

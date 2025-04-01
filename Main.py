@@ -259,12 +259,11 @@ def search_with_merging(search_tokens, trie_sequence):
         # Duyệt từ token cuối cùng (bên phải) của tokens_remaining.
         for i in range(len(tokens_remaining) - 1, -1, -1):
             token = tokens_remaining[i]
-            # Nối token vào merged_token theo thứ tự tự nhiên.
             merged_token = token if merged_token == "" else token + merged_token
             used_count += 1
 
-            # Đảo ngược merged_token vì trie được xây dựng theo thứ tự ngược.
             search_key = merged_token[::-1]
+            print("Search key (non-reversed):", merged_token)
             print("Search key (reversed):", search_key)
 
             # Lấy candidates từ trie.
@@ -273,15 +272,12 @@ def search_with_merging(search_tokens, trie_sequence):
 
             # Tính candidate hiện tại dựa trên khoảng cách Levenshtein.
             current_candidate, candidate_ids, distance = best_candidate_by_distance(search_key, candidates)
-            print("Iteration candidate:", current_candidate)
-            print("Candidate Reference IDs:", candidate_ids)
+            print("Best candidate:", current_candidate)
             print("Distance:", distance)
 
-            # Lưu candidate hiện tại vào candidate_array cùng với số token đã dùng.
             candidate_array.append((current_candidate, candidate_ids, distance, used_count))
             print("Candidate array:", candidate_array)
 
-            # So sánh candidate hiện tại với tất cả các candidate đã lưu để tìm ra candidate tốt nhất (best of best)
             best_candidate_current = None
             best_candidate_ids_current = None
             best_distance_current = float('inf')

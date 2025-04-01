@@ -240,7 +240,6 @@ def build_reversed_trie(file_path, trie, type):
                         trie.insert_reversed(variant, id)
                 else:
                     text_variants = generate_text_variants(raw)
-                    print(text_variants)
                     for variant in text_variants:
                         trie.insert_reversed(variant, id)
 

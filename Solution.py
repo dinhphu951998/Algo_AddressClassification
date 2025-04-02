@@ -16,11 +16,12 @@ class Solution:
         self.ward_path = 'list_ward.txt'
 
         self.tries = {}
+        self.reversed_tries = {}
         load_databases({
             "province": self.province_path,
             "district": self.district_path,
             "ward": self.ward_path
-        }, self.tries)
+        }, self.tries, self.reversed_tries)
 
         self.variation_map = variation_map
         pass
@@ -80,11 +81,11 @@ class Solution:
         # If the province/district/ward not found, search by segments
         segments = segment_text(remaining_text, False)
         result, remaining_text = search_locations_in_segments(self.tries, segments, results)
-        check, check_result = self.is_result_ok(s_copy, result, raw_data)
-        if check is not None:
-            return check
-
-        result = search_by_character(self.tries, result, remaining_text)
+        # check, check_result = self.is_result_ok(s_copy, result, raw_data)
+        # if check is not None:
+        #     return check
+        #
+        # result = search_by_character(self.reversed_tries, result, check_result, remaining_text)
 
         result =  {
             "province": self.tries["province"].get_raw_text(result["province"]),
@@ -103,7 +104,7 @@ class Solution:
 runner = Solution()
 runner.debug = True
 
-runner.process(" Điên Hải, Đông Hải, T bạc Liêu")
+runner.process(" T.P Phan Rang-Tháp lhàm  Ninh Thuận")
 
 
 # Not able to solve yet

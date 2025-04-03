@@ -6,7 +6,7 @@ locality_map = {}
 current_id = 0
 
 SPECIAL_CASES = ["xã", "x.", "huyện", "tỉnh", "t.",
-                 "tp", "thành phố", "thànhphố"]
+                 "tp","thành phố", "thànhphố"]
 
 # Prefixes for wards and districts to expand possible matches
 DIGIT_CASES = {
@@ -63,23 +63,47 @@ class Trie:
                 return (node.original_string, start, i + 1)
         return None
 
-    def search_max_length(self, text: str, start: int) -> Optional[Tuple[str, int, int]]:
-        """Finds the longest valid word from the given start index."""
-        node = self.root
-        longest_match = ""
-        longest_length = 0
-        for i in range(start, len(text)):
-            char = text[i]
-            if char not in node.children:
-                break
-            node = node.children[char]
-            if node.is_end_of_word:
-                current_length = i - start + 1
-                if current_length > longest_length:
-                    longest_length = current_length
-                    longest_match = (node.original_string, start, i + 1)
-        return longest_match
+    # def search_max_length(self, text: str, start: int) -> Optional[Tuple[str, int, int]]:
+    #     """Finds the longest valid word from the given start index."""
+    #     node = self.root
+    #     longest_match = ""
+    #     longest_length = 0
+    #     result = []
+    #     for i in range(start, len(text)):
+    #         char = text[i]
+    #         if char not in node.children:
+    #             break
+    #         node = node.children[char]
+    #         if node.is_end_of_word:
+    #             current_length = i - start + 1
+    #             if current_length > longest_length:
+    #                 longest_length = current_length
+    #                 longest_match = (node.original_string, start, i + 1)
+    #                 print(longest_match)
+    #                 result.append(longest_match)
+    #                 print(result)
+    #     return result
+    def search_max_length(self, text: str, start: int) -> List[Tuple[str, int, int]]:
+        """Finds all valid words, including overlapping ones, without skipping characters."""
+        result = []
+        
+        for i in range(start, len(text)):  # Start search at each position
+            node = self.root
+            for j in range(i, len(text)):  # Continue searching for words from `i`
+                char = text[j]
+                if char not in node.children:
+                    break  # Stop if the character is not in the Trie
+                
+                node = node.children[char]
 
+                if node.is_end_of_word:
+                    match = (node.original_string, i, j + 1)  # (word, start index, end index)
+                    result.append(match)  # Store all matches
+
+        return result  # Return all matches
+
+
+    
     def get_raw_text(self, normalized_text):
         return self.original_names.get(normalized_text, normalized_text)
 
@@ -93,7 +117,13 @@ def generate_prefixed_variations(location_name: str, category: str) -> Tuple[Lis
     normalized_name = normalize_text_but_keep_accent(location_name)
 
     if normalized_name.isdigit():  # Only generate prefixes for wards and districts
-        variations = [prefix + normalized_name for prefix in DIGIT_CASES[category]]
+        padded_name = normalized_name.zfill(2) if len(normalized_name) == 1 else normalized_name
+        unpadded_name = str(int(normalized_name))  # "01" -> "1", keeps "11" as "11"
+        
+        all_number_forms = {padded_name, unpadded_name}  # Set ensures unique values
+
+        variations = [prefix + num for num in all_number_forms for prefix in DIGIT_CASES[category]]
+        # print(variations)
     elif normalized_name in province_short_form:
         variations = [normalized_name, province_short_form[normalized_name]]
     else:

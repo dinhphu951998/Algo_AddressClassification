@@ -2,7 +2,7 @@ from IndexAnalyzer import load_databases, variation_map
 from Searcher import search_locations_in_trie, search_locations_in_segments
 from Utils import normalize_text_but_keep_vietnamese_alphabet, normalize_text_but_keep_accent, \
     normalize_text_and_remove_accent, segment_text
-
+import re
 
 class Solution:
 
@@ -28,13 +28,17 @@ class Solution:
     def process(self, s: str):
         # Preprocess
         s_copy = s[:]
-
+        
         segments = segment_text(s)
         input_text = normalize_text_but_keep_accent(",".join(segments))
-
+        parts = input_text.split(',')
+        if len(parts) >= 4:
+            # Remove the first part and merge the remaining parts back
+            text = ','.join(parts[1:])
+            print(text)
         # Start searching
         results = {"ward": "", "district": "", "province": ""}
-
+        print(input_text)
         # Search with accents
         result, remaining_text = search_locations_in_trie(self.tries, input_text, results)
 
@@ -43,6 +47,7 @@ class Solution:
         # result, remaining_text = search_locations_in_trie(self.tries, remaining_text, results)
 
         # If the province/district/ward not found, search by segments
+        text = re.sub(r',+', ',', remaining_text)
         segments = segment_text(remaining_text, False)
         result, remaining_text = search_locations_in_segments(self.tries, segments, results)
 

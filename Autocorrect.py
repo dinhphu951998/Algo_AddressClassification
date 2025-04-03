@@ -18,8 +18,9 @@ from Utils import normalize_text_but_keep_vietnamese_alphabet, normalize_text_bu
 
 # Define category ranking
 CATEGORY_PRIORITY = {"province": 1, "district": 2, "ward": 3}  # Lower number = higher priority
-COSINE_SIMILARITY_THRESHOLD = 0.75  # If similarity < 0.7, return "null", the less value - the less strict
+COSINE_SIMILARITY_THRESHOLD = 0.73  # If similarity < 0.7, return "null", the less value - the less strict
 MAX_VALID_EDIT_DISTANCE = 3
+COSINE_SIMILARITY_THRESHOLD_NUM = 0.85
 
 # Damerau-Levenshtein Distance with max_distance
 # def damerau_levenshtein(s1, s2, max_distance=3):
@@ -77,7 +78,15 @@ def autocorrect(word_normalized, trie: Trie, category):
     best_similarity = 0
     for match in matches:
         p = cosine_similarity(word_normalized, match)
-        if p > COSINE_SIMILARITY_THRESHOLD and  p > best_similarity:
+
+        # Xác định ngưỡng phù hợp
+        if any(char.isdigit() for char in word_normalized):
+            threshold = COSINE_SIMILARITY_THRESHOLD_NUM
+        else:
+            threshold = COSINE_SIMILARITY_THRESHOLD
+
+        # So sánh tương đồng
+        if p > threshold and p > best_similarity:
             best_similarity = p
             best_match = match
 

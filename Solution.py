@@ -3,6 +3,7 @@ from Searcher import search_locations_in_trie, search_locations_in_segments, sea
 from Utils import normalize_text_but_keep_vietnamese_alphabet, normalize_text_but_keep_accent, \
     normalize_text_and_remove_accent, segment_text
 import json
+import re
 
 class Solution:
 
@@ -53,10 +54,6 @@ class Solution:
         # Preprocess
         s_copy = s[:]
 
-        segments = segment_text(s)
-        input_text = normalize_text_but_keep_accent(",".join(segments))
-
-        # Load expected result từ file JSON
         raw_data = None
         try:
             with open("public.json", "r", encoding="utf-8") as f:
@@ -64,10 +61,17 @@ class Solution:
         except Exception as e:
             if self.debug:
                 print("Không load được expected result:", e)
-
+        
+        segments = segment_text(s)
+        input_text = normalize_text_but_keep_accent(",".join(segments))
+        parts = input_text.split(',')
+        if len(parts) >= 4:
+            # Remove the first part and merge the remaining parts back
+            text = ','.join(parts[1:])
+            print(text)
         # Start searching
         results = {"ward": "", "district": "", "province": ""}
-
+        print(input_text)
         # Search with accents
         result, remaining_text = search_locations_in_trie(self.tries, input_text, results)
         check, check_result = self.is_result_ok(s_copy, result, raw_data)
@@ -78,6 +82,7 @@ class Solution:
         # result, remaining_text = search_locations_in_trie(self.tries, remaining_text, results)
 
         # If the province/district/ward not found, search by segments
+        text = re.sub(r',+', ',', remaining_text)
         segments = segment_text(remaining_text, False)
         segments_copy = segments.copy()
         result, remaining_text = search_locations_in_segments(self.tries, segments, results)

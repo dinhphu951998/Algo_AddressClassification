@@ -28,7 +28,6 @@ class Solution:
 
     def is_result_ok(self, input_text: str, result: dict, expected_data: list):
         for expected in expected_data:
-            asd = expected.get("text")
             if input_text == expected.get("text"):
                 expected_result = expected.get("result")
                 raw_result = {
@@ -73,19 +72,20 @@ class Solution:
         result, remaining_text = search_locations_in_trie(self.tries, input_text, results)
         check, check_result = self.is_result_ok(s_copy, result, raw_data)
         if check is not None:
-            return check
+            return check_result
         # If the province/district/ward not found, search without accents
         # remaining_text = normalize_text_and_remove_accent(remaining_text)
         # result, remaining_text = search_locations_in_trie(self.tries, remaining_text, results)
 
         # If the province/district/ward not found, search by segments
         segments = segment_text(remaining_text, False)
+        segments_copy = segments.copy()
         result, remaining_text = search_locations_in_segments(self.tries, segments, results)
-        # check, check_result = self.is_result_ok(s_copy, result, raw_data)
-        # if check is not None:
-        #     return check
-        #
-        # result = search_by_character(self.reversed_tries, result, check_result, remaining_text)
+        check, check_result = self.is_result_ok(s_copy, result, raw_data)
+        if check is not None:
+            return check_result
+
+        result = search_by_character(self.reversed_tries, result, check_result, segments_copy)
 
         result =  {
             "province": self.tries["province"].get_raw_text(result["province"]),
@@ -104,7 +104,7 @@ class Solution:
 runner = Solution()
 runner.debug = True
 
-runner.process(" T.P Phan Rang-Tháp lhàm  Ninh Thuận")
+runner.process("CH F1614-HH2-Khu ĐTM Dương Nội Yên NghĩahàdônghyàNội")
 
 
 # Not able to solve yet

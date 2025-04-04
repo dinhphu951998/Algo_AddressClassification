@@ -114,28 +114,74 @@ class Trie:
         return candidates
 
 
-def generate_prefixed_variations(location_name: str, category: str) -> Tuple[List[str], str]:
-    """Generate prefixed variations ONLY for wards and districts, and store variations per category."""
+def generate_prefixed_variations(location_name: str, category: str) -> Tuple[List[str], List[str], str]:
+    """
+    Generate basic prefixed variants and additional (acronym) variants.
+    """
     variations = []
-
     if category not in variation_map:
         variation_map[category] = {}
 
     normalized_name = normalize_text_but_keep_accent(location_name)
 
-    if normalized_name.isdigit():  # Only generate prefixes for wards and districts
+    if normalized_name.isdigit():
         variations = [prefix + normalized_name for prefix in DIGIT_CASES[category]]
     elif normalized_name in province_short_form:
         variations = [normalized_name, province_short_form[normalized_name]]
     else:
         variations = [normalized_name]
 
-    non_accents_variations = [normalize_text_and_remove_accent(variation) for variation in variations]
+    non_accents_variations = [normalize_text_and_remove_accent(v) for v in variations]
     variations.extend(non_accents_variations)
+    variations = list(set(variations))
 
-    # Store variations per category
+    # Process each acronym variant with the same logic as above.
+    raw_acronym_variants = generate_text_variants(location_name)
+
+    acronym_variants = []
+    for av in raw_acronym_variants:
+        if av.isdigit():
+            new_vars = [prefix + av for prefix in DIGIT_CASES[category]]
+        elif av in province_short_form:
+            new_vars = [av, province_short_form[av]]
+        else:
+            new_vars = [av]
+        new_vars_non_accent = [normalize_text_and_remove_accent(v) for v in new_vars]
+        acronym_variants.extend(new_vars_non_accent)
+    acronym_variants = list(set(acronym_variants))
+
     variation_map[category][normalized_name] = variations
-    return variations, normalized_name
+    return variations, acronym_variants, normalized_name
+
+
+def generate_text_variants(raw_str):
+    # If there is no whitespace, just return the string itself.
+    if " " not in raw_str:
+        return [raw_str]
+
+    tokens = raw_str.split()
+    n = len(tokens)
+
+    if n == 2:
+        t1, t2 = tokens
+        variants = [
+            f"{t1[0]}{t2}",
+            f"{t1}{t2}",
+        ]
+    elif n == 3:
+        t1, t2, t3 = tokens
+        variants = [
+            f"{t1}{t2}{t3}",
+        ]
+    elif n == 4:
+        t1, t2, t3, t4 = tokens
+        variants = [
+            f"{t1}{t2}{t3}{t4}",
+        ]
+    else:
+        variants = [raw_str]
+
+    return list(set(variants))
 
 
 def load_databases(filenames: Dict[str, str],
@@ -156,18 +202,25 @@ def load_databases(filenames: Dict[str, str],
             reversed_tries[category] = Trie()
     return tries, reversed_tries
 
-def load_line(line, trie: Trie, reversed_trie: Trie, category: str):
+
+def load_line(line, trie, reversed_trie, category):
     location_name = line.strip()
     if location_name == "":
         return
 
-    prefixed_variations, normalized_text = generate_prefixed_variations(location_name, category)
-
+    # Generate the initial prefixed variants
+    prefixed_variations, acronym_variants, normalized_text = generate_prefixed_variations(location_name, category)
+    # Insert original prefixed_variations into the regular trie
     for variant in prefixed_variations:
         trie.original_names[variant] = location_name
-        reversed_trie.original_names[variant] = location_name
-
-        # Chèn vào Trie thông thường
         trie.insert(variant)
-        # Chèn vào Trie đảo ngược
+
+    all_variants = []
+    for variant in prefixed_variations + acronym_variants:
+        if variant not in all_variants:
+            all_variants.append(variant)
+
+    # Insert the combined variants into the reversed trie using insert_reversed
+    for variant in all_variants:
+        trie.original_names[variant] = location_name
         reversed_trie.insert_reversed(variant)

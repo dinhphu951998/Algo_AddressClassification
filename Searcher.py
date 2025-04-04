@@ -84,12 +84,11 @@ def search_by_character(trie, last_results, missing_results, remaining_text):
     combined_string = ''.join(remaining_text)
     split_char_segment = list(combined_string[::-1])
 
-    keys_order = ['ward', 'district', 'province']
+    keys_order = ['province', 'district', 'ward']
     results = {}
 
     for key in keys_order:
         if key in missing_results:
-            print(f"Processing key: {key}")
             merged_token = ""
             best_result = None
             best_distance = float('inf')
@@ -104,18 +103,14 @@ def search_by_character(trie, last_results, missing_results, remaining_text):
                 used_count += 1
 
                 search_key = merged_token
-                print("Search key:", search_key)
 
                 # Lấy danh sách candidate từ reversed trie theo key
                 candidates = trie[key].collect_candidates(search_key)
-                print("Candidates:", candidates)
 
                 # best_candidate_by_distance trả về (current_candidate, candidate_ids, distance)
                 current_candidate, candidate_ids, distance = best_candidate_by_distance(search_key, candidates)
-                print("Current candidate:", current_candidate, "Distance:", distance)
 
                 candidate_array.append((current_candidate, candidate_ids, distance, used_count))
-                print("Candidate array:", candidate_array)
 
                 # So sánh các candidate đã thu thập để chọn ra candidate tốt nhất hiện tại cho key này.
                 best_candidate_current = None
@@ -133,10 +128,6 @@ def search_by_character(trie, last_results, missing_results, remaining_text):
                             best_distance_current = d
                             best_used_count_current = cand_used
 
-                print("Best candidate after comparison:", best_candidate_current)
-                print("Best candidate IDs after comparison:", best_candidate_ids_current)
-                print("Best distance after comparison:", best_distance_current)
-
                 # Cập nhật kết quả tốt nhất nếu có candidate hợp lệ
                 if best_candidate_ids_current:
                     if best_result is None or best_distance_current < best_distance or (
@@ -147,10 +138,12 @@ def search_by_character(trie, last_results, missing_results, remaining_text):
 
             # Nếu có kết quả cho key hiện tại, cập nhật vào results
             if best_result is not None:
+                # Nếu best_result là tập hợp và chứa nhiều hơn 1 phần tử thì chỉ lấy một giá trị
+                if isinstance(best_result, set) and len(best_result) > 0:
+                    best_result = next(iter(best_result))
                 results[key] = best_result
                 # Loại bỏ các token đã sử dụng (theo số lượng best_used_count) khỏi split_char_segment
                 split_char_segment = split_char_segment[best_used_count:]
-                print(f"After processing key '{key}', remaining tokens: {split_char_segment}")
 
     # Merge kết quả mới vào last_results
     if last_results is None:

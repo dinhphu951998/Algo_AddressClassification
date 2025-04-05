@@ -84,6 +84,5 @@ def search_part(trie, input_text, matched_positions, remaining_chars, reversed=F
             start, end = best_match[1], best_match[2]
             if any(s <= start < e or s < end <= e for s, e in matched_intervals):
                 continue  # Skip overlapping matches
-            # Remove matched characters properly
             return best_match
     return "", None, None

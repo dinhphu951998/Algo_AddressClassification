@@ -18,7 +18,7 @@ from Utils import normalize_text_but_keep_vietnamese_alphabet, normalize_text_bu
 
 # Define category ranking
 CATEGORY_PRIORITY = {"province": 1, "district": 2, "ward": 3}  # Lower number = higher priority
-COSINE_SIMILARITY_THRESHOLD = 0.73  # If similarity < 0.7, return "null", the less value - the less strict
+COSINE_SIMILARITY_THRESHOLD = 0.725  # If similarity < 0.7, return "null", the less value - the less strict
 MAX_VALID_EDIT_DISTANCE = 3
 COSINE_SIMILARITY_THRESHOLD_NUM = 0.85
 

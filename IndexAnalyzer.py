@@ -1,9 +1,5 @@
-from queue import Queue
 from typing import Optional, Tuple, Dict, List
-
 from Utils import *
-locality_map = {}
-current_id = 0
 
 SPECIAL_CASES = ["xã", "x.", "huyện", "tỉnh", "t.",
                  "tp","thành phố", "thànhphố"]

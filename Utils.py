@@ -124,30 +124,40 @@ def two_grams(segments):
             result.append(segments[i] + segments[j])
     return result
 
-def best_candidate_by_distance(search_key, candidates):
-    best_distance = float('inf')
-    best_candidate = None
-    best_reference = None  # Giờ đây chỉ lưu một chuỗi hoặc None
+# def best_candidate_by_distance(search_key, candidates):
+#     best_distance = float('inf')
+#     best_candidate = None
+#     best_reference = None  # Giờ đây chỉ lưu một chuỗi hoặc None
+#
+#     for candidate, reference in candidates:
+#         d = levenshtein_distance(candidate, search_key)
+#         if d < best_distance:
+#             best_distance = d
+#             best_candidate = candidate
+#             best_reference = reference
+#         elif d == best_distance:
+#             # Nếu có nhiều candidate với cùng khoảng cách, bạn có thể quyết định cách chọn:
+#             # Ví dụ, nếu best_reference khác candidate hiện tại, bạn có thể lưu cả hai trong một tập hợp
+#             if best_reference is None:
+#                 best_reference = reference
+#             elif best_reference != reference:
+#                 # Nếu cần lưu tất cả, bạn có thể chuyển thành tập hợp
+#                 if isinstance(best_reference, set):
+#                     best_reference.add(reference)
+#                 else:
+#                     best_reference = {best_reference, reference}
+#     return best_candidate, best_reference, best_distance
 
+def best_candidate_by_distance(search_key, candidates):
+    results = []
     for candidate, reference in candidates:
         d = levenshtein_distance(candidate, search_key)
-        if d < best_distance:
-            best_distance = d
-            best_candidate = candidate
-            best_reference = reference
-        elif d == best_distance:
-            # Nếu có nhiều candidate với cùng khoảng cách, bạn có thể quyết định cách chọn:
-            # Ví dụ, nếu best_reference khác candidate hiện tại, bạn có thể lưu cả hai trong một tập hợp
-            if best_reference is None:
-                best_reference = reference
-            elif best_reference != reference:
-                # Nếu cần lưu tất cả, bạn có thể chuyển thành tập hợp
-                if isinstance(best_reference, set):
-                    best_reference.add(reference)
-                else:
-                    best_reference = {best_reference, reference}
-    return best_candidate, best_reference, best_distance
-
+        results.append({
+            "candidate": candidate,
+            "reference": reference,
+            "distance": d
+        })
+    return results
 
 def levenshtein_distance(s, t):
     m, n = len(s), len(t)

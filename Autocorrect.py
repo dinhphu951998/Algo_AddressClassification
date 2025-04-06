@@ -10,7 +10,7 @@
 import time
 from collections import Counter
 import math
-
+from functools import lru_cache
 import editdistance
 
 from IndexAnalyzer import Trie
@@ -18,7 +18,7 @@ from Utils import normalize_text_but_keep_vietnamese_alphabet, normalize_text_bu
 
 # Define category ranking
 CATEGORY_PRIORITY = {"province": 1, "district": 2, "ward": 3}  # Lower number = higher priority
-COSINE_SIMILARITY_THRESHOLD = 0.725  # If similarity < 0.7, return "null", the less value - the less strict
+COSINE_SIMILARITY_THRESHOLD = 0.7225  # If similarity < 0.7, return "null", the less value - the less strict
 MAX_VALID_EDIT_DISTANCE = 3
 COSINE_SIMILARITY_THRESHOLD_NUM = 0.85
 
@@ -63,22 +63,24 @@ def cosine_similarity(s1, s2):
 def autocorrect(word_normalized, trie: Trie, category):
     best_distance = float("inf")
     matches = []
+    print(category)
     for candidate_normalized in trie.all_words:
         distance = editdistance.distance(word_normalized, candidate_normalized)
-
         # Prioritize lower edit distance & higher-ranked category (Province > District > Ward)
-        if distance < min(best_distance, MAX_VALID_EDIT_DISTANCE):
-            matches = [candidate_normalized]
-            best_distance = distance
-        elif distance == min(best_distance, MAX_VALID_EDIT_DISTANCE):
+        # if distance < min(best_distance, MAX_VALID_EDIT_DISTANCE):
+        #     matches = [candidate_normalized]
+        #     best_distance = distance
+        # elif distance == min(best_distance, MAX_VALID_EDIT_DISTANCE):
+        #     matches.append(candidate_normalized)
+        if distance < MAX_VALID_EDIT_DISTANCE:
             matches.append(candidate_normalized)
-
+            print(distance, candidate_normalized)
     # Check Cosine Similarity Threshold
     best_match = ""
     best_similarity = 0
     for match in matches:
         p = cosine_similarity(word_normalized, match)
-
+        print(match, p)
         # Xác định ngưỡng phù hợp
         if any(char.isdigit() for char in word_normalized):
             threshold = COSINE_SIMILARITY_THRESHOLD_NUM

@@ -26,7 +26,7 @@ def get_formatted_datetime():
   return formatted_datetime
 
 #
-TEAM_NAME = f'DEFAULT_NAME_{get_formatted_datetime()}'  # This should be your team name
+TEAM_NAME = f'GROUP4_{get_formatted_datetime()}'  # This should be your team name
 EXCEL_FILE = f'{TEAM_NAME}.xlsx'
 TEST_FILE = 'public.json'
 with open(TEST_FILE, encoding='utf-8') as f:

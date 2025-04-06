@@ -12,6 +12,7 @@ from collections import Counter
 import math
 
 import editdistance
+import unicodedata
 
 from IndexAnalyzer import Trie
 
@@ -34,8 +35,11 @@ def cosine_similarity(s1, s2):
 def autocorrect(word_normalized, trie: Trie, category):
     best_distance = float("inf")
     matches = []
+    temp = unicodedata.normalize("NFKD", word_normalized)
+
     for candidate_normalized in trie.all_words:
-        distance = editdistance.distance(word_normalized, candidate_normalized)
+
+        distance = editdistance.distance(temp, unicodedata.normalize("NFKD", candidate_normalized))
 
         # Prioritize lower edit distance & higher-ranked category (Province > District > Ward)
         if distance < min(best_distance, MAX_VALID_EDIT_DISTANCE):

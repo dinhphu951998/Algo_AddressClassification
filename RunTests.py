@@ -5,7 +5,7 @@ from datetime import datetime
 
 from Solution import Solution
 
-debug = False
+debug = True
 # CORRECT TESTS
 groups_province = {}
 groups_district = {'hòa bình': ['Hoà Bình', 'Hòa Bình'], 'kbang': ['Kbang', 'KBang'], 'quy nhơn': ['Qui Nhơn', 'Quy Nhơn']}

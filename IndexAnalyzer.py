@@ -215,8 +215,7 @@ def generate_text_variants(raw_str):
 
 
 def load_databases(filenames: Dict[str, str],
-                   tries: Dict[str, Trie],
-                   reversed_tries: Dict[str, Trie]) -> Tuple[Dict[str, Trie], Dict[str, Trie]]:
+                   tries: Dict[str, Trie]) -> Tuple[Dict[str, Trie], Dict[str, Trie]]:
     for category, filename in filenames.items():
         trie = Trie()
         reversed_trie = Trie()
@@ -225,12 +224,10 @@ def load_databases(filenames: Dict[str, str],
                 for line in file:
                     load_line(line, trie, reversed_trie, category)
             tries[category] = trie
-            reversed_tries[category] = reversed_trie
         except FileNotFoundError:
             print(f"Warning: File {filename} not found!")
             tries[category] = Trie()
-            reversed_tries[category] = Trie()
-    return tries, reversed_tries
+    return tries
 
 
 def load_line(line, trie, reversed_trie, category):

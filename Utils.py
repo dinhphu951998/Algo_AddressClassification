@@ -5,18 +5,18 @@ import unicodedata
 from numpy import character
 
 SAFE_CASES = [
-                "TP.", "TP","Thành phố", "ThànhPhố", # "T.P", "F.", "TP ", " TP",
+                "TP.", "TP","Thành phố", "ThànhPhố", "T.P", #"F.", "TP ", " TP",
                "Tỉnh", " T ", #"Tỉn",  ",T ", "T.",
                #"Quận", "Q.", " Q ", ",Q ", -> quận 5 sau khi remove sẽ thành 5 và không tìm ra
                "Huyện", "hyện", #"H.", " H ", ",H ",
                # "Phường", "F",  "P.", " P ", ",P ",
-               "Thị xã", "ThịXã", "Xã", # "X.", " X ", "X ", ",X ",
+               "Thị xã", "ThịXã", "Xã", "X.", # " X ", "X ", ",X ",
                 "Thị trấn", "ThịTrấn", #"T.T",
                 "khu phố", "KP", "KhuPhố", "Khu pho", "KhuPho", # -> KP5 bị nhầm thành P5
                ]
 
 ALL_PREFIXES = ["TP.", "T.P", "F.", "Thành phố", "ThànhPhố", "TP ", " TP",
-               "Tỉnh", "Tỉn","T.", " T ",  #",T ",
+               "Tỉnh", "Tỉn","T.", " T ", "Thành Fhố",#",T ",
                "Quận", "Q.", " Q ", ",Q ",
                "Huyện", "hyện", "H.", " H ",  #",H ",
                 #"KP", # KP. contains P.
@@ -50,7 +50,17 @@ def common_normalize(text: str) -> str:
     # text = text.replace(",", "")  # replace for T,â,n,B,ì,n,h Dĩ An Bình Dương
     # text = text.replace(".", "")
     for case in SAFE_CASES:
-        text = re.sub(re.escape(case), ',', text, flags=re.IGNORECASE)
+        text = re.sub(re.escape(case.lower()), ',', text, flags=re.IGNORECASE)
+    text = re.sub(r"\s{2,}", ",", text)  # Remove spaces
+    text = text.replace(" ", "")
+    return text
+
+def recommon_normalize(text: str) -> str:
+    text = text.lower()
+    # text = text.replace(",", "")  # replace for T,â,n,B,ì,n,h Dĩ An Bình Dương
+    # text = text.replace(".", "")
+    for case in ALL_PREFIXES:
+        text = re.sub(re.escape(case.lower()), ',', text, flags=re.IGNORECASE)
     text = re.sub(r"\s{2,}", ",", text)  # Remove spaces
     text = text.replace(" ", "")
     return text

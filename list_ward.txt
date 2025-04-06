@@ -11,7 +11,6 @@ Trảng Dài
 Tô Hiệu
 Yên Nghĩa
 Suối Hoa
-An Khánh
 Phú Thạnh
 Vĩnh Trụ
 Nam Chính
@@ -62,6 +61,7 @@ Mỹ Long
 Cờ Đỏ
 Minh Lãng
 Thống Nhất
+Tân Bình
 Vân Giang
 Quảng Bị
 Tân Minh
@@ -69,6 +69,7 @@ Sài Đồng
 Đại Kim
 Đất Đỏ
 5
+13
 Trảng Bom
 Hoàng Lâu
 Hợp Đồng
@@ -99,21 +100,27 @@ Vĩnh Ngọc
 Thới An
 Thạch Bình
 Xuân Hương
+Long Bình Tân
 Trung Giáp
 Bắc Lý
 Lê Lợi
+Phú Thạnh
 Tường Lộc
 Bích Hòa
 Suối Rao
 Minh Xuân
+An Hải
 Yên Sơn
 Cô Giang
 Tân An Hội
+Nam Chính
 Me
 Phan Thiết
 Trung Môn
+3
 Tề Lễ
 Khương Mai
+An Phú
 Nhơn Bình
 Hòa Thọ Đông
 Ngô Quyền
@@ -127,10 +134,12 @@ Hưng Thuận
 Quang Hưng
 Kim Linh
 KRông Búk
+12
 Mỹ Xương
 Liên Minh
 Bình Thuận
 Chợ Chu
+Hải Ba
 Phú Lợi
 Tự Lạn
 Bình Hiệp
@@ -146,13 +155,16 @@ Tam Giang
 La Dêê
 Tân Thạnh
 Cam Bình
+Thạnh Lợi
 Minh Tân
 Quỳnh Lâm
 Nà Tấu
 Hiệp Tùng
+Yên Bình
 Tự An
 Đức Bác
 Hà Hồi
+Sơn Thủy
 Hoằng Lưu
 An Tiến
 Gia Hội
@@ -191,6 +203,7 @@ An Long
 Tân Thịnh
 Hoàn Sơn
 Hải An
+Hai Riêng
 Diễn Thành
 Thanh Vĩnh Đông
 Chế Là
@@ -223,6 +236,7 @@ Cẩm Lương
 Hoài Hảo
 Hướng Hiệp
 Ea Tam
+Tân An
 Tân Dân
 Nam Cát
 Vị Tân
@@ -239,6 +253,7 @@ Hải Minh
 Bạch Lưu
 Đề Thám
 Hà Mãn
+Sơn Thủy
 Nam Thái A
 Quảng Thọ
 Tam Anh Nam
@@ -288,15 +303,19 @@ SRó
 Tân Thanh
 Sơn Hội
 Bản Máy
+Cộng Hòa
 Chơ Chun
 Vô Tranh
+Bù Gia Mập
 Ba Tiêu
 Tân Kiên
 Tam Đồng
 Văn Tiến
+An Phú
 Cẩm Hoàng
 Cát Chánh
 Ea Kmút
+Sơn Hà
 Mỹ Thạnh
 Châu Minh
 Thịnh Vượng
@@ -334,6 +353,7 @@ Ia Ake
 Thái Sơn
 Uar
 Phú Đô
+Thái Hòa
 Phước Hiệp
 Huy Hạ
 Quỳnh Côi
@@ -346,6 +366,7 @@ Tràng Minh
 Bản Hon
 Điền Hải
 Thanh Phong
+Bình Trung
 Đông Thạnh
 Tân Lĩnh
 Thủy Châu
@@ -353,6 +374,7 @@ Ea Knốp
 Quế Minh
 Nga Thanh
 Phú Mỹ
+Tân Bình
 Trung Sơn
 Côn Lôn
 Tân Hòa

@@ -1,11 +1,8 @@
 import re
-from gettext import textdomain
-
 import unicodedata
-from numpy import character
 
 SAFE_CASES = [
-                #"TP.", "T.P", "F.", "Thành phố", "ThànhPhố", "TP ", " TP",
+                "TP.", "TP","Thành phố", "ThànhPhố", # "T.P", "F.", "TP ", " TP",
                "Tỉnh", " T ", #"Tỉn",  ",T ", "T.",
                #"Quận", "Q.", " Q ", ",Q ", -> quận 5 sau khi remove sẽ thành 5 và không tìm ra
                "Huyện", "hyện", #"H.", " H ", ",H ",
@@ -38,8 +35,6 @@ vietnamese_dict = {
 
 }
 
-reversed_vietnamese_dict = {}
-
 wrong_accents = {
     "oà": "òa", "oá": "óa", "oạ": "ọa", "oã": "õa", "oả": "ỏa",
     "qui": "quy",
@@ -64,26 +59,6 @@ def normalize_text_and_remove_accent(text: str) -> str:
     # text = re.sub(r"\s+", "", text)  # Remove spaces
     return text
 
-def normalize_text_but_keep_vietnamese_alphabet(text: str) -> str:
-    text = common_normalize(text)
-    for base_char, variations in vietnamese_dict.items():
-        for char in variations:
-            reversed_vietnamese_dict[char] = base_char
-
-    result = []
-    for char in text:
-        if char in reversed_vietnamese_dict:
-            result.append(reversed_vietnamese_dict[char])
-        else:
-            result.append(char)
-
-    text = "".join(result)
-    text = unicodedata.normalize("NFKC", text)
-
-    text = "".join(c for c in text if not unicodedata.combining(c))  # Remove accents
-    text = re.sub(r"\s+", "", text)  # Remove spaces
-    return text
-
 def normalize_text_but_keep_accent(text: str) -> str:
     """Normalize text by removing accents, spaces, and special cases."""
     text = common_normalize(text)
@@ -103,7 +78,7 @@ def segment_text(s, safe=True):
         text = re.sub(re.escape(p), ',', text, flags=re.IGNORECASE)
 
     # Xử lý dấu "-" trong tên (ví dụ: "Ng-T-" -> "Ng T ")
-    text = re.sub(r'[.\-]', ' ', text)
+    text = re.sub(r'[.]', ' ', text)
 
     # Tách cụm địa chỉ
     segments = [seg.strip() for seg in text.split(',') if seg.strip()]
@@ -111,9 +86,3 @@ def segment_text(s, safe=True):
     # print()
     # print(f"'{s}'  -->  {segments}")
     return segments
-
-
-# print(normalize_text_but_keep_accent("T18,Cẩm Bình, Cẩm Phả, Quảng Ninh"))
-# print(normalize_text_but_keep_vietnamese("Thôn Đồng Lực Hoàng Lâu, Tam Dương, Vĩnh Phúc"))
-# print(normalize_text_but_keep_vietnamese("Tam Đường, Tam Đường, Lai Châu"))
-

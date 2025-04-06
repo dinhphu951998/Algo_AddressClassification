@@ -26,7 +26,7 @@ def get_formatted_datetime():
   return formatted_datetime
 
 #
-TEAM_NAME = f'TestResults/DEFAULT_NAME_{get_formatted_datetime()}'  # This should be your team name
+TEAM_NAME = f'DEFAULT_NAME_{get_formatted_datetime()}'  # This should be your team name
 EXCEL_FILE = f'{TEAM_NAME}.xlsx'
 TEST_FILE = 'public.json'
 with open(TEST_FILE, encoding='utf-8') as f:
@@ -167,7 +167,9 @@ print(df2)
 if not debug:
     print(f'{TEAM_NAME = }')
     print(f'{EXCEL_FILE = }')
-    writer = pd.ExcelWriter(EXCEL_FILE, engine='xlsxwriter')
-    df2.to_excel(writer, index=False, sheet_name='summary')
-    df.to_excel(writer, index=False, sheet_name='details')
-    writer.close()
+
+    with pd.ExcelWriter(EXCEL_FILE, engine='xlsxwriter') as writer:
+        df2.to_excel(writer, index=False, sheet_name='summary')
+        df.to_excel(writer, index=False, sheet_name='details')
+
+print("Excel file saved successfully.")

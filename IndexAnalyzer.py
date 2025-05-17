@@ -2,14 +2,17 @@ from typing import Optional, Tuple, Dict, List
 from Utils import *
 from rapidfuzz import process, fuzz
 from rapidfuzz.distance import DamerauLevenshtein, Levenshtein
+from collections import Counter
+import math
+import editdistance
 
 SPECIAL_CASES = ["xã", "x.", "huyện", "tỉnh", "t.",
                  "tp","thành phố", "thànhphố"]
 
 # Prefixes for wards and districts to expand possible matches
 DIGIT_CASES = {
-    "ward": ["p", "phuong"],
-    "district": ["q", "quan"],
+    "ward": ["p", "phuong", "p ", "phuong "],
+    "district": ["q", "quan", "q ", "quan "],
 }
 
 # Dictionary to store generated variations for tracing back
@@ -24,7 +27,7 @@ class TrieNode:
     def __init__(self):
         self.children = {}
         self.is_end_of_word = False
-        self.original_string: Optional[str] = None
+        self.original_names: List[str] = []
 
 
 class Trie:
@@ -32,48 +35,27 @@ class Trie:
     def __init__(self):
         self.root = TrieNode()
         self.all_norm_names = set()
-        self.original_names: Dict[str, str] = {}
+        self.norm_to_original: Dict[str, List[str]] = {}
 
-    def insert(self, normalized_word: str):
+    def insert(self, normalized_name: str, original_name: str):
         """Insert a normalized word into the trie with a reference to the original."""
         node = self.root
-        for i, char in enumerate(normalized_word):
-
+        for char in normalized_name:
             if char not in node.children:
                 node.children[char] = TrieNode()
 
             node = node.children[char]
 
         node.is_end_of_word = True
-        node.original_string = normalized_word
+        node.original_names.append(original_name)
+        
+        if normalized_name not in self.norm_to_original:
+            self.norm_to_original[normalized_name] = []
 
-        self.all_norm_names.add(normalized_word)
+        self.norm_to_original[normalized_name].append(original_name)
+        self.all_norm_names.add(normalized_name)
 
-    def insert_reversed(self, normalized_word: str):
-        node = self.root
-        reversed_word = normalized_word[::-1]  # Đảo ngược chuỗi
-        for char in reversed_word:
-            if char not in node.children:
-                node.children[char] = TrieNode()
-            node = node.children[char]
-
-        node.is_end_of_word = True
-        node.original_string = normalized_word  # Lưu chuỗi gốc, không phải chuỗi đảo ngược.
-        self.all_norm_names.add(normalized_word)
-
-    def search(self, text: str, start: int) -> Optional[Tuple[str, int, int]]:
-        """Finds the first valid word from the given start index."""
-        node = self.root
-        for i in range(start, len(text)):
-            char = text[i]
-            if char not in node.children:
-                break
-            node = node.children[char]
-            if node.is_end_of_word:
-                return (node.original_string, start, i + 1)
-        return None
-    
-    def search(self, normalized_name):
+    def search(self, normalized_name: str) -> List[str]:
         """Return list of original names if exact match, else empty list."""
         node = self.root
         for char in normalized_name:
@@ -81,8 +63,19 @@ class Trie:
                 return []
             node = node.children[char]
         if node.is_end_of_word:
-            return [node.original_string]
+            return node.original_names
         return []
+    
+    # def search(self, normalized_name):
+    #     """Return list of original names if exact match, else empty list."""
+    #     node = self.root
+    #     for char in normalized_name:
+    #         if char not in node.children:
+    #             return []
+    #         node = node.children[char]
+    #     if node.is_end_of_word:
+    #         return [node.original_names]
+    #     return []
     
     def fuzzy_search(self, query, max_distance=2):
         qlen = len(query)
@@ -94,7 +87,7 @@ class Trie:
                     )
         matches = []
         for match, distance, _ in results:
-            matches.extend(self.original_names[match])
+            matches.extend(self.norm_to_original[match])
         return matches
 
     # def search_max_length(self, text: str, start: int) -> Optional[Tuple[str, int, int]]:
@@ -139,7 +132,7 @@ class Trie:
 
     
     def get_raw_text(self, normalized_text):
-        return self.original_names.get(normalized_text, normalized_text)
+        return self.norm_to_original.get(normalized_text, normalized_text)
 
     def collect_candidates(self, search_key: str) -> List[Tuple[str, Optional[str]]]:
         node = self.root
@@ -152,12 +145,73 @@ class Trie:
 
         def dfs(current_node: TrieNode, path: str):
             if current_node.is_end_of_word:
-                candidates.append((path, current_node.original_string))
+                candidates.append((path, current_node.original_names))
             for letter, child in current_node.children.items():
                 dfs(child, path + letter)
 
         dfs(node, search_key)
         return candidates
+
+    def fuzzy_search_with_edit_distance_and_similarity(self, word_normalized):
+        COSINE_SIMILARITY_THRESHOLD = 0.73
+        COSINE_SIMILARITY_THRESHOLD_NUM = 0.85
+        MAX_VALID_EDIT_DISTANCE = 3
+
+        def cosine_similarity(s1, s2):
+            vec1, vec2 = Counter(s1), Counter(s2)
+            intersection = set(vec1.keys()) & set(vec2.keys())
+            dot_product = sum(vec1[x] * vec2[x] for x in intersection)
+            magnitude1 = math.sqrt(sum(vec1[x] ** 2 for x in vec1.keys()))
+            magnitude2 = math.sqrt(sum(vec2[x] ** 2 for x in vec2.keys()))
+            return dot_product / (magnitude1 * magnitude2) if magnitude1 and magnitude2 else 0.0
+
+        best_distance = float("inf")
+        matches = []
+        # No normalization here, compare as-is
+        for candidate_normalized in self.all_norm_names:
+            if abs(len(candidate_normalized) - len(word_normalized)) > MAX_VALID_EDIT_DISTANCE:
+                continue
+            distance = editdistance.distance(word_normalized, candidate_normalized)
+            if distance < min(best_distance, MAX_VALID_EDIT_DISTANCE):
+                matches = [candidate_normalized]
+                best_distance = distance
+            elif distance == min(best_distance, MAX_VALID_EDIT_DISTANCE):
+                matches.append(candidate_normalized)
+
+        best_match = ""
+        best_similarity = 0
+        for match in matches:
+            p = cosine_similarity(word_normalized, match)
+            if any(char.isdigit() for char in word_normalized):
+                threshold = COSINE_SIMILARITY_THRESHOLD_NUM
+            else:
+                threshold = COSINE_SIMILARITY_THRESHOLD
+            if p > threshold and p > best_similarity:
+                best_similarity = p
+                best_match = match
+
+        return [best_match]
+    
+    def fuzzy_search_with_radio(self, word_normalized, threshold=0.8):
+        MAX_VALID_EDIT_DISTANCE = 2
+        best_score = 0
+        matches = []
+        for candidate_normalized in self.all_norm_names:
+            if abs(len(candidate_normalized) - len(word_normalized)) > MAX_VALID_EDIT_DISTANCE:
+                continue
+            distance = Levenshtein.distance(word_normalized, candidate_normalized)
+            score = 1 - distance / max(len(word_normalized), len(candidate_normalized))
+
+            if score > max(best_score, threshold):
+                matches = [candidate_normalized]
+                best_score = score
+            elif score == max(best_score, threshold):
+                matches.append(candidate_normalized)
+
+        result = []
+        for match in matches:
+            result.extend(self.norm_to_original[match])
+        return result
 
 
 def generate_prefixed_variations(location_name: str, category: str) -> Tuple[List[str], List[str], str]:
@@ -234,7 +288,7 @@ def load_databases(filenames: Dict[str, str],
     return tries
 
 
-def load_line(line, trie, category):
+def load_line(line: str, trie: Trie, category: str):
     location_name = line.strip()
     if location_name == "":
         return
@@ -243,5 +297,5 @@ def load_line(line, trie, category):
     prefixed_variations, normalized_text = generate_prefixed_variations(location_name, category)
     # Insert original prefixed_variations into the regular trie
     for variant in prefixed_variations:
-        trie.original_names[variant] = location_name
-        trie.insert(variant)
+        # trie.original_names[variant] = location_name
+        trie.insert(variant, location_name)

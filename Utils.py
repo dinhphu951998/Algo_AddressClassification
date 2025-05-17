@@ -91,15 +91,15 @@ def normalize_text_v2(text: str) -> str:
     text = text.lower()
     
     # Bước 2: Chuẩn hóa các từ viết tắt
-    tokens = re.findall(r'\w+|[.,;:/\\\-]', text, re.UNICODE)
-    new_tokens = []
-    for token in tokens:
-        token_lower = token.lower().strip('.')
-        if token_lower in TOKEN_ABBREVIATIONS:
-            new_tokens.append(TOKEN_ABBREVIATIONS[token_lower])
-        else:
-            new_tokens.append(token)
-    text = ' '.join(new_tokens)
+    # tokens = re.findall(r'\w+|[.,;:/\\\-]', text, re.UNICODE)
+    # new_tokens = []
+    # for token in tokens:
+    #     token_lower = token.lower().strip('.')
+    #     if token_lower in TOKEN_ABBREVIATIONS:
+    #         new_tokens.append(TOKEN_ABBREVIATIONS[token_lower])
+    #     else:
+    #         new_tokens.append(token)
+    # text = ' '.join(new_tokens)
     
     # Bước 3: Bỏ dấu tiếng Việt
     text = unicodedata.normalize('NFD', text)

@@ -37,7 +37,7 @@ def autocorrect(word_normalized, trie: Trie, category):
     matches = []
     temp = unicodedata.normalize("NFKD", word_normalized)
 
-    for candidate_normalized in trie.all_words:
+    for candidate_normalized in trie.all_norm_names:
 
         distance = editdistance.distance(temp, unicodedata.normalize("NFKD", candidate_normalized))
 

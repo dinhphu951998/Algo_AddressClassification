@@ -40,21 +40,21 @@ def select_best_combination(candidates: List[Dict], contextual_filter=None) -> D
                 spans = sorted(spans)
                 overlap = any(spans[i][1] >= spans[i+1][0] for i in range(len(spans)-1))
 
-                if not overlap:
-                    if district and ward and not contextual_filter.is_ward_in_district(ward['original'], district['original']):
-                        score -= ward['end'] - ward['start'] + 1
-                    if province and district and not contextual_filter.is_district_in_province(district['original'], province['original']):
-                        score -= district['end'] - district['start'] + 1
+                # if not overlap:
+                #     if district and ward and not contextual_filter.is_ward_in_district(ward['original'], district['original']):
+                #         score -= ward['end'] - ward['start'] + 1
+                #     if province and district and not contextual_filter.is_district_in_province(district['original'], province['original']):
+                #         score -= district['end'] - district['start'] + 1
 
-                if score > best_score:
+                if not overlap and score > best_score:
                     best_score = score
                     w = ward['original'] if ward else ''
                     d = district['original'] if district else ''
                     p = province['original'] if province else ''
-                    if d and p and not contextual_filter.is_district_in_province(d, p):
-                        d = ''
-                    if w and d and not contextual_filter.is_ward_in_district(w, d):
-                        w = ''
+                    # if d and p and not contextual_filter.is_district_in_province(d, p):
+                    #     d = ''
+                    # if w and d and not contextual_filter.is_ward_in_district(w, d):
+                    #     w = ''
                     best['ward'] = w
                     best['district'] = d
                     best['province'] = p

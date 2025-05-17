@@ -29,7 +29,7 @@ class Trie:
 
     def __init__(self):
         self.root = TrieNode()
-        self.all_words = set()
+        self.all_norm_names = set()
         self.original_names: Dict[str, str] = {}
 
     def insert(self, normalized_word: str):
@@ -45,7 +45,7 @@ class Trie:
         node.is_end_of_word = True
         node.original_string = normalized_word
 
-        self.all_words.add(normalized_word)
+        self.all_norm_names.add(normalized_word)
 
     def insert_reversed(self, normalized_word: str):
         node = self.root
@@ -57,7 +57,7 @@ class Trie:
 
         node.is_end_of_word = True
         node.original_string = normalized_word  # Lưu chuỗi gốc, không phải chuỗi đảo ngược.
-        self.all_words.add(normalized_word)
+        self.all_norm_names.add(normalized_word)
 
     def search(self, text: str, start: int) -> Optional[Tuple[str, int, int]]:
         """Finds the first valid word from the given start index."""

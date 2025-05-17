@@ -1,5 +1,3 @@
-import re
-from trie import Trie
 from dictionary_construction import normalize_name
 
 def tokenize(text):

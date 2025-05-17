@@ -192,7 +192,7 @@ class Trie:
 
         return [best_match]
     
-    def fuzzy_search_with_radio(self, word_normalized, threshold=0.8):
+    def fuzzy_search_with_radio(self, word_normalized, threshold=0.73):
         MAX_VALID_EDIT_DISTANCE = 2
         best_score = 0
         matches = []
@@ -232,7 +232,7 @@ def generate_prefixed_variations(location_name: str, category: str) -> Tuple[Lis
 
         variations = [prefix + num for num in all_number_forms for prefix in DIGIT_CASES[category]]
     else:
-        variations = [normalized_name]
+        variations = generate_text_variants(normalized_name)
 
     # non_accents_variations = [normalize_text_and_remove_accent(v) for v in variations]
     # variations.extend(non_accents_variations)
@@ -254,18 +254,35 @@ def generate_text_variants(raw_str):
     if n == 2:
         t1, t2 = tokens
         variants = [
-            f"{t1[0]}{t2}",
-            f"{t1}{t2}",
+            f"{t1} {t2}",
+            f"{t1[0]} {t2}"
         ]
     elif n == 3:
         t1, t2, t3 = tokens
         variants = [
-            f"{t1}{t2}{t3}",
+            f"{t1} {t2} {t3}",
+            f"{t1[0]} {t2[0]} {t3[0]}",
+            f"{t1[0]}{t2[0]}{t3[0]}",
+            f"{t1[0]} {t2} {t3}",
+            f"{t1} {t2[0]} {t3}",
+            f"{t1} {t2} {t3[0]}",
+            f"{t1[0]} {t2} {t3[0]}",
+            f"{t1} {t2[0]} {t3[0]}",
+            f"{t1[0]} {t2[0]} {t3}",
         ]
     elif n == 4:
         t1, t2, t3, t4 = tokens
         variants = [
-            f"{t1}{t2}{t3}{t4}",
+            f"{t1} {t2} {t3} {t4}",
+            f"{t1[0]} {t2[0]} {t3[0]} {t4[0]}",
+            f"{t1[0]} {t2} {t3} {t4}",
+            f"{t1} {t2[0]} {t3} {t4}",
+            f"{t1} {t2} {t3[0]} {t4}",
+            f"{t1} {t2} {t3} {t4[0]}",
+            f"{t1[0]} {t2} {t3[0]} {t4}",
+            f"{t1[0]} {t2} {t3} {t4[0]}",
+            f"{t1[0]} {t2[0]} {t3} {t4}",
+            
         ]
     else:
         variants = [raw_str]

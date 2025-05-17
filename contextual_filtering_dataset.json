@@ -19676,6 +19676,455 @@
     ]
   },
   {
+    "FullName": "Thừa Thiên Huế",
+    "District": [
+      {
+        "FullName": "Thuận Hóa",
+        "Ward": [
+          {
+            "FullName": "Vỹ Dạ"
+          },
+          {
+            "FullName": "Phường Đúc"
+          },
+          {
+            "FullName": "Vĩnh Ninh"
+          },
+          {
+            "FullName": "Phú Hội"
+          },
+          {
+            "FullName": "Phú Nhuận"
+          },
+          {
+            "FullName": "Xuân Phú"
+          },
+          {
+            "FullName": "Trường An"
+          },
+          {
+            "FullName": "Phước Vĩnh"
+          },
+          {
+            "FullName": "An Cựu"
+          },
+          {
+            "FullName": "Thuỷ Biều"
+          },
+          {
+            "FullName": "Thuỷ Xuân"
+          },
+          {
+            "FullName": "An Đông"
+          },
+          {
+            "FullName": "An Tây"
+          },
+          {
+            "FullName": "Thuận An"
+          },
+          {
+            "FullName": "Dương Nỗ"
+          },
+          {
+            "FullName": "Phú Thượng"
+          },
+          {
+            "FullName": "Thủy Vân"
+          },
+          {
+            "FullName": "Thủy Bằng"
+          },
+          {
+            "FullName": "Hương Phong"
+          }
+        ]
+      },
+      {
+        "FullName": "Phú Xuân",
+        "Ward": [
+          {
+            "FullName": "Tây Lộc"
+          },
+          {
+            "FullName": "Thuận Lộc"
+          },
+          {
+            "FullName": "Gia Hội"
+          },
+          {
+            "FullName": "Phú Hậu"
+          },
+          {
+            "FullName": "Thuận Hòa"
+          },
+          {
+            "FullName": "Đông Ba"
+          },
+          {
+            "FullName": "Kim Long"
+          },
+          {
+            "FullName": "An Hòa"
+          },
+          {
+            "FullName": "Hương Sơ"
+          },
+          {
+            "FullName": "Hương Long"
+          },
+          {
+            "FullName": "Hương Vinh"
+          },
+          {
+            "FullName": "Hương An"
+          },
+          {
+            "FullName": "Long Hồ"
+          }
+        ]
+      },
+      {
+        "FullName": "Phong Điền",
+        "Ward": [
+          {
+            "FullName": "Phong Thu"
+          },
+          {
+            "FullName": "Phong Thạnh"
+          },
+          {
+            "FullName": "Phong Phú"
+          },
+          {
+            "FullName": "Phong Bình"
+          },
+          {
+            "FullName": "Phong Chương"
+          },
+          {
+            "FullName": "Phong Hải"
+          },
+          {
+            "FullName": "Phong Hòa"
+          },
+          {
+            "FullName": "Phong Hiền"
+          },
+          {
+            "FullName": "Phong Mỹ"
+          },
+          {
+            "FullName": "Phong An"
+          },
+          {
+            "FullName": "Phong Xuân"
+          },
+          {
+            "FullName": "Phong Sơn"
+          }
+        ]
+      },
+      {
+        "FullName": "Quảng Điền",
+        "Ward": [
+          {
+            "FullName": "Sịa"
+          },
+          {
+            "FullName": "Quảng Thái"
+          },
+          {
+            "FullName": "Quảng Ngạn"
+          },
+          {
+            "FullName": "Quảng Lợi"
+          },
+          {
+            "FullName": "Quảng Công"
+          },
+          {
+            "FullName": "Quảng Phước"
+          },
+          {
+            "FullName": "Quảng Vinh"
+          },
+          {
+            "FullName": "Quảng An"
+          },
+          {
+            "FullName": "Quảng Thành"
+          },
+          {
+            "FullName": "Quảng Thọ"
+          },
+          {
+            "FullName": "Quảng Phú"
+          }
+        ]
+      },
+      {
+        "FullName": "Phú Vang",
+        "Ward": [
+          {
+            "FullName": "Phú Thuận"
+          },
+          {
+            "FullName": "Phú An"
+          },
+          {
+            "FullName": "Phú Hải"
+          },
+          {
+            "FullName": "Phú Xuân"
+          },
+          {
+            "FullName": "Phú Diên"
+          },
+          {
+            "FullName": "Phú Mỹ"
+          },
+          {
+            "FullName": "Phú Hồ"
+          },
+          {
+            "FullName": "Vinh Xuân"
+          },
+          {
+            "FullName": "Phú Lương"
+          },
+          {
+            "FullName": "Phú Đa"
+          },
+          {
+            "FullName": "Vinh Thanh"
+          },
+          {
+            "FullName": "Vinh An"
+          },
+          {
+            "FullName": "Phú Gia"
+          },
+          {
+            "FullName": "Vinh Hà"
+          }
+        ]
+      },
+      {
+        "FullName": "Hương Thủy",
+        "Ward": [
+          {
+            "FullName": "Phú Bài"
+          },
+          {
+            "FullName": "Thủy Thanh"
+          },
+          {
+            "FullName": "Thủy Dương"
+          },
+          {
+            "FullName": "Thủy Phương"
+          },
+          {
+            "FullName": "Thủy Châu"
+          },
+          {
+            "FullName": "Thủy Lương"
+          },
+          {
+            "FullName": "Thủy Tân"
+          },
+          {
+            "FullName": "Thủy Phù"
+          },
+          {
+            "FullName": "Phú Sơn"
+          },
+          {
+            "FullName": "Dương Hòa"
+          }
+        ]
+      },
+      {
+        "FullName": "Hương Trà",
+        "Ward": [
+          {
+            "FullName": "Tứ Hạ"
+          },
+          {
+            "FullName": "Hương Toàn"
+          },
+          {
+            "FullName": "Hương Vân"
+          },
+          {
+            "FullName": "Hương Văn"
+          },
+          {
+            "FullName": "Hương Xuân"
+          },
+          {
+            "FullName": "Hương Chữ"
+          },
+          {
+            "FullName": "Hương Bình"
+          },
+          {
+            "FullName": "Bình Tiến"
+          },
+          {
+            "FullName": "Bình Thành"
+          }
+        ]
+      },
+      {
+        "FullName": "A Lưới",
+        "Ward": [
+          {
+            "FullName": "A Lưới"
+          },
+          {
+            "FullName": "Hồng Vân"
+          },
+          {
+            "FullName": "Hồng Hạ"
+          },
+          {
+            "FullName": "Hồng Kim"
+          },
+          {
+            "FullName": "Trung Sơn"
+          },
+          {
+            "FullName": "Hương Nguyên"
+          },
+          {
+            "FullName": "Hồng Bắc"
+          },
+          {
+            "FullName": "A Ngo"
+          },
+          {
+            "FullName": "Sơn Thủy"
+          },
+          {
+            "FullName": "Phú Vinh"
+          },
+          {
+            "FullName": "Hương Phong"
+          },
+          {
+            "FullName": "Quảng Nhâm"
+          },
+          {
+            "FullName": "Hồng Thượng"
+          },
+          {
+            "FullName": "Hồng Thái"
+          },
+          {
+            "FullName": "A Roàng"
+          },
+          {
+            "FullName": "Đông Sơn"
+          },
+          {
+            "FullName": "Lâm Đớt"
+          },
+          {
+            "FullName": "Hồng Thủy"
+          }
+        ]
+      },
+      {
+        "FullName": "Phú Lộc",
+        "Ward": [
+          {
+            "FullName": "Phú Lộc"
+          },
+          {
+            "FullName": "Lăng Cô"
+          },
+          {
+            "FullName": "Vinh Mỹ"
+          },
+          {
+            "FullName": "Vinh Hưng"
+          },
+          {
+            "FullName": "Giang Hải"
+          },
+          {
+            "FullName": "Vinh Hiền"
+          },
+          {
+            "FullName": "Lộc Bổn"
+          },
+          {
+            "FullName": "Lộc Sơn"
+          },
+          {
+            "FullName": "Lộc Bình"
+          },
+          {
+            "FullName": "Lộc Vĩnh"
+          },
+          {
+            "FullName": "Lộc An"
+          },
+          {
+            "FullName": "Lộc Điền"
+          },
+          {
+            "FullName": "Lộc Thủy"
+          },
+          {
+            "FullName": "Lộc Trì"
+          },
+          {
+            "FullName": "Lộc Tiến"
+          },
+          {
+            "FullName": "Lộc Hòa"
+          },
+          {
+            "FullName": "Xuân Lộc"
+          },
+          {
+            "FullName": "Khe Tre"
+          },
+          {
+            "FullName": "Hương Phú"
+          },
+          {
+            "FullName": "Hương Sơn"
+          },
+          {
+            "FullName": "Hương Lộc"
+          },
+          {
+            "FullName": "Thượng Quảng"
+          },
+          {
+            "FullName": "Hương Xuân"
+          },
+          {
+            "FullName": "Hương Hữu"
+          },
+          {
+            "FullName": "Thượng Lộ"
+          },
+          {
+            "FullName": "Thượng Long"
+          },
+          {
+            "FullName": "Thượng Nhật"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "FullName": "Đà Nẵng",
     "District": [
       {

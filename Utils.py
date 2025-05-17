@@ -13,16 +13,19 @@ SAFE_CASES = [
                ]
 
 ALL_PREFIXES = ["TP.", "T.P", "F.", "Thành phố", "ThànhPhố", "TP ", " TP",
-               "Tỉnh", "Tỉn","T.", " T ",  #",T ",
-               "Quận", "Q.", " Q ", ",Q ",
+               "Tỉnh", "Tỉn",#"T.", " T ",  #",T ",
+            #    "Quận", "Q.", " Q ", ",Q ",
                "Huyện", "hyện", "H.", " H ",  #",H ",
                 #"KP", # KP. contains P.
                "khu phố",  "KhuPhố", "Khu pho", "KhuPho",
-               "Phường", "P.", "F", " P ",  #",P ",
+               "P.", "F", " P ",  #",P ", "Phường", 
                "X.", "Thị xã", "ThịXã", "Xã",  #" X ", "X ", ",X ",
-                "Thị trấn", "ThịTrấn", "T.T",
+                "Thị trấn", "ThịTrấn",# "T.T",
                "-"
                 ]
+
+WARD_PREFIXES = ["Phường"]
+DISTRICT_PREFIXES = ["Quận"]
 
 vietnamese_dict = {
     "a": ["à", "á", "ạ", "ả", "ã", "â", "ầ", "ấ", "ậ", "ẩ", "ẫ", "ă", "ằ", "ắ", "ặ", "ẳ", "ẵ"],
@@ -100,6 +103,14 @@ def normalize_text_v2(text: str) -> str:
     #     else:
     #         new_tokens.append(token)
     # text = ' '.join(new_tokens)
+    for p in ALL_PREFIXES:
+        text = re.sub(re.escape(p), ' ', text, flags=re.IGNORECASE)
+
+    for p in WARD_PREFIXES:
+        text = re.sub(re.escape(p), 'p', text, flags=re.IGNORECASE)
+
+    for p in DISTRICT_PREFIXES:
+        text = re.sub(re.escape(p), 'q', text, flags=re.IGNORECASE)
     
     # Bước 3: Bỏ dấu tiếng Việt
     text = unicodedata.normalize('NFD', text)

@@ -9,8 +9,8 @@ def select_best_combination(candidates: List[Dict], cf=None) -> Dict[str, str]:
     Returns a dict: {'ward': ..., 'district': ..., 'province': ...}
     """
 
-    SCORE_FOR_EXACT_MATCH = 0.4
-    SCORE_FOR_FUZZY_MATCH = 0.1
+    SCORE_FOR_EXACT_MATCH = 0.3
+    SCORE_FOR_FUZZY_MATCH = 0
 
     # Group candidates by type
     by_type = {'ward': [], 'district': [], 'province': []}
@@ -35,26 +35,22 @@ def select_best_combination(candidates: List[Dict], cf=None) -> Dict[str, str]:
                 if ward:
                     spans.append((ward['start'], ward['end']))
                     score += (ward['end'] - ward['start'] + 1)# * (2 if ward['match_type'] == 'exact' else 1)
-                    # added_percentage += SCORE_FOR_EXACT_MATCH if ward['match_type'] == 'exact' else SCORE_FOR_FUZZY_MATCH
+                    added_percentage += SCORE_FOR_EXACT_MATCH if ward['match_type'] == 'exact' else SCORE_FOR_FUZZY_MATCH
+
                 if district:
                     spans.append((district['start'], district['end']))
                     score += (district['end'] - district['start'] + 1)# * (2 if district['match_type'] == 'exact' else 1)
-                    # added_percentage += SCORE_FOR_EXACT_MATCH if district['match_type'] == 'exact' else SCORE_FOR_FUZZY_MATCH
+                    added_percentage += SCORE_FOR_EXACT_MATCH if district['match_type'] == 'exact' else SCORE_FOR_FUZZY_MATCH
+                    
                 if province:
                     spans.append((province['start'], province['end']))
                     score += (province['end'] - province['start'] + 1)# * (2 if province['match_type'] == 'exact' else 1)
-                    # added_percentage += SCORE_FOR_EXACT_MATCH if province['match_type'] == 'exact' else SCORE_FOR_FUZZY_MATCH
+                    added_percentage += SCORE_FOR_EXACT_MATCH if province['match_type'] == 'exact' else SCORE_FOR_FUZZY_MATCH
 
                 # Check if any consecutive spans overlap of ward, district, province
                 overlap = any(spans[i][1] >= spans[i+1][0] for i in range(len(spans)-1))
                 if overlap:
                     continue
-
-                # Decrease the score by the distance between the start of the ward and the end of the district
-                # if ward and district:
-                #     score -= abs(ward['start'] - district['end'])
-                # if district and province:
-                #     score -= abs(district['start'] - province['end'])
 
                 if cf and not cf.is_valid(ward['original'] if ward else '', 
                                           district['original'] if district else '', 

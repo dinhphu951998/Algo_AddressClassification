@@ -63,7 +63,8 @@ class Solution:
     
 s = Solution()
 s.debug = 1
-print(s.process("Hoằng Minh, Hoằng Hóa Thanh Hóa"))
+# print(s.process("P. Nghi Hương Thị xã Cửa Lò, Nghệ An"))
+print(s.process("Nam Đông,T. T.T.H"))
 
 # exit()
 

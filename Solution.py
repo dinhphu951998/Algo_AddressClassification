@@ -2,7 +2,7 @@ from CursorSolution.address_candidate_extraction import extract_candidates
 from CursorSolution.address_selection import select_best_combination
 from IndexAnalyzer import load_databases, variation_map
 from Searcher import search_locations_in_trie, search_locations_in_segments
-from Utils import normalize_text_but_keep_accent, segment_text
+from Utils import normalize_text_v2, normalize_text_but_keep_accent, segment_text
 
 class Solution:
 
@@ -30,7 +30,7 @@ class Solution:
         s_copy = s[:]
 
         segments = segment_text(s)
-        input_text = normalize_text_but_keep_accent(",".join(segments))
+        input_text = normalize_text_v2(",".join(segments))
 
         # Start searching
         candidates = extract_candidates(input_text, self.tries["ward"], self.tries["district"], self.tries["province"])

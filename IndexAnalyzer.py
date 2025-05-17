@@ -142,7 +142,7 @@ def generate_prefixed_variations(location_name: str, category: str) -> Tuple[Lis
     if category not in variation_map:
         variation_map[category] = {}
 
-    normalized_name = normalize_text_but_keep_accent(location_name)
+    normalized_name = normalize_text_v2(location_name)
 
     if normalized_name.isdigit():  # Only generate prefixes for wards and districts
         padded_name = normalized_name.zfill(2) if len(normalized_name) == 1 else normalized_name
@@ -151,33 +151,16 @@ def generate_prefixed_variations(location_name: str, category: str) -> Tuple[Lis
         all_number_forms = {padded_name, unpadded_name}  # Set ensures unique values
 
         variations = [prefix + num for num in all_number_forms for prefix in DIGIT_CASES[category]]
-        # print(variations)
-    elif normalized_name in province_short_form:
-        variations = [normalized_name, province_short_form[normalized_name]]
     else:
         variations = [normalized_name]
 
-    non_accents_variations = [normalize_text_and_remove_accent(v) for v in variations]
-    variations.extend(non_accents_variations)
+    # non_accents_variations = [normalize_text_and_remove_accent(v) for v in variations]
+    # variations.extend(non_accents_variations)
     variations = list(set(variations))
 
-    # Process each acronym variant with the same logic as above.
-    raw_acronym_variants = generate_text_variants(location_name)
-
-    acronym_variants = []
-    for av in raw_acronym_variants:
-        if av.isdigit():
-            new_vars = [prefix + av for prefix in DIGIT_CASES[category]]
-        elif av in province_short_form:
-            new_vars = [av, province_short_form[av]]
-        else:
-            new_vars = [av]
-        new_vars_non_accent = [normalize_text_and_remove_accent(v) for v in new_vars]
-        acronym_variants.extend(new_vars_non_accent)
-    acronym_variants = list(set(acronym_variants))
-
+   
     variation_map[category][normalized_name] = variations
-    return variations, acronym_variants, normalized_name
+    return variations, normalized_name
 
 
 def generate_text_variants(raw_str):
@@ -214,11 +197,10 @@ def load_databases(filenames: Dict[str, str],
                    tries: Dict[str, Trie]) -> Tuple[Dict[str, Trie], Dict[str, Trie]]:
     for category, filename in filenames.items():
         trie = Trie()
-        reversed_trie = Trie()
         try:
             with open(filename, "r", encoding="utf-8") as file:
                 for line in file:
-                    load_line(line, trie, reversed_trie, category)
+                    load_line(line, trie, category)
             tries[category] = trie
         except FileNotFoundError:
             print(f"Warning: File {filename} not found!")
@@ -226,24 +208,14 @@ def load_databases(filenames: Dict[str, str],
     return tries
 
 
-def load_line(line, trie, reversed_trie, category):
+def load_line(line, trie, category):
     location_name = line.strip()
     if location_name == "":
         return
 
     # Generate the initial prefixed variants
-    prefixed_variations, acronym_variants, normalized_text = generate_prefixed_variations(location_name, category)
+    prefixed_variations, normalized_text = generate_prefixed_variations(location_name, category)
     # Insert original prefixed_variations into the regular trie
     for variant in prefixed_variations:
         trie.original_names[variant] = location_name
         trie.insert(variant)
-
-    all_variants = []
-    for variant in prefixed_variations + acronym_variants:
-        if variant not in all_variants:
-            all_variants.append(variant)
-
-    # Insert the combined variants into the reversed trie using insert_reversed
-    for variant in all_variants:
-        trie.original_names[variant] = location_name
-        reversed_trie.insert_reversed(variant)

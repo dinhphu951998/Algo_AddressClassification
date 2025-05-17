@@ -8,16 +8,16 @@ SPECIAL_CASES = ["xã", "x.", "huyện", "tỉnh", "t.",
 
 # Prefixes for wards and districts to expand possible matches
 DIGIT_CASES = {
-    "ward": ["p", "phường"],
-    "district": ["q", "quận"],
+    "ward": ["p", "phuong"],
+    "district": ["q", "quan"],
 }
 
 # Dictionary to store generated variations for tracing back
 variation_map: Dict[str, dict] = {}
 
 province_short_form = {
-    "hồchíminh":"hcm",
-    "bàrịavũngtàu":"brvt",
+    "ho chi minh":"hcm",
+    "ba ria vung tau":"brvt",
 }
 
 class TrieNode:

@@ -21,9 +21,9 @@ def select_best_combination(candidates: List[Dict], contextual_filter=None) -> D
     best = {'ward': '', 'district': '', 'province': ''}
     best_score = -1
     # Try all combinations (usually only a few candidates per type)
-    for ward in by_type['ward'] or [None]:
-        for district in by_type['district'] or [None]:
-            for province in by_type['province'] or [None]:
+    for ward in [None] + (by_type['ward'] or []):
+        for district in [None] + (by_type['district'] or []):
+            for province in [None] + (by_type['province'] or []):
                 spans = []
                 score = 0
                 if province:

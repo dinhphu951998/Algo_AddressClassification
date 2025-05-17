@@ -40,6 +40,23 @@ wrong_accents = {
     "qui": "quy",
 }
 
+TOKEN_ABBREVIATIONS = {
+    'tp': 'thành phố',
+    'q': 'quận',
+    'h': 'huyện', 
+    't': 'tỉnh',
+    'p': 'phường',
+    'x': 'xã',
+    'tx': 'thị xã',
+    'tt': 'thị trấn',
+    'đt': 'đường',
+    'f': 'phường',
+    'kdc': 'khu dân cư',
+    'kcn': 'khu công nghiệp',
+    'kdt': 'khu đô thị',
+    'kp': 'khu phố',
+}
+
 def common_normalize(text: str) -> str:
     text = text.lower()
     # text = text.replace(",", "")  # replace for T,â,n,B,ì,n,h Dĩ An Bình Dương
@@ -67,6 +84,33 @@ def normalize_text_but_keep_accent(text: str) -> str:
     for wrong, correct in wrong_accents.items():
         text = text.replace(wrong, correct)
 
+    return text
+
+def normalize_text_v2(text: str) -> str:
+    # Bước 1: Chuyển về chữ thường
+    text = text.lower()
+    
+    # Bước 2: Chuẩn hóa các từ viết tắt
+    tokens = re.findall(r'\w+|[.,;:/\\\-]', text, re.UNICODE)
+    new_tokens = []
+    for token in tokens:
+        token_lower = token.lower().strip('.')
+        if token_lower in TOKEN_ABBREVIATIONS:
+            new_tokens.append(TOKEN_ABBREVIATIONS[token_lower])
+        else:
+            new_tokens.append(token)
+    text = ' '.join(new_tokens)
+    
+    # Bước 3: Bỏ dấu tiếng Việt
+    text = unicodedata.normalize('NFD', text)
+    text = ''.join([c for c in text if unicodedata.category(c) != 'Mn'])
+    
+    # Bước 4: Thay thế dấu câu bằng khoảng trắng
+    text = re.sub(r'[.,;:/\\\-]', ' ', text)
+    
+    # Bước 5: Chuẩn hóa khoảng trắng
+    text = re.sub(r'\s+', ' ', text).strip()
+    
     return text
 
 def segment_text(s, safe=True):

@@ -1,0 +1,65 @@
+General:
+- Given 3 datasets `list_ward.txt`, `list_district.txt`, `list_province.txt` containing wards, districts, provinces in Viet Nam 
+and a string, find the correct name for each part. Set empty if the name of each part is not existed in the dataset of that part.
+- Noted that the input string might be wrong spelling.
+
+Example:
+- list_ward.txt: 'Thuận Thành'
+- list_district.txt: 'Cần Giuộc'
+- list_province.txt: 'Long An'
+
+Input 1:
+'X. Thuận Thành, H. Cần Giuộc, T. Long An'
+
+Output 1:
+ward: Thuận Thành
+district: Cần Giuộc
+province: Long An
+
+Input 2:
+'Thuận Thanh, HCần Giuộc, Tlong An'
+
+Output 2:
+ward: Thuận Thành
+district: Cần Giuộc
+province: Long An
+
+Input 3:
+'Thuận Thành, H Cần Giuộc T. Long An'
+
+Output 3:
+ward: Thuận Thành
+district: Cần Giuộc
+province: Long An
+
+
+Input 4:
+'X Thuận Thành H. Cần Giuộc, Long An'
+
+Output 4:
+ward: Thuận Thành
+district: Cần Giuộc
+province: Long An
+
+
+Input 5:
+'X ThuanThanh H. Can Giuoc, Long An'
+
+Output 5:
+ward: Thuận Thành
+district: Cần Giuộc
+province: Long An
+
+Input 6:
+'X ThuanThanh H. Can Giuoc'
+
+Output 5:
+ward: Thuận Thành
+district: Cần Giuộc
+province: ''
+
+
+
+Hints:
+- Trie
+- Dynamic programming

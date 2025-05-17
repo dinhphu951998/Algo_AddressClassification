@@ -1,0 +1,381 @@
+Tân Bình
+3
+Phú Bình
+Đa Kao
+Trung Chánh
+Thuận Thành
+Cẩm Bình
+Thanh Long
+Thạnh Lợi
+Hải Ba
+Trảng Dài
+Tô Hiệu
+Yên Nghĩa
+Suối Hoa
+Phú Thạnh
+Vĩnh Trụ
+Nam Chính
+Hiệp Thạnh
+Hiệp Tân
+Hai Riêng
+Chư Prông
+Minh Đạo
+Bồng Khê
+Cư Prông
+Long Bình Tân
+Vĩnh Hòa
+Bình Minh
+Hưng Mỹ
+Quỳnh Ngọc
+Nậm Cha
+Tây Tựu
+Nghi Hương
+Hoằng Anh
+Hữu Định
+Yên Thanh
+Càng Long
+An Phú
+Bình Trung
+Hòa Cường Nam
+Phù Mỹ
+Dân Lực
+Cao Dương
+Minh Hòa
+Đức Hòa
+Định Công
+Mê Linh
+Đức Long
+Bút Sơn
+An Lộc
+Thái Hòa
+Thanh Hòa
+Sơn Hải
+Quảng Thành
+Định Trung
+Ea Phê
+Lương Lỗ
+Hoằng Đức
+Nam Hải
+13
+8
+Mỹ Long
+Cờ Đỏ
+Minh Lãng
+Thống Nhất
+Tân Bình
+Vân Giang
+Quảng Bị
+Tân Minh
+Sài Đồng
+Đại Kim
+Đất Đỏ
+5
+13
+Trảng Bom
+Hoàng Lâu
+Hợp Đồng
+Đồng Trạch
+Thạch Xá
+Phú Thượng
+Huổi Luông
+Quang Trung
+Sơn Hà
+Thanh Nhàn
+Hàng Gòn
+Nguyên Bình
+Ngọc Tảo
+Hoằng Minh
+Châu Phú A
+Hải Bình
+An Hải
+Long Trung
+Tân Mai
+Sơn Thủy
+Đông Thọ
+Tân Thành
+Sao Đỏ
+Xuân Khanh
+Long Thủy
+Hưng Hà
+Vĩnh Ngọc
+Thới An
+Thạch Bình
+Xuân Hương
+Long Bình Tân
+Trung Giáp
+Bắc Lý
+Lê Lợi
+Phú Thạnh
+Tường Lộc
+Bích Hòa
+Suối Rao
+Minh Xuân
+An Hải
+Yên Sơn
+Cô Giang
+Tân An Hội
+Nam Chính
+Me
+Phan Thiết
+Trung Môn
+3
+Tề Lễ
+Khương Mai
+An Phú
+Nhơn Bình
+Hòa Thọ Đông
+Ngô Quyền
+Kim Sơn
+12
+Chiêu Yên
+Hòa Thạnh
+Lê Hồng Phong
+14
+Hưng Thuận
+Quang Hưng
+Kim Linh
+KRông Búk
+12
+Mỹ Xương
+Liên Minh
+Bình Thuận
+Chợ Chu
+Hải Ba
+Phú Lợi
+Tự Lạn
+Bình Hiệp
+Trà Sơn
+Vĩnh Lợi
+Vạn Điểm
+Yên Bình
+Thạnh Đức
+Thài Phìn Tủng
+Bù Gia Mập
+Mỹ Lương
+Tam Giang
+La Dêê
+Tân Thạnh
+Cam Bình
+Thạnh Lợi
+Minh Tân
+Quỳnh Lâm
+Nà Tấu
+Hiệp Tùng
+Yên Bình
+Tự An
+Đức Bác
+Hà Hồi
+Sơn Thủy
+Hoằng Lưu
+An Tiến
+Gia Hội
+Tam Văn
+Hoằng Quỳ
+Bình Châu
+Tân Tiến
+Him Lam
+Hoà Quý
+Bản Sen
+Phong Quang
+Vũ Ninh
+Trà Dương
+Vĩnh Thắng
+Thiết Kế
+Khâm Thiên
+Quỳnh Nguyên
+Vĩnh Hùng
+Tăng Thành
+Trung Lập
+Ngọc Thụy
+Yên Lạc
+Quỹ Nhất
+Tân Hưng Tây
+Phong Dụ
+Phú Hưng
+An Thủy
+Bình Phú
+Thọ Sơn
+Hòa Bắc
+Cộng Hòa
+Đại Tân
+Sin Suối Hồ
+Sùng Phài
+An Long
+Tân Thịnh
+Hoàn Sơn
+Hải An
+Hai Riêng
+Diễn Thành
+Thanh Vĩnh Đông
+Chế Là
+Hồng Sỹ
+Hành Tín Tây
+An Lạc
+Hòa Lợi
+Hiệp An
+Trịnh Tường
+Chiềng Mung
+Mễ Trì
+4
+Trần Hưng Đạo
+Tông Lạnh
+07
+Xuân Lâm
+Đông
+Long Thắng
+Lưu Sơn
+Chi Lăng
+Bằng Lũng
+Tân An
+Trung Thành
+Vĩnh Hưng
+04
+Nậm Nhừ
+Châu Thuận
+Văn Đẩu
+Cẩm Lương
+Hoài Hảo
+Hướng Hiệp
+Ea Tam
+Tân An
+Tân Dân
+Nam Cát
+Vị Tân
+Mỹ Thành Bắc
+Cư Drăm
+Bình Hải
+Nhân Chính
+Khả Cửu
+Nông Trường Việt Lâm
+Long Bình
+Đông Cường
+Trung Nghĩa
+Hải Minh
+Bạch Lưu
+Đề Thám
+Hà Mãn
+Sơn Thủy
+Nam Thái A
+Quảng Thọ
+Tam Anh Nam
+Vân Du
+Phong Cốc
+An Thuận
+Nghi Sơn
+Đạ Tẻh
+Hội An
+Trường Thịnh
+Hạ Mỗ
+Tiến Nông
+Quang Tiến
+Kẻ Sặt
+Lương Hòa
+Tân Sơn
+Quách Phẩm Bắc
+Trực Đạo
+Tân Phong
+Lộc Thanh
+Đường Hoa
+Vạn Kim
+Miền Đồi
+Phú Mãn
+Mường Lèo
+Tam Xuân I
+Tâm Thắng
+Tích Sơn
+Hòa Trị
+La Sơn
+Điện Nam Bắc
+Bok Tới
+Tân Nghĩa
+Bình Sa
+Tân Lập
+Tinh Nhuệ
+Gia Vượng
+Hợp Đức
+Sông Đốc
+Vĩnh Hanh
+Yên Phong
+Nghi Thu
+Dịch Vọng
+Minh Thuận
+Ea Huar
+SRó
+Tân Thanh
+Sơn Hội
+Bản Máy
+Cộng Hòa
+Chơ Chun
+Vô Tranh
+Bù Gia Mập
+Ba Tiêu
+Tân Kiên
+Tam Đồng
+Văn Tiến
+An Phú
+Cẩm Hoàng
+Cát Chánh
+Ea Kmút
+Sơn Hà
+Mỹ Thạnh
+Châu Minh
+Thịnh Vượng
+Diên Thạnh
+Việt Hồng
+Đức Sơn
+Đắk Nang
+Điện Hồng
+Đức Lợi
+Nguyễn Trãi
+Song Lộc
+Lộc Châu
+Bản Nguyên
+Phương Công
+Lương Nghĩa
+Tây Yên
+Kiên Thành
+Duy Phú
+Phước Vĩnh Đông
+Thạch Xuân
+Sín Chéng
+Duy Hải
+Văn Cẩm
+Bình Ngọc
+Chương Dương
+Nậm Tin
+An Đức
+Trung Kiên
+Đông Lâm
+Đức Lĩnh
+Quỳnh Hội
+Yên Phú
+Xuân Tân
+Ia Ake
+Thái Sơn
+Uar
+Phú Đô
+Thái Hòa
+Phước Hiệp
+Huy Hạ
+Quỳnh Côi
+Cảm Nhân
+Đức An
+Ninh Sở
+Đoàn Đào
+Hương Liên
+Tràng Minh
+Bản Hon
+Điền Hải
+Thanh Phong
+Bình Trung
+Đông Thạnh
+Tân Lĩnh
+Thủy Châu
+Ea Knốp
+Quế Minh
+Nga Thanh
+Phú Mỹ
+Tân Bình
+Trung Sơn
+Côn Lôn
+Tân Hòa

@@ -25,31 +25,50 @@ class Solution:
         self.variation_map = variation_map
         pass
 
+    def print_candidates(self, candidates):
+        """Nicely print extracted address candidates."""
+        if not candidates:
+            print("No candidates found.")
+            return
+        print("Candidates:")
+        for c in candidates:
+            print(f"  [{c['type']}] {c['original']} (ngram: '{c['ngram']}', tokens {c['start']}-{c['end']})")
+
     def process(self, s: str):
         # Preprocess
         s_copy = s[:]
 
-        segments = segment_text(s)
-        input_text = normalize_text_v2(",".join(segments))
+        input_text = normalize_text_v2(s)
 
         # Start searching
         candidates = extract_candidates(input_text, self.tries["ward"], self.tries["district"], self.tries["province"])
+        self.print_candidates(candidates)
 
         best = select_best_combination(candidates)
         
         result =  {
-            "province": best['province'],
-            "district": best['district'],
-            "ward": best['ward'],
+            "ward": self.tries["ward"].get_raw_text(best["ward"]),
+            "district": self.tries["district"].get_raw_text(best["district"]),
+            "province": self.tries["province"].get_raw_text(best["province"]),
         }
 
         if self.debug:
             print()
-            # print(f"Original: {s_copy}")
+            print(f"Original: {s_copy}")
             # print(f"Normalized: {normalize_text_but_keep_accent(s_copy)}")
             print(f"Result: {result}")
 
         return result
+    
+    
+
+    
+s = Solution()
+# print(s.process("Khu phố 3, Trảng Dài, Thành phố Biên Hòa, Đồng Nai."))
+# print(s.process("357/28,Ng-T- Thuật,P1,Q3,TP.HồChíMinh."))
+# print(s.process("284DBis Ng Văn Giáo, P3, Mỹ Tho, T.Giang."))
+print(s.process("TT T,â,n B,ì,n,h Huyện Yên Sơn, Tuyên Quang"))
+
 
     # def process(self, s: str):
     #     # Preprocess

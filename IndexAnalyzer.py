@@ -1,5 +1,7 @@
 from typing import Optional, Tuple, Dict, List
 from Utils import *
+from rapidfuzz import process, fuzz
+from rapidfuzz.distance import DamerauLevenshtein, Levenshtein
 
 SPECIAL_CASES = ["xã", "x.", "huyện", "tỉnh", "t.",
                  "tp","thành phố", "thànhphố"]
@@ -70,6 +72,30 @@ class Trie:
             if node.is_end_of_word:
                 return (node.original_string, start, i + 1)
         return None
+    
+    def search(self, normalized_name):
+        """Return list of original names if exact match, else empty list."""
+        node = self.root
+        for char in normalized_name:
+            if char not in node.children:
+                return []
+            node = node.children[char]
+        if node.is_end_of_word:
+            return [node.original_string]
+        return []
+    
+    def fuzzy_search(self, query, max_distance=2):
+        qlen = len(query)
+        filtered_keys = [k for k in self.all_norm_names if abs(len(k) - qlen) <= max_distance]
+        results = process.extract(
+                        query,
+                        filtered_keys,
+                        score_cutoff=90
+                    )
+        matches = []
+        for match, distance, _ in results:
+            matches.extend(self.original_names[match])
+        return matches
 
     # def search_max_length(self, text: str, start: int) -> Optional[Tuple[str, int, int]]:
     #     """Finds the longest valid word from the given start index."""

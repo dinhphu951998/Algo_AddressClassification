@@ -104,6 +104,7 @@ def normalize_text_v2(text: str) -> str:
     # Bước 3: Bỏ dấu tiếng Việt
     text = unicodedata.normalize('NFD', text)
     text = ''.join([c for c in text if unicodedata.category(c) != 'Mn'])
+    text = text.replace("đ", "d")
     
     # Bước 4: Thay thế dấu câu bằng khoảng trắng
     text = re.sub(r'[.,;:/\\\-]', ' ', text)

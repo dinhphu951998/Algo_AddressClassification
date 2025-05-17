@@ -1,4 +1,5 @@
-from dictionary_construction import normalize_name
+from Utils import normalize_text_v2
+
 
 def tokenize(text):
     """Tokenize the normalized input into words."""
@@ -49,13 +50,15 @@ def extract_candidates(normalized_text, ward_trie, district_trie, province_trie)
     ngrams = [*word_ngrams, *char_ngrams]
     candidates = []
     for start, end, ngram, ngram_type in ngrams:
-        norm_ngram = normalize_name(ngram)
+        norm_ngram = ngram
         for trie, typ in [
             (ward_trie, 'ward'),
             (district_trie, 'district'),
             (province_trie, 'province')
         ]:
             matches = trie.search(norm_ngram)
+            if not matches:
+                continue
             if not matches:
                 matches = trie.fuzzy_search(norm_ngram)
             for match in matches:

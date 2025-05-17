@@ -1,8 +1,8 @@
+from ContextualFiltering import ContextualFiltering
 from CursorSolution.address_candidate_extraction import extract_candidates
 from CursorSolution.address_selection import select_best_combination
-from IndexAnalyzer import load_databases, variation_map
-from Searcher import search_locations_in_trie, search_locations_in_segments
-from Utils import normalize_text_v2, normalize_text_but_keep_accent, segment_text
+from IndexAnalyzer import load_databases
+from Utils import normalize_text_v2
 
 class Solution:
 
@@ -22,7 +22,7 @@ class Solution:
             "ward": self.ward_path
         }, self.tries)
 
-        self.variation_map = variation_map
+        self.contextual_filter = ContextualFiltering()
         pass
 
     def print_candidates(self, candidates):
@@ -42,7 +42,7 @@ class Solution:
         # Start searching
         candidates = extract_candidates(input_text, self.tries["ward"], self.tries["district"], self.tries["province"])
 
-        best = select_best_combination(candidates)
+        best = select_best_combination(candidates, self.contextual_filter)
         
         result =  {
             "ward": best["ward"],
@@ -55,15 +55,15 @@ class Solution:
             print(f"Original: {s_copy}")
             print("Normalized: ", input_text)
             self.print_candidates(candidates)
-            print(f"Result: {result}")
+            print(best)
 
         return result
     
     
     
 s = Solution()
-s.debug = 0
-
+s.debug = 1
+print(s.process("Hoằng Minh, Hoằng Hóa Thanh Hóa"))
 
 # exit()
 
@@ -106,6 +106,8 @@ s.debug = 0
 # print(s.process("Khu 1, Tân Bình, Hồ Chí Minh"))
 # print(s.process("Khu 1, Tân Bình, Hồ Chí Minh"))
 # print(s.process("Khóm 1 TT Càng Long, Càng Long, Trà Vinh"))
+# print(s.process("Số Nhà 38, Tổ 9 Tô Hiệu, Thành phố Sơn La, Sơn La"))
+
 
 
 # Not solved yet

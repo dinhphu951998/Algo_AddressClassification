@@ -1,6 +1,6 @@
 from typing import List, Dict
 
-def select_best_combination(candidates: List[Dict], contextual_filter=None) -> Dict[str, str]:
+def select_best_combination(candidates: List[Dict], cf=None) -> Dict[str, str]:
     """
     Given a list of candidates (with type, start, end, original, ngram),
     select the best non-overlapping combination for ward, district, and province.
@@ -8,6 +8,10 @@ def select_best_combination(candidates: List[Dict], contextual_filter=None) -> D
     If contextual_filter is provided, only allow valid (ward, district, province) hierarchies.
     Returns a dict: {'ward': ..., 'district': ..., 'province': ...}
     """
+
+    SCORE_FOR_EXACT_MATCH = 0.4
+    SCORE_FOR_FUZZY_MATCH = 0.1
+
     # Group candidates by type
     by_type = {'ward': [], 'district': [], 'province': []}
     for c in candidates:
@@ -30,45 +34,45 @@ def select_best_combination(candidates: List[Dict], contextual_filter=None) -> D
                 
                 if ward:
                     spans.append((ward['start'], ward['end']))
-                    score += ward['end'] - ward['start'] + 1
-                    added_percentage += 0.2 if ward['match_type'] == 'exact' else 0
+                    score += (ward['end'] - ward['start'] + 1)# * (2 if ward['match_type'] == 'exact' else 1)
+                    # added_percentage += SCORE_FOR_EXACT_MATCH if ward['match_type'] == 'exact' else SCORE_FOR_FUZZY_MATCH
                 if district:
                     spans.append((district['start'], district['end']))
-                    score += district['end'] - district['start'] + 1
-                    added_percentage += 0.2 if district['match_type'] == 'exact' else 0
+                    score += (district['end'] - district['start'] + 1)# * (2 if district['match_type'] == 'exact' else 1)
+                    # added_percentage += SCORE_FOR_EXACT_MATCH if district['match_type'] == 'exact' else SCORE_FOR_FUZZY_MATCH
                 if province:
                     spans.append((province['start'], province['end']))
-                    score += province['end'] - province['start'] + 1
-                    added_percentage += 0.2 if province['match_type'] == 'exact' else 0
-                # Check for overlap
-                # spans = sorted(spans)
+                    score += (province['end'] - province['start'] + 1)# * (2 if province['match_type'] == 'exact' else 1)
+                    # added_percentage += SCORE_FOR_EXACT_MATCH if province['match_type'] == 'exact' else SCORE_FOR_FUZZY_MATCH
 
                 # Check if any consecutive spans overlap of ward, district, province
                 overlap = any(spans[i][1] >= spans[i+1][0] for i in range(len(spans)-1))
-
                 if overlap:
                     continue
 
-                # if not overlap:
-                #     if district and ward and not contextual_filter.is_ward_in_district(ward['original'], district['original']):
-                #         score -= ward['end'] - ward['start'] + 1
-                #     if province and district and not contextual_filter.is_district_in_province(district['original'], province['original']):
-                #         score -= district['end'] - district['start'] + 1
+                # Decrease the score by the distance between the start of the ward and the end of the district
+                # if ward and district:
+                #     score -= abs(ward['start'] - district['end'])
+                # if district and province:
+                #     score -= abs(district['start'] - province['end'])
+
+                if cf and not cf.is_valid(ward['original'] if ward else '', 
+                                          district['original'] if district else '', 
+                                          province['original'] if province else ''):
+                    continue
 
                 score = score * (1 + added_percentage)
 
                 if score > best_score:
                     best_score = score
-                    w = ward['original'] if ward else ''
-                    d = district['original'] if district else ''
-                    p = province['original'] if province else ''
-                    # if d and p and not contextual_filter.is_district_in_province(d, p):
-                    #     d = ''
-                    # if w and d and not contextual_filter.is_ward_in_district(w, d):
-                    #     w = ''
-                    best['ward'] = w
-                    best['district'] = d
-                    best['province'] = p
+                    best['ward'] = ward['original'] if ward else ''
+                    best['district'] = district['original'] if district else ''
+                    best['province'] = province['original'] if province else ''
+                    best['ward_candidate'] = ward
+                    best['district_candidate'] = district
+                    best['province_candidate'] = province
+                    best['score'] = score
+                    best['added_percentage'] = added_percentage
 
     return best
 

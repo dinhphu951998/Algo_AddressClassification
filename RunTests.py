@@ -50,7 +50,11 @@ for test_idx, data_point in enumerate(data):
         start = time.perf_counter_ns()
         result = solution.process(address)
         finish = time.perf_counter_ns()
+        
         timer.append(finish - start)
+        if (finish - start) / 1_000_000_000 > 0.07:
+            print(f"Slow execution ({(finish - start)/1_000_000_000:.3f}s): {address}")
+
         result["province_normalized"] = normalize(result["province"], same_province)
         result["district_normalized"] = normalize(result["district"], same_district)
         result["ward_normalized"] = normalize(result["ward"], same_ward)
@@ -164,6 +168,10 @@ df.columns = columns
 
 print(df2)
 
+print(f"Average extract time: {solution.total_extract_time / solution.process_count:.4f}s")
+print(f"Average select time: {solution.total_select_time / solution.process_count:.4f}s")
+print(f"Average process time: {(solution.total_extract_time + solution.total_select_time) / solution.process_count:.4f}s")
+
 if not debug:
     print(f'{TEAM_NAME = }')
     print(f'{EXCEL_FILE = }')
@@ -172,4 +180,4 @@ if not debug:
         df2.to_excel(writer, index=False, sheet_name='summary')
         df.to_excel(writer, index=False, sheet_name='details')
 
-print("Excel file saved successfully.")
+    print("Excel file saved successfully.")

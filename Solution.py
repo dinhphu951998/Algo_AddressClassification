@@ -3,7 +3,7 @@ from CursorSolution.address_candidate_extraction import extract_candidates
 from CursorSolution.address_selection import select_best_combination
 from IndexAnalyzer import load_databases
 from Utils import normalize_text_v2
-
+import time
 class Solution:
 
     debug = False
@@ -23,6 +23,10 @@ class Solution:
         }, self.tries)
 
         self.contextual_filter = ContextualFiltering()
+
+        self.total_extract_time = 0
+        self.total_select_time = 0
+        self.process_count = 0
         pass
 
     def print_candidates(self, candidates):
@@ -35,14 +39,23 @@ class Solution:
             print(f"  [{c['type']}] {c['original']} (ngram: '{c['ngram']}', tokens {c['start']}-{c['end']}, {c['ngram_type']}, {c['match_type']})")
 
     def process(self, s: str):
+        self.process_count += 1
+
         # Preprocess
         s_copy = s[:]
         input_text = normalize_text_v2(s)
-
-        # Start searching
+        
+        start_time = time.time()
         candidates = extract_candidates(input_text, self.tries["ward"], self.tries["district"], self.tries["province"])
+        extract_time = time.time() - start_time
+        self.total_extract_time += extract_time
 
+        start_time = time.time()
         best = select_best_combination(candidates, self.contextual_filter)
+        select_time = time.time() - start_time
+        self.total_select_time += select_time
+
+        
         
         result =  {
             "ward": best["ward"],
@@ -55,64 +68,70 @@ class Solution:
             print(f"Original: {s_copy}")
             print("Normalized: ", input_text)
             self.print_candidates(candidates)
-            print(best)
+            # print(best)
+            print(f"Extract time: {extract_time:.4f}s")
+            print(f"Select time: {select_time:.4f}s")
+            print("--------------------------------")
 
         return result
     
-    
-    
-s = Solution()
-s.debug = 1
-# print(s.process("P. Nghi Hương Thị xã Cửa Lò, Nghệ An"))
-print(s.process("Nam Đông,T. T.T.H"))
 
-# exit()
+if __name__ == "__main__":
+    s = Solution()
+    s.debug = 1
+    # print(s.process("P. Nghi Hương Thị xã Cửa Lò, Nghệ An"))
+    print(s.process("7/3/4/16 Thành Thái Phường 14, Quận 10, TP. Hồ Chí Minh"))
 
-
-# print(s.process("Khu phố 3, Trảng Dài, Thành phố Biên Hòa, Đồng Nai."))
-# print(s.process("357/28,Ng-T- Thuật,P1,Q3,TP.HồChíMinh."))
-# print(s.process("284DBis Ng Văn Giáo, P3, Mỹ Tho, T.Giang."))
-# print(s.process("TT T,â,n B,ì,n,h Huyện Yên Sơn, Tuyên Quang"))
-
-# print(s.process("46/8F Trung Chánh 2 Trung Chánh, Hóc Môn, TP. Hồ Chí Minh"))
-# print(s.process("T18,Cẩm Bình, Cẩm Phả, Quảng Ninh"))
-# print(s.process("Thanh Long, Yên Mỹ Hưng Yên"))
-# print(s.process("D2, Thạnh Lợi, Vĩnh Thạnh Cần Thơ"))
-# print(s.process("Cổ Lũy Hải Ba, Hải Lăng, Quảng Trị"))
-# print(s.process("Phú Lộc Phú Thạnh, Phú Tân, An Giang"))
-# print(s.process("Nguyễn Khuyến Thị trấn Vĩnh Trụ, Lý Nhân, Hà Nam"))
-# print(s.process("Nam chính Tiền hải, Thái bình"))
-# print(s.process("Đá Hàng Hiệp Thạnh, Gò Dầu, Tây Ninh"))
-# print(s.process("371/11 Thoại Ngọc Hầu Hiệp Tân, Tân Phú, TP. Hồ Chí Minh"))
-# print(s.process("Số 93, khu phố 9, thị trấn Hai Riêng, Sông Hinh, Phú Yên"))
-# print(s.process("Tổ Dân Phố 3 Thị trấn Chư Prông, Chư Prông, Gia Lai"))
-# print(s.process("Xã Minh Đạo, Huyện Tiên Du, Tỉnh Bắc Ninh"))
-# print(s.process("Xã Bồng Khê Huyện Con Cuông, Nghệ An"))
-# print(s.process("Thôn 16 Cư Prông, Ea Kar, Đắk Lắk"))
-# print(s.process("Số 259/54/8, Tổ 28, KP1, Long Bình Tân, Biên Hòa, Đồng Nai."))
-# print(s.process("Pháp Ngỡ, Vĩnh Hòa Vĩnh Lộc, Thanh Hóa"))
-# print(s.process("Thôn Chua Bình Minh, Thanh Oai, Hà Nội"))
-
-# print(s.process("Tiểu khu 3, thị trấn Ba Hàng, huyện Phổ Yên, tỉnh Thái Nguyên"))
-# print(s.process("Xóm 2, Hưng Mỹ, Hưng Nguyên, Nghệ An"))
-# print(s.process("Bương Hạ Nam, Quỳnh Ngọc Quỳnh Phụ, Thái Bình"))
-# print(s.process("Nậm Cha Sìn Hổ, Lai Châu"))
-# print(s.process("TDP Hạ 10, Tây Tựu Bắc Từ Liêm, Hà Nội"))
-# print(s.process("P. Nghi Hương Thị xã Cửa Lò, Nghệ An"))
-# print(s.process("Hoằng Anh Thành phố Thanh Hóa, Thanh Hóa"))
-# print(s.process("Ấp Phú Hữu Hữu Định, Châu Thành, Bến Tre"))
-# print(s.process("Phường Yên Thanh, thành phố Uông Bí, tỉnh Quảng Ninh"))
-# print(s.process("Khóm 1 TT Càng Long, Càng Long, Trà Vinh"))
-# print(s.process("Khu 3, Tân Bình, Hồ Chí Minh"))
-# print(s.process("Khu 1, Tân Bình, Hồ Chí Minh"))
-# print(s.process("Khu 1, Tân Bình, Hồ Chí Minh"))
-# print(s.process("Khóm 1 TT Càng Long, Càng Long, Trà Vinh"))
-# print(s.process("Số Nhà 38, Tổ 9 Tô Hiệu, Thành phố Sơn La, Sơn La"))
+    # exit()
 
 
+    # s.process("Khu phố 3, Trảng Dài, Thành phố Biên Hòa, Đồng Nai.")
+    # s.process("357/28,Ng-T- Thuật,P1,Q3,TP.HồChíMinh.")
+    # s.process("284DBis Ng Văn Giáo, P3, Mỹ Tho, T.Giang.")
+    # s.process("TT T,â,n B,ì,n,h Huyện Yên Sơn, Tuyên Quang")
 
-# Not solved yet
-# print(s.process("Khu 3 Suối Hoa, Thành phố Bắc Ninh, Bắc Ninh"))
+    # s.process("46/8F Trung Chánh 2 Trung Chánh, Hóc Môn, TP. Hồ Chí Minh")
+    # s.process("T18,Cẩm Bình, Cẩm Phả, Quảng Ninh")
+    # s.process("Thanh Long, Yên Mỹ Hưng Yên")
+    # s.process("D2, Thạnh Lợi, Vĩnh Thạnh Cần Thơ")
+    # s.process("Cổ Lũy Hải Ba, Hải Lăng, Quảng Trị")
+    # s.process("Phú Lộc Phú Thạnh, Phú Tân, An Giang")
+    # s.process("Nguyễn Khuyến Thị trấn Vĩnh Trụ, Lý Nhân, Hà Nam")
+    # s.process("Nam chính Tiền hải, Thái bình")
+    # s.process("Đá Hàng Hiệp Thạnh, Gò Dầu, Tây Ninh")
+    # s.process("371/11 Thoại Ngọc Hầu Hiệp Tân, Tân Phú, TP. Hồ Chí Minh")
+    # s.process("Số 93, khu phố 9, thị trấn Hai Riêng, Sông Hinh, Phú Yên")
+    # s.process("Tổ Dân Phố 3 Thị trấn Chư Prông, Chư Prông, Gia Lai")
+    # s.process("Xã Minh Đạo, Huyện Tiên Du, Tỉnh Bắc Ninh")
+    # s.process("Xã Bồng Khê Huyện Con Cuông, Nghệ An")
+    # s.process("Thôn 16 Cư Prông, Ea Kar, Đắk Lắk")
+    # s.process("Số 259/54/8, Tổ 28, KP1, Long Bình Tân, Biên Hòa, Đồng Nai.")
+    # s.process("Pháp Ngỡ, Vĩnh Hòa Vĩnh Lộc, Thanh Hóa")
+    # s.process("Thôn Chua Bình Minh, Thanh Oai, Hà Nội")
+    # s.process("Tiểu khu 3, thị trấn Ba Hàng, huyện Phổ Yên, tỉnh Thái Nguyên")
+    # s.process("Xóm 2, Hưng Mỹ, Hưng Nguyên, Nghệ An")
+    # s.process("Bương Hạ Nam, Quỳnh Ngọc Quỳnh Phụ, Thái Bình")
+    # s.process("Nậm Cha Sìn Hổ, Lai Châu")
+    # s.process("TDP Hạ 10, Tây Tựu Bắc Từ Liêm, Hà Nội")
+    # s.process("P. Nghi Hương Thị xã Cửa Lò, Nghệ An")
+    # s.process("Hoằng Anh Thành phố Thanh Hóa, Thanh Hóa")
+    # s.process("Ấp Phú Hữu Hữu Định, Châu Thành, Bến Tre")
+    # s.process("Phường Yên Thanh, thành phố Uông Bí, tỉnh Quảng Ninh")
+    # s.process("Khóm 1 TT Càng Long, Càng Long, Trà Vinh")
+    # s.process("Khu 3, Tân Bình, Hồ Chí Minh")
+    # s.process("Khu 1, Tân Bình, Hồ Chí Minh")
+    # s.process("Khu 1, Tân Bình, Hồ Chí Minh")
+    # s.process("Khóm 1 TT Càng Long, Càng Long, Trà Vinh")
+    # s.process("Số Nhà 38, Tổ 9 Tô Hiệu, Thành phố Sơn La, Sơn La")
+
+
+    # print(f"Average extract time: {s.total_extract_time / s.process_count:.4f}s")
+    # print(f"Average select time: {s.total_select_time / s.process_count:.4f}s")
+    # print(f"Average process time: {(s.total_extract_time + s.total_select_time) / s.process_count:.4f}s")
+
+
+    # Not solved yet
+    # print(s.process("Khu 3 Suối Hoa, Thành phố Bắc Ninh, Bắc Ninh"))
 
 
 

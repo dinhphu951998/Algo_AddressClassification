@@ -39,6 +39,9 @@ class Trie:
 
     def insert(self, normalized_name: str, original_name: str):
         """Insert a normalized word into the trie with a reference to the original."""
+
+    
+
         node = self.root
         for char in normalized_name:
             if char not in node.children:
@@ -214,15 +217,13 @@ class Trie:
         return result
 
 
-def generate_prefixed_variations(location_name: str, category: str) -> Tuple[List[str], List[str], str]:
+def generate_prefixed_variations(normalized_name: str, category: str) -> Tuple[List[str], str]:
     """
     Generate basic prefixed variants and additional (acronym) variants.
     """
     variations = []
     if category not in variation_map:
         variation_map[category] = {}
-
-    normalized_name = normalize_text_v2(location_name)
 
     if normalized_name.isdigit():  # Only generate prefixes for wards and districts
         padded_name = normalized_name.zfill(2) if len(normalized_name) == 1 else normalized_name
@@ -237,7 +238,6 @@ def generate_prefixed_variations(location_name: str, category: str) -> Tuple[Lis
     # non_accents_variations = [normalize_text_and_remove_accent(v) for v in variations]
     # variations.extend(non_accents_variations)
     variations = list(set(variations))
-
    
     variation_map[category][normalized_name] = variations
     return variations, normalized_name
@@ -306,13 +306,19 @@ def load_databases(filenames: Dict[str, str],
 
 
 def load_line(line: str, trie: Trie, category: str):
-    location_name = line.strip()
-    if location_name == "":
+    original_name = line.strip()
+    if original_name == "":
         return
+    
+    normalized_name = normalize_text_v2(original_name)
 
+    if normalized_name in trie.norm_to_original and original_name in trie.norm_to_original[normalized_name]:
+        return
+    
     # Generate the initial prefixed variants
-    prefixed_variations, normalized_text = generate_prefixed_variations(location_name, category)
+    prefixed_variations, normalized_name = generate_prefixed_variations(normalized_name, category)
+
     # Insert original prefixed_variations into the regular trie
     for variant in prefixed_variations:
         # trie.original_names[variant] = location_name
-        trie.insert(variant, location_name)
+        trie.insert(variant, original_name)

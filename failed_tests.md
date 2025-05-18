@@ -27,32 +27,116 @@ District -> Actual: 'Thường Tín', Expected: 'Bình Thạnh'
 Ward -> Actual: '', Expected: '5'
 
 
+Original: TT T,â,n B,ì,n,h Huyện Yên Sơn, Tuyên Quang
+Ward -> Actual: '', Expected: 'Tân Bình'
 
-Original: A:12A.21BlockA C/c BCA,P.AnKhánh,TP.Thủ Đức, TP. HCM
+Original: 357/28,Ng-T- Thuật,P1,Q3,TP.HồChíMinh.
 Province -> Actual: '', Expected: 'Hồ Chí Minh'
+District -> Actual: 'Thạch Thất', Expected: ''
+
+Original: 284DBis Ng Văn Giáo, P3, Mỹ Tho, T.Giang.
+Ward -> Actual: '', Expected: '3'
+
+Original: Cổ Lũy Hải Ba, Hải Lăng, Quảng Trị
+Ward -> Actual: '', Expected: 'Hải Ba'
+Slow execution (0.081s): CH F1614-HH2-Khu ĐTM Dương Nội Yên NghĩahàdônghyàNội
+
+Original: CH F1614-HH2-Khu ĐTM Dương Nội Yên NghĩahàdônghyàNội
+Province -> Actual: 'Đồng Nai', Expected: 'Hà Nội'
+District -> Actual: '', Expected: 'Hà Đông'
+Ward -> Actual: '', Expected: 'Yên Nghĩa'
+
+Original: Xã Bồng Khê Huyện Con Cuông, Nghệ An
+Ward -> Actual: '', Expected: 'Bồng Khê'
+
+Original: Tiểu khu 3, thị trấn Ba Hàng, huyện Phổ Yên, tỉnh Thái Nguyên.
+Province -> Actual: 'Thái Nguyên', Expected: ''
+District -> Actual: 'Phổ Yên', Expected: ''
+
+Original: Xóm 2, Hưng Mỹ, Hưng Nguyên, Nghệ An
+Ward -> Actual: '', Expected: 'Hưng Mỹ'
+
+Original: P. Nghi Hương Thị xã Cửa Lò, Nghệ An
+District -> Actual: '', Expected: 'Cửa Lò'
+
+Original: Hoằng Anh Thành phố Thanh Hóa, Thanh Hóa
+Ward -> Actual: '', Expected: 'Hoằng Anh'
+
+Original: 154/4/81 Nguyễn - Phúc Chu, P15, TB, TP. Hồ Chí Minh
+Province -> Actual: 'Hồ Chí Minh', Expected: ''
+
+Original: Xã Cao Dương, Huyện Thanh Oai, Thành phố Hà Nội
+Ward -> Actual: '', Expected: 'Cao Dương'
+
+Original: Thái Hòa Huyện Thái Thụy, Thái Bình
+Ward -> Actual: '', Expected: 'Thái Hòa'
+
+Original: Thôn 3 Sơn Hải, Quỳnh Lưu, Nghệ An
+Ward -> Actual: 'Tân Sơn', Expected: 'Sơn Hải'
+
+Original: Bộ Đầu Thống Nhất, Thường Tín, Hà Nội
+Ward -> Actual: '', Expected: 'Thống Nhất'
+
+Original: Phố 2, Vân Giang Thành phố Ninh Bình, Ninh Bình
+District -> Actual: '', Expected: 'Ninh Bình'
+
+Original: Tổ 11 Sài Đồng, Long Biên, Hà Nội
+Ward -> Actual: '', Expected: 'Sài Đồng'
+
+Original: KP Phước Trung Thị trấn Đất Đỏ, Đất Đỏ, Bà Rịa - Vũng Tàu
+District -> Actual: '', Expected: 'Đất Đỏ'
+
+Original: 55/30 Nguyễn - Thượng Hiền,P5,BT, TP. Hồ Chí Minh
+District -> Actual: '', Expected: 'Bình Thạnh'
+
+Original: 290 Tùng Thiện- Vương,P.13, Quận 8, TP. Hồ Chí Minh.
+District -> Actual: '', Expected: '8'
+
+Original: Khu phố Nam Tân, TT Thuận Nam, Hàm Thuận Bắc, Bình Thuận.
+Province -> Actual: 'Bình Thuận', Expected: ''
+
+Original: Sơn Hà Nho Quan, Ninh Bình
+Ward -> Actual: '', Expected: 'Sơn Hà'
+
+Original: Xã Nguyên Bình Huyện Tĩnh Gia, Thanh Hoá
+District -> Actual: '', Expected: 'Tĩnh Gia'
+
+Original: Hoằng Minh, Hoằng Hóa Thanh Hóa
+Ward -> Actual: '', Expected: 'Hoằng Minh'
+
+Original: Liên Bình, Hải Bình Tĩnh Gia, Thanh Hóa
+District -> Actual: '', Expected: 'Tĩnh Gia'
+
+Original: - Khu B Chu Hoà, Việt HhiPhú Thọ
+Ward -> Actual: 'Bích Hòa', Expected: ''
+
+Original: 51 Phạm Ngũ Lão, Lê Lợi Sơn Tây, Hà Nội
+Ward -> Actual: '', Expected: 'Lê Lợi'
+
+Original: Mỹ Phú 5 Tường Lộc, Tam Bình, Vĩnh Long
+Ward -> Actual: '', Expected: 'Tường Lộc'
+
 Original: 14.5 Block A2, The Mansion, ĐS 7,KDC 13E,Ấp 5,PP,BC, TP.HCM
-Province -> Actual: '', Expected: 'Hồ Chí Minh'
+Ward -> Actual: '5', Expected: ''
 
+Original: Phố Tân Mỹ Thị trấn Me, Gia Viễn, Ninh Bình
+Ward -> Actual: '', Expected: 'Me'
 
+Original: 31B Sư Vạn Hạnh, Phường 3 Quận 10, TP. Hồ Chí Minh
+District -> Actual: '', Expected: '10'
+Ward -> Actual: 'Tân Thành', Expected: '3'
 
+Original: 191A Nguyễn Thị Định An Phú, Quận 2, Tp Hồ Chí Minh
+District -> Actual: '', Expected: '2'
 
-Original: Liên Minh,,TỉnhThái Nguyên
-Province -> Actual: '', Expected: 'Thái Nguyên'
+Original: Phường Lê Hồng Phong Tp. Quy Nhơn, tỉnh Bình Định.
+Ward -> Actual: '', Expected: 'Lê Hồng Phong'
 
-Original:  Tự Lạn, HuyệnViệt Yên, T Bắc Giang
-District -> Actual: '', Expected: 'Việt Yên'
-
-Original:  Bình Hiệp,H.Bình Sơn,TỉnhQuảng Ngãi
-Province -> Actual: '', Expected: 'Quảng Ngãi'
-
-Original: X Vĩnh Lợi, Huyện Châu Thành, Tỉnhan Giang
-Province -> Actual: '', Expected: 'An Giang'
+Original: Hải Ba  Hải Lăng 
+Ward -> Actual: '', Expected: 'Hải Ba'
 
 Original: Van Điểm, H hường TLín, Thành phốHa Nội
-Province -> Actual: 'Thanh Hóa', Expected: 'Hà Nội'
-
-Original: XThạnh Đức, HGò Dầ6u, T Tây Ninh
-District -> Actual: '', Expected: 'Gò Dầu'
+Ward -> Actual: '', Expected: 'Vạn Điểm'
 
 Original: XãBù Gia Mập,,T Bình Phước
 District -> Actual: 'Bù Gia Mập', Expected: ''
@@ -62,99 +146,26 @@ Original:  Tam GiangNăm CănT.Cà Mau
 District -> Actual: '', Expected: 'Năm Căn'
 Ward -> Actual: '', Expected: 'Tam Giang'
 
-Original: XTân Thạnh, hAn Minh
+Original: XTân Thạnh, hAn Minh 
+Province -> Actual: 'Hồ Chí Minh', Expected: ''
+District -> Actual: '', Expected: 'An Minh'
 Ward -> Actual: 'Tân Thành', Expected: 'Tân Thạnh'
 
 Original: X Cam Bình, Thành FhốCam Rah,  Khánh Hòa
-District -> Actual: 'Bình Thạnh', Expected: 'Cam Ranh'
-Ward -> Actual: '', Expected: 'Cam Bình'
+District -> Actual: '', Expected: 'Cam Ranh'
 
-Original: X.UThạnh Lợi  TỉnhLong An
-Province -> Actual: '', Expected: 'Long An'
-
-Original: XãQuỳn1 Lâm, H. Quỳnh Phụ,  Thai Bình
-Ward -> Actual: '', Expected: 'Quỳnh Lâm'
-
-Original: P.tự Anm T.PhốBuôn Ma Thuột, T. Đắk Lăk
-District -> Actual: '', Expected: 'Buôn Ma Thuột'
-
-Original: , HuyệnChâu Thành, TỉnhTiền Giang
-Province -> Actual: '', Expected: 'Tiền Giang'
-District -> Actual: '', Expected: 'Châu Thành'
-
-Original:  tPPhổ Yên Tỉnh Thái Nguyên
-District -> Actual: 'Yên Bình', Expected: 'Phổ Yên'
-
-Original: X. Hà Hồi H. Thường Tin TPHàNội
-Province -> Actual: '', Expected: 'Hà Nội'
-
-Original:   Đông Giang T Quảyg Nm
-Province -> Actual: '', Expected: 'Quảng Nam'
-
-Original: X. Hoằng Lưu, Hoăng Hóa, TỉnhThanh Hóa
-Province -> Actual: '', Expected: 'Thanh Hóa'
-
-Original: X. HoDng Quỳ,,9hanh Hóa
-Province -> Actual: 'Khánh Hòa', Expected: 'Thanh Hóa'
-
-Original:  BảIn Sen H Mường Khương T5Lào Cai
-Province -> Actual: '', Expected: 'Lào Cai'
+Original:  Minh Tân,h.Lưng Tai,
+District -> Actual: '', Expected: 'Lương Tài'
+Ward -> Actual: 'Tân Hưng Tây', Expected: 'Minh Tân'
 
 Original: X Phong Quang, HKuyệnVị Xuyên, Tỉnh Hà Giang
 District -> Actual: '', Expected: 'Vị Xuyên'
 
-Original: XãV Ninh, Kiên Xương,
-Ward -> Actual: '', Expected: 'Vũ Ninh'
-
-Original:  TP Biên Hòa TỉnhĐyng Nai
-Province -> Actual: '', Expected: 'Đồng Nai'
-
-Original: X. Trà DVưong Bắc Trà My TQuảg Nam
-Province -> Actual: '', Expected: 'Quảng Nam'
-
-Original:  H.Bắc Mê TỉnhHà Giang
-Province -> Actual: '', Expected: 'Hà Giang'
-
-Original: Phưng Khâm Thiên Quận Đ.Đa T.Phố HàNội
-District -> Actual: '1', Expected: 'Đống Đa'
-
-Original: XVnh Hung, , T.Thanh Hóa
-Ward -> Actual: '', Expected: 'Vĩnh Hùng'
-
-Original: Phường Ngoc Thụy  Thành phốHà Nội
-Province -> Actual: 'Thanh Hóa', Expected: 'Hà Nội'
-
-Original: X.Yên Lạc HuyệnNhu Thanh Tỉnh Thanh Hóa
-District -> Actual: 'Thăng Bình', Expected: 'Như Thanh'
-
-Original: XHòa Bqc, HDi Linh,
-Ward -> Actual: '', Expected: 'Hòa Bắc'
-
-Original:  Cộng Hòa,,TỉnhHaOi Dương
-Province -> Actual: '', Expected: 'Hải Dương'
-
-Original: Đai TanHuyện Đại ộc,TỉnhQuảng Nam
-Province -> Actual: '', Expected: 'Quảng Nam'
-Ward -> Actual: '', Expected: 'Đại Tân'
-
-Original: X Sùng Phài T.P zai Châu T.Lai Châu
-District -> Actual: 'Hải Châu', Expected: 'Lai Châu'
-
-Original: XKHoan Sơn,TiênDu,Tỉnhbac Ninh
-Province -> Actual: '', Expected: 'Bắc Ninh'
+Original: , Huyện Maỹ Lộc, TỉnhD Nam Định
+District -> Actual: '', Expected: 'Mỹ Lộc'
 
 Original:  Hải An  Hải Lăng TQdung trị
 Province -> Actual: '', Expected: 'Quảng Trị'
-
-Original: Xã thanh Vĩnh Đông, HuyệnChâu Thành, TLong An
-District -> Actual: '', Expected: 'Châu Thành'
-
-Original: Phường Hiệ An, T.X.Kinh Môn, TỉnhHải Dương
-Province -> Actual: '', Expected: 'Hải Dương'
-Ward -> Actual: 'Hướng Hiệp', Expected: 'Hiệp An'
-
-Original: XãChiềng Mu5ng  T.stn la
-Ward -> Actual: '', Expected: 'Chiềng Mung'
 
 Original: Fmễ Trì, Nam Từ Liêm, Thành phố HN
 Province -> Actual: '', Expected: 'Hà Nội'
@@ -164,252 +175,66 @@ District -> Actual: '', Expected: 'Đông Hà'
 
 Original: F. Trần Hưng Đao,Phủ Ly,TỉnhH  Nam
 Province -> Actual: '', Expected: 'Hà Nam'
+District -> Actual: '', Expected: 'Phủ Lý'
 
-Original:  T.PhôSông Công t. Thái Nguyên
-District -> Actual: '', Expected: 'Sông Công'
-Ward -> Actual: 'Phương Công', Expected: ''
-
-Original: F.07, Q6,
+Original: F.07, Q6, 
 Ward -> Actual: '', Expected: '07'
 
-Original: XãĐông h KBang TGia Lai
-Ward -> Actual: '', Expected: 'Đông'
+Original: Bạch Lưu, H.Song Lô, Vĩnh PGhúc
+Ward -> Actual: '', Expected: 'Bạch Lưu'
 
-Original:  Huyệntân biên T.TDy Ninh
-District -> Actual: '', Expected: 'Tân Biên'
+Original: X Vân Du, , Phú Thọ
+Ward -> Actual: '', Expected: 'Vân Du'
 
-Original:  HuyệnThanh Miện Tỉnh Hải Dương
-District -> Actual: '', Expected: 'Thanh Miện'
-
-Original: X. Tân An, HuyệnThnh Hà,
-District -> Actual: '', Expected: 'Thanh Hà'
-
-Original: XãtrBung Thanh,,TThanh Hóa
-Province -> Actual: '', Expected: 'Thanh Hóa'
-District -> Actual: 'Thạch Thành', Expected: ''
-Ward -> Actual: '', Expected: 'Trung Thành'
-
-Original: vĩnh Hưng, , Long An
-Ward -> Actual: 'Vĩnh Hùng', Expected: 'Vĩnh Hưng'
-
-Original: Phường 04,,Thành phốHồ Chi Minh
-Province -> Actual: '', Expected: 'Hồ Chí Minh'
-District -> Actual: 'Chí Linh', Expected: ''
-
-Original: X Châu Thuận7  TNghệ An
-District -> Actual: 'Châu Thành', Expected: ''
-Ward -> Actual: '', Expected: 'Châu Thuận'
-
-Original:  Cẩm Lương HCẩm Thủa T. Thanh Hóa
-District -> Actual: '', Expected: 'Cẩm Thủy'
-
-Original: P Ea Tam T.P Buôn Ma Thuột TỉnĐắk Llk
-Province -> Actual: '', Expected: 'Đắk Lắk'
-
-Original: F Tân Dân, T.Xã.Nghi Sơn, TỉnhThanh Hóa
-Province -> Actual: '', Expected: 'Thanh Hóa'
-
-Original: XNam Cát, HuyệnNam đàn,
-District -> Actual: '', Expected: 'Nam Đàn'
-
-Original: X My Thành Bac, HuyệnCai Lậy,
-District -> Actual: '', Expected: 'Cai Lậy'
-
-Original: XCư Drămb H.Krông Bông
-Ward -> Actual: '', Expected: 'Cư Drăm'
-
-Original: XãNân Chính, H Ly Nhân, Tỉnh HaNam
-Ward -> Actual: '', Expected: 'Nhân Chính'
-
-Original:  HuyệnĐắk Tô T. KonTum
-District -> Actual: '', Expected: 'Đắk Tô'
-
-Original:  H. Đăk Đoa TỉnhGia Lai
-Province -> Actual: '', Expected: 'Gia Lai'
-
-Original: F.LoWng Binh, TpThủ Đưc, TPHCM
-Province -> Actual: '', Expected: 'Hồ Chí Minh'
-District -> Actual: '', Expected: 'Thủ Đức'
-
-Original: ,HyệnĐại Lộc,TỉnhQuảng Nam
-Province -> Actual: '', Expected: 'Quảng Nam'
-District -> Actual: '', Expected: 'Đại Lộc'
-
-Original: PhườngHà Mãn, T.X.Thuận Thành,
-Ward -> Actual: '', Expected: 'Hà Mãn'
-
-Original: x. Nam Thai A, AZBiên,Tỉnh Kiên Giang
-District -> Actual: '', Expected: 'An Biên'
-
-Original: , HuyệnBình Sơn, TQuảng Ngãi
-District -> Actual: '', Expected: 'Bình Sơn'
-
-Original: Xã Lương Hòa,HuyệnBen Lức,
-District -> Actual: '', Expected: 'Bến Lức'
-
-Original: X.Tân Son,hchợ QMới,
-District -> Actual: '', Expected: 'Chợ Mới'
+Original: Xã Quang Tiếns6 Tân Yên, 
+District -> Actual: '', Expected: 'Tân Yên'
 
 Original: xã Vạn Kim, HuyệnMỹ Đức, T.P HNội
-Province -> Actual: '', Expected: 'Hà Nội'
-District -> Actual: '', Expected: 'Mỹ Đức'
+Ward -> Actual: '', Expected: 'Vạn Kim'
 
 Original: X Phu Mãn   HN
 Province -> Actual: '', Expected: 'Hà Nội'
 
-Original: Xã Tam Xuân I Huyệnúi Thành Quảng Nam
-District -> Actual: '', Expected: 'Núi Thành'
-
-Original: J,Huyệnđô Lương,Tỉnh Nghệ An
-District -> Actual: '', Expected: 'Đô Lương'
-Ward -> Actual: 'Long Bình', Expected: ''
-
-Original: XTâm Thsắng Cư Jút TỉnhĐắk Nông
-Province -> Actual: '', Expected: 'Đắk Nông'
-
-Original: Tích Sơn T.Phốvinh Yên t vĩnh phúc
-District -> Actual: '', Expected: 'Vĩnh Yên'
-
-Original: Bình Sa HuyệnThăng Bình 
-District -> Actual: '', Expected: 'Thăng Bình'
-
-Original: ,H Bắc Son,TỉnhLạng Son
-Province -> Actual: '', Expected: 'Lạng Sơn'
+Original: XãGia Vượng, Gia Viễn, 
+District -> Actual: '', Expected: 'Gia Viễn'
 
 Original: Thị trấnSông Đốc, , TnhCà Mau
 Province -> Actual: '', Expected: 'Cà Mau'
-Ward -> Actual: '', Expected: 'Sông Đốc'
 
-Original: F.Dịch Vọng  C/Giấy Thành phốHàNội
-Province -> Actual: '', Expected: 'Hà Nội'
-District -> Actual: '', Expected: 'Cầu Giấy'
-
-Original: Xã Minh thuận HuyệnU Minh Thượng TỉnhKiên Giang
-Province -> Actual: '', Expected: 'Kiên Giang'
-
-Original:  Ea Huar,HuyệnBuôn Đôn,
-District -> Actual: '', Expected: 'Buôn Đôn'
-
-Original: X Tân Thanh Huyện Lang Giang
-Ward -> Actual: 'Tân Thành', Expected: 'Tân Thanh'
+Original: P. Nhi Thu Thị xã Cửa Lò TNghệ An
+District -> Actual: '', Expected: 'Cửa Lò'
 
 Original: X. Sơn Hv HSơn Hoa Tỉnh Phú Yên
 Ward -> Actual: 'Sơn Hà', Expected: 'Sơn Hội'
 
-Original: X. Tam Đồng,HuyệnMê Linh,T.Phw HàNoi
-District -> Actual: '', Expected: 'Mê Linh'
-
-Original:  eăn Tiến, Yên Lạc, vĩnh P0húc
-Ward -> Actual: 'An Tiến', Expected: 'Văn Tiến'
-
-Original: X. Cat Chánh,HuyệnPhù Cát,
-District -> Actual: '', Expected: 'Phù Cát'
-
-Original:  Ea Kmút,hyệnea Kar,Tỉnwh Đắk Lắk
-District -> Actual: '', Expected: 'Ea Kar'
+Original: Công Hòa H.Kim Thành
+Ward -> Actual: '', Expected: 'Cộng Hòa'
 
 Original: Xã 7Sơn Hà HuyệnNho Quan Tinh Ninh Bình
-District -> Actual: '1', Expected: 'Nho Quan'
-
-Original: X.Mỹ Thạnh, HuyệnGiong Trôm, TỉnhBến Tre
-Province -> Actual: '', Expected: 'Bến Tre'
-District -> Actual: '', Expected: 'Giồng Trôm'
-
-Original: Xã C.hâu Minh, HHiệp Ha, TBắc Giang
-District -> Actual: '', Expected: 'Hiệp Hòa'
-
-Original: Diên Thạnh,,T Khabnh Hòa
-Ward -> Actual: 'Diễn Thành', Expected: 'Diên Thạnh'
+Ward -> Actual: '', Expected: 'Sơn Hà'
 
 Original: Đứ Lợi,H Mộ Đức,TỉnhQuản Ngãi
-Province -> Actual: '', Expected: 'Quảng Ngãi'
-
-Original: PhườngNguyễn Trãi, T.P Kon Tum, T Kon Tum
-Ward -> Actual: '8', Expected: 'Nguyễn Trãi'
-
-Original: Lộc Châu,TPBảo Lộc,T Lâm Đồng
-District -> Actual: '', Expected: 'Bảo Lộc'
-
-Original: X. Bản Nguyen,HuyệnLâm Thao,
-District -> Actual: '', Expected: 'Lâm Thao'
-
-Original: X Tây Yên, H.An Biên, TKiên Giang
-Province -> Actual: 'Tiền Giang', Expected: 'Kiên Giang'
-
-Original: XThạch Xuâ,Thạch Hà,T. Hà Tĩnh
-Ward -> Actual: 'Thạch Xá', Expected: 'Thạch Xuân'
-
-Original:  Quận 1 T.P H.C.Minh
-Province -> Actual: '', Expected: 'Hồ Chí Minh'
-
-Original: Sín Chéng,HuyệnSi Ma Cai,TỉnhLào Cai
-Province -> Actual: '', Expected: 'Lào Cai'
-District -> Actual: '', Expected: 'Si Ma Cai'
-
-Original: x. Văn Cẩs HuyệnHung Hà Tthái Bình
-District -> Actual: '', Expected: 'Hưng Hà'
+Ward -> Actual: '', Expected: 'Đức Lợi'
 
 Original: oã Bnh Ngọc,T.Phố Tuy Hoà,Tỉnhphú Yên
-Province -> Actual: '', Expected: 'Phú Yên'
+Ward -> Actual: '', Expected: 'Bình Ngọc'
 
-Original: Xia Ake, HuyệnPhú Thiện, TGia Lai
-District -> Actual: '', Expected: 'Phú Thiện'
-
-Original: Phú Đô HuyệnPhú Lươnz
-District -> Actual: '', Expected: 'Phú Lương'
-
-Original:  Thái Ha, HBa Vì, T.pHNội
-Province -> Actual: '', Expected: 'Hà Nội'
+Original:  Chương Dương, HuyệnĐôngHưng,
+District -> Actual: '', Expected: 'Đông Hưng'
 
 Original: , Nam Đông,T. T.T.H
 Province -> Actual: '', Expected: 'Thừa Thiên Huế'
 
-Original:  Cam Nhân HuyệnYên Bình TYên Bái
-District -> Actual: '', Expected: 'Yên Bình'
-
-Original: TTĐức An Huyện Đắk SongTỉnhĐắk Nông
-Province -> Actual: '', Expected: 'Đắk Nông'
-District -> Actual: '', Expected: 'Đắk Song'
-Ward -> Actual: '', Expected: 'Đức An'
-
-Original: X. Hương Liên HuyệnHương Khê T Hà Tinh
-District -> Actual: '', Expected: 'Hương Khê'
-
-Original:  bản HoJn Tam Đường Lai Châu
-District -> Actual: 'Tam Dương', Expected: 'Tam Đường'
-
-Original: X. Thanh Phongjc , Tỉnhthanh hóa
-Province -> Actual: '', Expected: 'Thanh Hóa'
-District -> Actual: 'Bình Thạnh', Expected: ''
-
-Original:   Bắc Trà My TỉnhQuảng NaHm
-Province -> Actual: '', Expected: 'Quảng Nam'
-
-Original: ,Diễn Châu,TỉnhNghệ An
-Province -> Actual: '', Expected: 'Nghệ An'
-
-Original:  Muyện Châu Thành TỉnhĐồng Tháp
-Province -> Actual: '', Expected: 'Đồng Tháp'
-District -> Actual: '', Expected: 'Châu Thành'
-Ward -> Actual: 'Thanh Vĩnh Đông', Expected: ''
-
-Original: P Thủy Châu,T.X. hươngThủy,Thừa.t.Huế
-Province -> Actual: '', Expected: 'Thừa Thiên Huế'
-
-Original: X. Quế Minh,HZuyện Quế Sơn,TỉnhQuảng Nam
-Province -> Actual: '', Expected: 'Quảng Nam'
-
-Original: X.Nga Thanh hyện Nga son TỉnhThanhQ Hóa
-Province -> Actual: '', Expected: 'Thanh Hóa'
-
-Original: Phường Phú Mỹ, Thà6nh phố Thủ Dầu Một, TBình Dương
-Ward -> Actual: 'Phù Mỹ', Expected: 'Phú Mỹ'
-
-Original: x2Trung Sơn,,TỉnhNghê An
-Province -> Actual: '', Expected: 'Nghệ An'
-
-Original: XãCôn Lôn,H Na Hang,TỉnhC Tuyên.Quang
-Ward -> Actual: '', Expected: 'Côn Lôn'
+Original: Phườni Tràng Minh Q. Kiến An Thành phố Hải Phòng
+Ward -> Actual: '', Expected: 'Tràng Minh'
 
 Original: Tân Hòa,H. Phú Tân,TnhAn Giang
 Province -> Actual: '', Expected: 'An Giang'
+
+------------------------------
+   correct  total  score / 10  max_time_sec  avg_time_sec
+0     1275   1350        9.44        0.0809        0.0126
+
+Average extract time: 0.0110s
+Average select time: 0.0013s
+Average process time: 0.0123s

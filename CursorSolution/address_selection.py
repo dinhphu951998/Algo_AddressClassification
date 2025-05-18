@@ -72,6 +72,74 @@ def select_best_combination(candidates: List[Dict], cf=None) -> Dict[str, str]:
 
     return best
 
+def select_best_combination_dp(candidates: List[Dict], cf=None) -> Dict[str, str]:
+    """
+    DP-based selection of the best non-overlapping combination for ward, district, and province.
+    Returns a dict: {'ward': ..., 'district': ..., 'province': ...}
+    """
+    SCORE_FOR_EXACT_MATCH = 0.3
+    SCORE_FOR_FUZZY_MATCH = 0
+    types = ['ward', 'district', 'province']
+    type_to_bit = {'ward': 0, 'district': 1, 'province': 2}
+
+    # Sort candidates by end position for DP
+    candidates_sorted = sorted(candidates, key=lambda c: (c['end'], c['start']))
+    n = len(candidates_sorted)
+    # dp[i][mask] = (score, path)
+    dp = [{} for _ in range(n+1)]
+    dp[0][0] = (0, [])
+
+    for i in range(1, n+1):
+        cand = candidates_sorted[i-1]
+        typ = cand['type']
+        typ_idx = type_to_bit[typ]
+        for mask, (score, path) in dp[i-1].items():
+            # Option 1: skip this candidate
+            if mask not in dp[i] or dp[i][mask][0] < score:
+                dp[i][mask] = (score, path)
+            # Option 2: take this candidate if type not used and no overlap
+            new_mask = mask | (1 << typ_idx)
+            if (mask & (1 << typ_idx)) == 0:
+                # Check overlap
+                overlap = False
+                for prev_cand in path:
+                    if not (cand['end'] < prev_cand['start'] or cand['start'] > prev_cand['end']):
+                        overlap = True
+                        break
+                if overlap:
+                    continue
+                # Contextual filter
+                if cf:
+                    ward = cand['original'] if typ == 'ward' else next((c['original'] for c in path if c['type'] == 'ward'), '')
+                    district = cand['original'] if typ == 'district' else next((c['original'] for c in path if c['type'] == 'district'), '')
+                    province = cand['original'] if typ == 'province' else next((c['original'] for c in path if c['type'] == 'province'), '')
+                    if not cf.is_valid(ward, district, province):
+                        continue
+                # Score
+                added_percentage = SCORE_FOR_EXACT_MATCH if cand.get('match_type') == 'exact' else SCORE_FOR_FUZZY_MATCH
+                new_score = score + (cand['end'] - cand['start'] + 1) * (1 + added_percentage)
+                new_path = path + [cand]
+                if new_mask not in dp[i] or dp[i][new_mask][0] < new_score:
+                    dp[i][new_mask] = (new_score, new_path)
+
+    # Find the best among all dp[n][mask]
+    best_score = -1
+    best_path = []
+    best_mask = 0
+    for mask, (score, path) in dp[n].items():
+        if score > best_score:
+            best_score = score
+            best_path = path
+            best_mask = mask
+
+    # Build result dict
+    result = {'ward': '', 'district': '', 'province': ''}
+    for cand in best_path:
+        result[cand['type']] = cand['original']
+        result[cand['type'] + '_candidate'] = cand
+    result['score'] = best_score
+    return result
+
 # Example usage
 if __name__ == "__main__":
     # Example candidates

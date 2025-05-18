@@ -5,6 +5,7 @@ from rapidfuzz.distance import DamerauLevenshtein, Levenshtein
 from collections import Counter
 import math
 import editdistance
+from pybktree import BKTree
 
 SPECIAL_CASES = ["xã", "x.", "huyện", "tỉnh", "t.",
                  "tp","thành phố", "thànhphố"]
@@ -36,11 +37,10 @@ class Trie:
         self.root = TrieNode()
         self.all_norm_names = set()
         self.norm_to_original: Dict[str, List[str]] = {}
+        self.bktree = None
 
     def insert(self, normalized_name: str, original_name: str):
         """Insert a normalized word into the trie with a reference to the original."""
-
-    
 
         node = self.root
         for char in normalized_name:
@@ -195,15 +195,27 @@ class Trie:
 
         return [best_match]
     
-    def fuzzy_search_with_radio(self, word_normalized, threshold=0.73):
-        MAX_VALID_EDIT_DISTANCE = 2
+    def fuzzy_search_with_ratio(self, word_normalized, max_distance=2):
+        LONG_WORD_LENGTH = 8
+        THRESHOLD_FOR_LONG_WORD = 0.75
+        THRESHOLD_FOR_SHORT_WORD = 0.65
+        MIN_WORD_LENGTH = 5
+        MAX_WORD_LENGTH = 15
+
+        if len(word_normalized) < MIN_WORD_LENGTH or len(word_normalized) > MAX_WORD_LENGTH:
+            return []
+
         best_score = 0
         matches = []
         for candidate_normalized in self.all_norm_names:
-            if abs(len(candidate_normalized) - len(word_normalized)) > MAX_VALID_EDIT_DISTANCE:
+            if abs(len(candidate_normalized) - len(word_normalized)) > max_distance:
                 continue
             distance = Levenshtein.distance(word_normalized, candidate_normalized)
-            score = 1 - distance / max(len(word_normalized), len(candidate_normalized))
+
+            max_length = max(len(word_normalized), len(candidate_normalized))
+            threshold = THRESHOLD_FOR_LONG_WORD if max_length >= LONG_WORD_LENGTH else THRESHOLD_FOR_SHORT_WORD
+
+            score = 1 - distance / max_length
 
             if score > max(best_score, threshold):
                 matches = [candidate_normalized]
@@ -215,6 +227,47 @@ class Trie:
         for match in matches:
             result.extend(self.norm_to_original[match])
         return result
+    
+    def fuzzy_search_with_ratio_bktree(self, word_normalized, max_distance=2):
+        THRESHOLD_FOR_LONG_WORD = 0.75
+        THRESHOLD_FOR_SHORT_WORD = 0.75
+
+        best_score = 0
+
+        # Search in bktree with different edit distances
+        bktree_search_results = []
+        for n in range(1, max_distance + 1):
+            bktree_search_results.extend(self.bktree.find(word_normalized, n)) # [(1, 'book'), (1, 'cook')]
+
+        # Calculate score for each match
+        matches = []
+        for found in bktree_search_results:
+            distance = found[0]
+            candidate_normalized = found[1]
+
+            max_length = max(len(word_normalized), len(candidate_normalized))
+            if max_length < 8:
+                threshold = THRESHOLD_FOR_SHORT_WORD
+            else:
+                threshold = THRESHOLD_FOR_LONG_WORD
+
+            score = 1 - distance / max_length
+
+            if score > max(best_score, threshold):
+                matches = [candidate_normalized]
+                best_score = score 
+            elif score == max(best_score, threshold):
+                matches.append(candidate_normalized)
+
+        result = []
+        for match in matches:
+            result.extend(self.norm_to_original[match])
+
+        return result
+
+    def build_bk_tree(self, distance):
+        self.bktree = BKTree(distance, self.all_norm_names)
+        
 
 
 def generate_prefixed_variations(normalized_name: str, category: str) -> Tuple[List[str], str]:
@@ -255,7 +308,9 @@ def generate_text_variants(raw_str):
         t1, t2 = tokens
         variants = [
             f"{t1} {t2}",
-            f"{t1[0]} {t2}"
+            f"{t1[0]} {t2}",
+            f"{t1[0]} {t2[0]}",
+            f"{t1[0]}{t2[0]}",
         ]
     elif n == 3:
         t1, t2, t3 = tokens
@@ -298,10 +353,15 @@ def load_databases(filenames: Dict[str, str],
             with open(filename, "r", encoding="utf-8") as file:
                 for line in file:
                     load_line(line, trie, category)
+
+            trie.build_bk_tree(editdistance.distance)
+
             tries[category] = trie
+
         except FileNotFoundError:
             print(f"Warning: File {filename} not found!")
             tries[category] = Trie()
+        
     return tries
 
 

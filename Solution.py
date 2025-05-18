@@ -1,6 +1,6 @@
 from ContextualFiltering import ContextualFiltering
 from CursorSolution.address_candidate_extraction import extract_candidates
-from CursorSolution.address_selection import select_best_combination
+from CursorSolution.address_selection import select_best_combination, select_best_combination_dp
 from IndexAnalyzer import load_databases
 from Utils import normalize_text_v2
 import time
@@ -46,7 +46,7 @@ class Solution:
         input_text = normalize_text_v2(s)
         
         start_time = time.time()
-        candidates = extract_candidates(input_text, self.tries["ward"], self.tries["district"], self.tries["province"])
+        candidates, total_fuzzy_search_time, total_fuzzy_search_count = extract_candidates(input_text, self.tries["ward"], self.tries["district"], self.tries["province"])
         extract_time = time.time() - start_time
         self.total_extract_time += extract_time
 
@@ -55,8 +55,6 @@ class Solution:
         select_time = time.time() - start_time
         self.total_select_time += select_time
 
-        
-        
         result =  {
             "ward": best["ward"],
             "district": best["district"],
@@ -70,6 +68,7 @@ class Solution:
             self.print_candidates(candidates)
             # print(best)
             print(f"Extract time: {extract_time:.4f}s")
+            print(f"    Fuzzy search (fuzzy/extract): {total_fuzzy_search_time/extract_time:.4f}")
             print(f"Select time: {select_time:.4f}s")
             print("--------------------------------")
 
@@ -80,7 +79,11 @@ if __name__ == "__main__":
     s = Solution()
     s.debug = 1
     # print(s.process("P. Nghi Hương Thị xã Cửa Lò, Nghệ An"))
-    print(s.process("7/3/4/16 Thành Thái Phường 14, Quận 10, TP. Hồ Chí Minh"))
+    # print(s.process("7/3/4/16 Thành Thái Phường 14, Quận 10, TP. Hồ Chí Minh"))
+    # print(s.process("Khu 3 Suối Hoa, Thành phố Bắc Ninh, Bắc Ninh"))
+    # print(s.process("CH F1614-HH2-Khu ĐTM Dương Nội Yên NghĩahàdônghyàNội"))
+    # print(s.process("TT T,â,n B,ì,n,h Huyện Yên Sơn, Tuyên Quang"))
+    print(s.process("X Vĩnh Lợi, Huyện Châu Thành, Tỉnh An Giang"))
 
     # exit()
 
@@ -123,6 +126,7 @@ if __name__ == "__main__":
     # s.process("Khu 1, Tân Bình, Hồ Chí Minh")
     # s.process("Khóm 1 TT Càng Long, Càng Long, Trà Vinh")
     # s.process("Số Nhà 38, Tổ 9 Tô Hiệu, Thành phố Sơn La, Sơn La")
+    # s.process("Khu 3 Suối Hoa, Thành phố Bắc Ninh, Bắc Ninh")
 
 
     # print(f"Average extract time: {s.total_extract_time / s.process_count:.4f}s")
@@ -131,7 +135,8 @@ if __name__ == "__main__":
 
 
     # Not solved yet
-    # print(s.process("Khu 3 Suối Hoa, Thành phố Bắc Ninh, Bắc Ninh"))
+    # print(s.process("CH F1614-HH2-Khu ĐTM Dương Nội Yên NghĩahàdônghyàNội"))
+
 
 
 

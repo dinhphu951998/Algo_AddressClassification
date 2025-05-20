@@ -2,13 +2,12 @@ import json
 from collections import defaultdict
 
 class ContextualFiltering:
-    def __init__(self, json_path='contextual_filtering_dataset.json'):
+    def __init__(self):
         self.province_to_district = defaultdict(set)
         self.district_to_ward = defaultdict(set)
         self.province_to_ward = defaultdict(set)
-        self._load_context(json_path)
 
-    def _load_context(self, json_path):
+    def load_context(self, json_path):
         with open(json_path, encoding='utf-8') as f:
             data = json.load(f)
         for province in data:

@@ -86,7 +86,7 @@ def select_best_combination_dp(candidates: List[Dict], cf=None) -> Dict[str, str
     candidates_sorted = sorted(candidates, key=lambda c: (c['end'], c['start']))
     n = len(candidates_sorted)
     # dp[i][mask] = (score, path)
-    dp = [{} for _ in range(n+1)]
+    dp = [{} for _ in range(n + 1)]
     dp[0][0] = (0, [])
 
     for i in range(1, n+1):

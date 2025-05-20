@@ -23,6 +23,7 @@ class Solution:
         }, self.tries)
 
         self.contextual_filter = ContextualFiltering()
+        self.contextual_filter.load_context('contextual_filtering_dataset.json')
 
         self.total_extract_time = 0
         self.total_select_time = 0
@@ -83,7 +84,7 @@ if __name__ == "__main__":
     # print(s.process("Khu 3 Suối Hoa, Thành phố Bắc Ninh, Bắc Ninh"))
     # print(s.process("CH F1614-HH2-Khu ĐTM Dương Nội Yên NghĩahàdônghyàNội"))
     # print(s.process("TT T,â,n B,ì,n,h Huyện Yên Sơn, Tuyên Quang"))
-    print(s.process("X Vĩnh Lợi, Huyện Châu Thành, Tỉnh An Giang"))
+    print(s.process("X. Sơn Hv HSơn Hoa Tỉnh Phú Yên"))
 
     # exit()
 

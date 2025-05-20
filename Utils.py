@@ -12,7 +12,7 @@ SAFE_CASES = [
                 "khu phố", "KP", "KhuPhố", "Khu pho", "KhuPho", # -> KP5 bị nhầm thành P5
                ]
 
-ALL_PREFIXES = ["TP.", "T.P", "F.", "Thành phố", "ThànhPhố", "TP ", " TP",
+ALL_PREFIXES = ["TP.", "T.P", "Thành Fhố", "F.", "Thành phố", "ThànhPhố", "TP ", " TP",
                "Tỉnh", "Tỉn",#"T.", " T ",  #",T ",
             #    "Quận", "Q.", " Q ", ",Q ",
                "Huyện", "hyện", "H.", " H ",  #",H ",

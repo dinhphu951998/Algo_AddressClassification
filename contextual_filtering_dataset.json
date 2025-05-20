@@ -14101,6 +14101,9 @@
           },
           {
             "FullName": "Thái Thọ"
+          },
+          {
+            "FullName": "Thái Hòa"
           }
         ]
       },
@@ -16111,8 +16114,22 @@
     "FullName": "Thanh Hóa",
     "District": [
       {
+        "FullName": "Tĩnh Gia",
+        "Ward": [
+          {
+            "FullName": "Nguyên Bình"
+          },
+          {
+            "FullName": "Hải Bình"
+          }
+        ]
+      },
+      {
         "FullName": "Thanh Hóa",
         "Ward": [
+          {
+            "FullName": "Hoằng Anh"
+          },
           {
             "FullName": "An Hưng"
           },
@@ -17283,6 +17300,9 @@
       {
         "FullName": "Hoằng Hóa",
         "Ward": [
+          {
+            "FullName": "Hoằng Minh"
+          },
           {
             "FullName": "Bút Sơn"
           },
